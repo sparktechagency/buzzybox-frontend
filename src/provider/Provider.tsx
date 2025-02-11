@@ -10,7 +10,8 @@ const Provider = ({ children }: { children: ReactNode }) => {
                               token: {
                                     colorPrimary: '#FFC301',
                                     colorTextLightSolid: '#000000',
-                                    fontFamily: 'DM Sans',
+                                    fontFamily: '',
+                                    fontSize: 16,
                               },
                               components: {
                                     Button: {
@@ -24,6 +25,13 @@ const Provider = ({ children }: { children: ReactNode }) => {
 
                                           fontSize: 16,
                                           paddingInline: 24,
+                                    },
+                                    Typography: {
+                                          colorTextDescription: 'white',
+                                    },
+                                    Form: {
+                                          marginLG: 15,
+                                          labelColor: '#00180F',
                                     },
                               },
                         }}

@@ -42,7 +42,7 @@ const Navbar = () => {
                                     <NavItems items={items} />
                               </div>
                               <div className="flex items-center space-x-6">
-                                    <Link href="/login">
+                                    <Link href="/sign-in">
                                           <Button iconPosition="start" icon={<UserIcon />} type="primary">
                                                 Sign In
                                           </Button>

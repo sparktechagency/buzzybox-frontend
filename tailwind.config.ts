@@ -7,7 +7,7 @@ const config: Config = {
                   colors: {
                         primary: '#FFC301',
                         title: '#00180F',
-                        paragraph: '#00180F',
+                        paragraph: '#7A7A7A',
                   },
                   container: {
                         center: true,
