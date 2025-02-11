@@ -1,4 +1,5 @@
 import HeroSection from '@/components/pages/home/HeroSection';
+import HowItWorks from '@/components/pages/home/HowItWork';
 import JoinSection from '@/components/pages/home/JoinSection';
 import OccasionSlider from '@/components/pages/home/OccasionSlider';
 import React from 'react';
@@ -9,6 +10,7 @@ const HomePage = () => {
                   <HeroSection />
                   <JoinSection />
                   <OccasionSlider />
+                  <HowItWorks />
             </div>
       );
 };
