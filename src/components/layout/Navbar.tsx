@@ -5,11 +5,12 @@ import Logo from '@/assets/images/logo.svg';
 
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useState } from 'react';
-import { Button } from 'antd';
+import { Avatar, Button, Dropdown } from 'antd';
 
 import NavItems from './NavItems';
 import MobileDrawer from './MobileDrawer';
 import { UserIcon } from 'lucide-react';
+import ProfileDropdown from './ProfileDropdown';
 
 const Navbar = () => {
       const [showDrawer, setShowDrawer] = useState(false);
@@ -48,6 +49,17 @@ const Navbar = () => {
                                           </Button>
                                     </Link>
                               </div>
+                              <Dropdown
+                                    placement="bottomLeft"
+                                    className="cursor-pointer"
+                                    trigger={['click', 'hover']}
+                                    dropdownRender={() => <ProfileDropdown />}
+                              >
+                                    <div className="flex items-center gap-2">
+                                          <Avatar size={50} src={`https://picsum.photos/40`} style={{ border: '2px solid #FFC301' }} />
+                                          <h1 className="font-semibold text-lg">Sazzad</h1>
+                                    </div>
+                              </Dropdown>
                               <div className="md:hidden">
                                     <AiOutlineMenu
                                           onClick={() => setShowDrawer(!showDrawer)}
