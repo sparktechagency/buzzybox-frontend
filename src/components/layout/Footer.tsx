@@ -20,8 +20,8 @@ const quickLinks = [
 
 const quickLinksTwo = [
       { label: 'Privacy Policy', href: '/privacy-policy' },
-      { label: 'Disclaimer', href: '/disclaimer' },
-      { label: 'Terms & Condition', href: '/terms-and-condition' },
+
+      { label: 'Terms & Condition', href: '/terms-and-conditions' },
       { label: 'Faq', href: '/faq' },
 ];
 
