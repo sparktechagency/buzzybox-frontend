@@ -26,7 +26,7 @@ const Navbar = () => {
                   path: '/how-it-works',
             },
 
-            { label: 'Contact', path: '/contact' },
+            { label: 'Contact', path: '/contact-us' },
       ];
 
       return (
