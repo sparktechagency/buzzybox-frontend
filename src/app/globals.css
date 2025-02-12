@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+      .custom-shadow {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.01), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 0.75rem;
+      }
+}
+
+.ant-layout {
+      background-color: #fff !important;
+}
+
+.hide-scrollbar {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+}

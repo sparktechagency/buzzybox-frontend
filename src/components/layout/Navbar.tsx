@@ -31,7 +31,7 @@ const Navbar = () => {
       ];
 
       return (
-            <header className={`bg-[#fff] shadow-lg`}>
+            <header className={`bg-[#fff] border-b border-primary/50`}>
                   <nav className="container h-[96px]  relative z-[99]">
                         <div className="flex justify-between items-center h-full">
                               {/* Logo */}
