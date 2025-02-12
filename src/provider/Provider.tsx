@@ -1,6 +1,7 @@
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { ConfigProvider } from 'antd';
 import React, { ReactNode } from 'react';
+import NextTopLoader from 'nextjs-toploader';
 
 const Provider = ({ children }: { children: ReactNode }) => {
       return (
@@ -37,7 +38,11 @@ const Provider = ({ children }: { children: ReactNode }) => {
                               },
                         }}
                   >
-                        <AntdRegistry>{children}</AntdRegistry>
+                        <AntdRegistry>
+                              <NextTopLoader color="#FFC301" showSpinner={false} />
+
+                              {children}
+                        </AntdRegistry>
                   </ConfigProvider>
             </div>
       );
