@@ -39,18 +39,18 @@ const HowItWorkPage = () => {
                   <section className="py-20">
                         <div className="container mx-auto space-y-16">
                               {howItWorkData.map((section) => (
-                                    <div key={section.id} className={`grid grid-cols-1 md:grid-cols-2 gap-10 items-center`}>
+                                    <div key={section.id} className={`flex gap-10 items-center`}>
                                           <div className={`w-full ${section.reverse ? 'md:order-last' : ''}`}>
                                                 <h2 className="text-3xl font-bold text-gray-900">{section.title}</h2>
                                                 <p className="text-gray-600 mt-4 whitespace-pre-line">{section.description}</p>
                                           </div>
-                                          <div className={`flex ${section.reverse ? '' : 'justify-end'}`}>
+                                          <div className={`w-[384px] flex ${section.reverse ? '' : 'justify-end'}`}>
                                                 <Image
                                                       src={section.image}
                                                       width={500}
                                                       height={550}
                                                       alt={section.title}
-                                                      className="w-[384px]  rounded-lg"
+                                                      className="w-full rounded-lg"
                                                 />
                                           </div>
                                     </div>
