@@ -27,7 +27,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
 
                   {/* breadcrumb */}
                   {pathname !== '/' && (
-                        <div className="flex gap-2 justify-center mt-4">
+                        <div className="flex capitalize gap-2 justify-center mt-4">
                               <Link href="/">
                                     <p className="">Home</p>
                               </Link>

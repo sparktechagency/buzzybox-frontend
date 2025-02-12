@@ -54,10 +54,10 @@ const AboutUsPage = () => {
                                           <div className={`flex ${section.reverse ? '' : 'justify-end'}`}>
                                                 <Image
                                                       src={section.image}
-                                                      width={600}
+                                                      width={500}
                                                       height={550}
                                                       alt={section.title}
-                                                      className="w-full h-full rounded-lg"
+                                                      className="w-[588px] h-full rounded-lg"
                                                 />
                                           </div>
                                     </div>
