@@ -22,7 +22,7 @@ const quickLinksTwo = [
       { label: 'Privacy Policy', href: '/privacy-policy' },
 
       { label: 'Terms & Condition', href: '/terms-and-conditions' },
-      { label: 'Faq', href: '/faq' },
+      { label: 'Faqs', href: '/faqs' },
 ];
 
 const Footer = () => {

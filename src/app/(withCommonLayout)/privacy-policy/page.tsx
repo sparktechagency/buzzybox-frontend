@@ -2,9 +2,9 @@ import PageHeader from '@/components/shared/PageHeader';
 
 const PrivacyPolicyPage = () => {
       return (
-            <div className="container mx-auto py-20">
+            <div className="">
                   <PageHeader title="Privacy Policy" />
-                  <div className="max-w-4xl mx-auto space-y-8">
+                  <div className="container mx-auto py-20  space-y-8">
                         <section>
                               <h2 className="text-2xl font-semibold mb-4">Information We Collect</h2>
                               <div className="space-y-4">
