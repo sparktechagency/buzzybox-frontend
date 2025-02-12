@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Avatar } from 'antd';
-import { ArrowRight } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const ProfileDropdown = () => {
@@ -42,7 +42,7 @@ const ProfileDropdown = () => {
                         </Menu.Item>
 
                         <Menu.Divider />
-                        <Menu.Item onClick={handleLogout} key="logout" icon={<ArrowRight style={{ color: '#FFC301', fontSize: 20 }} />}>
+                        <Menu.Item onClick={handleLogout} key="logout" icon={<LogOut style={{ color: '#FFC301', fontSize: 20 }} />}>
                               Logout
                         </Menu.Item>
                   </Menu>

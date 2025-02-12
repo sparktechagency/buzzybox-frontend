@@ -56,7 +56,7 @@ const Navbar = () => {
                                     dropdownRender={() => <ProfileDropdown />}
                               >
                                     <div className="flex items-center gap-2">
-                                          <Avatar size={50} src={`https://picsum.photos/40`} style={{ border: '2px solid #FFC301' }} />
+                                          <Avatar size={45} src={`https://picsum.photos/40`} style={{ border: '2px solid #FFC301' }} />
                                           <h1 className="font-semibold text-lg">Sazzad</h1>
                                     </div>
                               </Dropdown>
