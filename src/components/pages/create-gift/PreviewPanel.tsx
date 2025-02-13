@@ -12,8 +12,10 @@ const PreviewPanel = () => {
       const pages = [
             {
                   front: {
-                        title: 'My Special Book',
-                        content: 'Click to Open ',
+                        recipientName: 'Recipient Name',
+                        senderName: 'Sender Name',
+                        title: 'BuzzyBox Title',
+
                         bgImage: BgImage.src,
                   },
                   back: {
@@ -87,24 +89,20 @@ const PreviewPanel = () => {
                                           <div
                                                 style={{
                                                       backgroundImage: `url(${page.front.bgImage})`,
+                                                      backgroundSize: 'cover',
+                                                      backgroundPosition: 'center',
+                                                      backgroundRepeat: 'no-repeat',
                                                 }}
-                                                className={`page-front rounded-lg custom-shadow ${page.front.bg} 
+                                                className={`page-front rounded-lg  ${page.front.bg} 
                   ${index === 0 ? 'p-8' : 'p-6'} flex flex-col items-center justify-center`}
                                           >
-                                                <div className="text-center">
+                                                <div className="text-center space-y-4">
+                                                      <h1>{page.front.recipientName}</h1>
                                                       <h2 className="text-2xl font-bold mb-4">{page.front.title}</h2>
-                                                      <div className="space-y-4">
-                                                            <p className="text-lg">{page.front.content}</p>
-                                                            {index === 0 && (
-                                                                  <div className="mt-8">
-                                                                        <div className="w-24 h-24 bg-yellow-400 rounded-full mx-auto flex items-center justify-center mb-4">
-                                                                              <span className="text-4xl">⭐</span>
-                                                                        </div>
-                                                                  </div>
-                                                            )}
-                                                      </div>
+                                                      <p>From</p>
+                                                      <p>{page.front.senderName}</p>
                                                 </div>
-                                                <div className="book-shadow"></div>
+                                                <div className="book-shadow rounded-lg"></div>
                                           </div>
 
                                           <div
@@ -115,7 +113,7 @@ const PreviewPanel = () => {
                                                       <h2 className="text-2xl font-bold mb-4">{page.back.title}</h2>
                                                       <p className="text-lg">{page.back.content}</p>
                                                 </div>
-                                                <div className="book-shadow"></div>
+                                                <div className="book-shadow rounded-lg"></div>
                                           </div>
                                     </div>
                               ))}
