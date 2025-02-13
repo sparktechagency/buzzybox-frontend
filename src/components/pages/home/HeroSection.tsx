@@ -27,7 +27,7 @@ const HeroSection = () => {
                                     perfect for any occasion!
                               </p>
                               <div className="flex justify-center md:justify-start items-center gap-4">
-                                    <Button type="primary" icon={<GiftIcon size={20} />}>
+                                    <Button href="/create-gift" type="primary" icon={<GiftIcon size={20} />}>
                                           Create a Buzzybox
                                     </Button>
                                     <Button
