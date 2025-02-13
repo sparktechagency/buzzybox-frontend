@@ -1,25 +1,31 @@
 'use client';
 
-import { useState } from 'react';
 import { Select, Input, Button } from 'antd';
 import Image from 'next/image';
 import GiftImage from '@/assets/images/configure-panel/gift.png';
 import BookImage from '@/assets/images/configure-panel/book.png';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { updateField } from '@/redux/features/gift-card/giftCardManagementSlice';
 
 const ConfigurationPanel = () => {
-      const [selectedFormat, setSelectedFormat] = useState('greetings');
+      const dispatch = useAppDispatch();
+      const { boardFormat, occasionType, title, recipientName, senderName } = useAppSelector((state) => state.giftCardManagement);
+
+      const handleDispatch = (field: any, value: any) => {
+            dispatch(updateField({ field, value }));
+      };
 
       return (
             <div>
-                  <div className="w-full bg-primary/5 p-6 rounded-xl  mx-auto">
+                  <div className="w-full bg-primary/5 p-6 rounded-xl mx-auto">
                         <h2 className="text-2xl font-bold text-title">Create Your Buzzybox?</h2>
 
                         <p className="text-gray-700 mt-3 font-medium">Select board format</p>
                         <div className="flex space-x-3 mt-2">
                               <div
-                                    onClick={() => setSelectedFormat('greetings')}
+                                    onClick={() => handleDispatch('boardFormat', 'grid')}
                                     className={`flex flex-col items-center justify-center p-4 w-1/2 border rounded-lg cursor-pointer transition ${
-                                          selectedFormat === 'greetings' ? 'border-red-500 bg-yellow-100' : 'border-gray-300 bg-[#B8D8FD]'
+                                          boardFormat === 'grid' ? 'border-red-500 bg-yellow-100' : 'border-gray-300 bg-[#B8D8FD]'
                                     }`}
                               >
                                     <Image width={500} height={500} src={GiftImage.src} alt="Greetings Card" className="w-8 h-8" />
@@ -27,9 +33,9 @@ const ConfigurationPanel = () => {
                               </div>
 
                               <div
-                                    onClick={() => setSelectedFormat('memory')}
+                                    onClick={() => handleDispatch('boardFormat', 'card')}
                                     className={`flex flex-col items-center justify-center p-4 w-1/2 border rounded-lg cursor-pointer transition ${
-                                          selectedFormat === 'memory' ? 'border-red-500 bg-yellow-100' : 'border-gray-300 bg-[#B8D8FD]'
+                                          boardFormat === 'card' ? 'border-red-500 bg-yellow-100' : 'border-gray-300 bg-[#B8D8FD]'
                                     }`}
                               >
                                     <Image width={500} height={500} src={BookImage.src} alt="Memory Book" className="w-8 h-8" />
@@ -41,6 +47,8 @@ const ConfigurationPanel = () => {
                         <Select
                               placeholder="Select an occasion"
                               className="w-full mt-2"
+                              value={occasionType}
+                              onChange={(value) => handleDispatch('occasionType', value)}
                               options={[
                                     { value: 'birthday', label: 'Birthday' },
                                     { value: 'farewell', label: 'Farewell' },
@@ -49,14 +57,30 @@ const ConfigurationPanel = () => {
                         />
 
                         <p className="text-gray-700 mt-5 font-medium">Recipient Name</p>
-                        <Input placeholder="Who is this card for?" className="mt-2" />
+                        <Input
+                              value={recipientName || ''}
+                              placeholder="Who is this card for?"
+                              className="mt-2"
+                              onChange={(e) => handleDispatch('recipientName', e.target.value)}
+                        />
 
                         <p className="text-gray-700 mt-5 font-medium">Buzzybox Title</p>
-                        <Input placeholder="e.g. Happy Birthday Jenny" className="mt-2" />
+                        <Input
+                              value={title || ''}
+                              placeholder="e.g. Happy Birthday Jenny"
+                              className="mt-2"
+                              onChange={(e) => handleDispatch('title', e.target.value)}
+                        />
 
                         <p className="text-gray-700 mt-5 font-medium">Sender Name</p>
-                        <Input placeholder="e.g. Adam John" className="mt-2" />
+                        <Input
+                              value={senderName || ''}
+                              placeholder="e.g. Adam John"
+                              className="mt-2"
+                              onChange={(e) => handleDispatch('senderName', e.target.value)}
+                        />
                   </div>
+
                   <div>
                         <Button type="primary" className="w-full mt-5">
                               Next

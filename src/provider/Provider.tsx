@@ -1,8 +1,10 @@
+'use client';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { ConfigProvider } from 'antd';
 import React, { ReactNode } from 'react';
 import NextTopLoader from 'nextjs-toploader';
-
+import { Provider as ReduxProvider } from 'react-redux';
+import store from '@/redux/store';
 const Provider = ({ children }: { children: ReactNode }) => {
       return (
             <div>
@@ -46,9 +48,11 @@ const Provider = ({ children }: { children: ReactNode }) => {
                         }}
                   >
                         <AntdRegistry>
-                              <NextTopLoader color="#FFC301" showSpinner={false} />
+                              <ReduxProvider store={store}>
+                                    <NextTopLoader color="#FFC301" showSpinner={false} />
 
-                              {children}
+                                    {children}
+                              </ReduxProvider>
                         </AntdRegistry>
                   </ConfigProvider>
             </div>
