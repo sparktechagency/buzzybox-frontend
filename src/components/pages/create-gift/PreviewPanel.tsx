@@ -3,10 +3,13 @@ import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import BgImg1 from '@/assets/images/preview-panel/594261572678155e84eaf710709ccc9c.png';
+import PeopleSketch from '@/assets/images/preview-panel/people-sketch.svg';
+import GiftSketch from '@/assets/images/preview-panel/gift-sketch.png';
 // import BgImg2 from '@/assets/images/preview-panel/1.jpg';
 // import BgImg3 from '@/assets/images/preview-panel/2.jpg';
 
 import { useAppSelector } from '@/redux/hooks';
+import Image from 'next/image';
 
 const PreviewPanel = () => {
       const { title, recipientName, senderName } = useAppSelector((state) => state.giftCardManagement);
@@ -23,8 +26,16 @@ const PreviewPanel = () => {
                         bgImage: BgImg1.src,
                   },
                   back: {
-                        title: 'Page 1',
-                        content: 'This is the first page',
+                        title: (
+                              <div>
+                                    <Image className="size-20 mx-auto" src={PeopleSketch} alt="People Sketch" width={100} height={100} />
+                              </div>
+                        ),
+                        content: (
+                              <div>
+                                    <p className="text-xs italic">This is some example message text.</p>
+                              </div>
+                        ),
                         bgImage: '',
                         bg: 'bg-white',
                   },
@@ -32,14 +43,29 @@ const PreviewPanel = () => {
 
             {
                   front: {
-                        title: 'Page 2',
-                        content: 'Almost at the end',
+                        title: (
+                              <div>
+                                    <Image className="size-20 mx-auto" src={PeopleSketch} alt="People Sketch" width={100} height={100} />
+                              </div>
+                        ),
+                        content: (
+                              <div>
+                                    <p className="text-xs italic">This is some example message text.</p>
+                              </div>
+                        ),
                         bg: 'bg-white',
                         bgImage: '',
                   },
                   back: {
-                        title: 'The End',
-                        content: 'Thanks for reading! ',
+                        title: (
+                              <div>
+                                    <Image className="size-32 mx-auto" src={GiftSketch.src} alt="People Sketch" width={400} height={400} />
+                              </div>
+                        ),
+                        content: `
+                        Created with
+                        Buzzybox
+                        `,
                         bg: 'bg-white',
                   },
             },
@@ -69,7 +95,7 @@ const PreviewPanel = () => {
                         className="absolute inset-0 bg-cover bg-center z-0"
                         style={{
                               backgroundImage: `url('https://s3-alpha-sig.figma.com/img/6abd/3727/594261572678155e84eaf710709ccc9c?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=A7hcJEzO384wfjvJDyhh0sHUIyNukejgyxcwd-y4GKJsyjp2cZ6aZo5eqlH6ZvR7TLaYpPWn2N31ZBN11rSDS0109yQYHgjj-9-M2pcg6oJFfJkNUH5j5ZKZ0IkLqo4uentanMRTgOf7FvsV9HllzbUf3jMgDj1CNdt~ReQ2lmOGYCDAeY5wQCddOpJficFOMGOmpRbGlFQB5kpt0Q--pZMd1nH6Vf7ajl7qJd-SIzo6~mdMFPJaDODLjSQZSANU1bLpEAOjl1v3PcHi19vvBJDLvtRVoByhUr5GZSKWhMJtiJUwhGRummRzhrG22yCD~IwNInk7wwqp66~m0wrdPg__')`,
-                              filter: 'blur(10px)',
+                              filter: 'blur(8px)',
                         }}
                   ></div>
                   <div className="">
@@ -80,7 +106,7 @@ const PreviewPanel = () => {
                                     style={{
                                           transformStyle: 'preserve-3d',
                                           left: currentPage == 0 ? '0px' : '150px',
-                                          transition: 'left 0.5s ease-in-out',
+                                          transition: 'left 0.8s ease-in-out',
                                     }}
                               >
                                     {pages.map((page, index) => (
@@ -104,10 +130,11 @@ const PreviewPanel = () => {
                   ${index === 0 ? 'p-8' : 'p-6'} flex flex-col items-center justify-center`}
                                                 >
                                                       <div className="text-center space-y-4">
-                                                            <h1>{page.front.recipientName}</h1>
-                                                            <h2 className="text-2xl font-bold mb-4">{page.front.title}</h2>
-                                                            <p>{page.front.senderName ? 'From' : ''}</p>
-                                                            <p>{page.front.senderName}</p>
+                                                            <h1 className="text-gray-600">{page.front.recipientName}</h1>
+                                                            <h2 className="text-2xl font-semibold mb-4">{page.front.title}</h2>
+                                                            <p className="text-gray-500">{page.front.content}</p>
+                                                            <p className="text-gray-500">{page.front.senderName ? 'From' : ''}</p>
+                                                            <p className="text-gray-600">{page.front.senderName}</p>
                                                       </div>
                                                       <div className="book-shadow rounded-lg"></div>
                                                 </div>
@@ -123,8 +150,9 @@ const PreviewPanel = () => {
                   flex flex-col items-center justify-center`}
                                                 >
                                                       <div className="text-center">
-                                                            <h2 className="text-2xl font-bold mb-4">{page.back.title}</h2>
-                                                            <p className="text-lg">{page.back.content}</p>
+                                                            <h2 className="text-xl font-semibold text-gray-600 mb-4">{page.back.title}</h2>
+
+                                                            <p className="text-gray-600">{page.back.content}</p>
                                                       </div>
                                                       <div className="book-shadow rounded-lg"></div>
                                                 </div>
