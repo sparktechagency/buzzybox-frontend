@@ -1,13 +1,14 @@
 'use client';
 import React, { useState } from 'react';
-import { Menu, message, Upload } from 'antd';
+import { Menu, Modal, Upload } from 'antd';
 import Image from 'next/image';
 import { CameraIcon, GiftIcon, LogOut, Settings2, UserIcon } from 'lucide-react';
 import { UploadChangeParam } from 'antd/es/upload';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 const ProfileSidebar = () => {
       const pathname = usePathname();
+      const router = useRouter();
       const activeKey = pathname.split('/').pop();
       const [previewImage, setPreviewImage] = useState<undefined | string>('https://i.ibb.co.com/yN2vT01/me.jpg');
 
@@ -38,7 +39,7 @@ const ProfileSidebar = () => {
                   key: 'settings',
                   icon: <Settings2 size={20} />,
                   label: 'Settings',
-                  href: '/dashboard/mentor/settings',
+                  href: '/dashboard/settings',
             },
             {
                   key: 'logout',
@@ -49,7 +50,30 @@ const ProfileSidebar = () => {
       ];
 
       const handleLogout = () => {
-            message.success('Logout successful!');
+            Modal.confirm({
+                  title: 'Logout',
+                  centered: true,
+                  content: 'Are you sure you want to logout?',
+                  okText: 'Yes',
+                  cancelText: 'No',
+                  okButtonProps: {
+                        style: {
+                              backgroundColor: '#FFC301',
+                              color: '#fff',
+                        },
+                  },
+                  cancelButtonProps: {
+                        style: {
+                              backgroundColor: '#fff',
+                              color: '#FFC301',
+                              border: '1px solid #FFC301',
+                        },
+                  },
+
+                  onOk() {
+                        router.push('/sign-in');
+                  },
+            });
       };
 
       return (

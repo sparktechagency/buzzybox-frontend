@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Avatar } from 'antd';
+import { Menu, Avatar, Modal } from 'antd';
 import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -7,8 +7,32 @@ const ProfileDropdown = () => {
       const router = useRouter();
 
       const handleLogout = () => {
-            router.push('/sign-in');
+            Modal.confirm({
+                  title: 'Logout',
+                  centered: true,
+                  content: 'Are you sure you want to logout?',
+                  okText: 'Yes',
+                  cancelText: 'No',
+                  okButtonProps: {
+                        style: {
+                              backgroundColor: '#FFC301',
+                              color: '#fff',
+                        },
+                  },
+                  cancelButtonProps: {
+                        style: {
+                              backgroundColor: '#fff',
+                              color: '#FFC301',
+                              border: '1px solid #FFC301',
+                        },
+                  },
+
+                  onOk() {
+                        router.push('/sign-in');
+                  },
+            });
       };
+
       return (
             <div className="">
                   <Menu

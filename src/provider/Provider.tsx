@@ -35,6 +35,10 @@ const Provider = ({ children }: { children: ReactNode }) => {
                                           marginLG: 15,
                                           labelColor: '#00180F',
                                     },
+                                    Table: {
+                                          headerBg: '#FEF9EB',
+                                          colorText: '#7A7A7A',
+                                    },
                               },
                         }}
                   >
