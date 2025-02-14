@@ -1,5 +1,7 @@
-import ConfigurationPanel from '@/components/pages/create-gift/ConfigurationPanel';
-import PreviewPanel from '@/components/pages/create-gift/PreviewPanel';
+'use client';
+import dynamic from 'next/dynamic';
+const ConfigurationPanel = dynamic(() => import('@/components/pages/create-gift/ConfigurationPanel'), { ssr: false });
+const PreviewPanel = dynamic(() => import('@/components/pages/create-gift/PreviewPanel'), { ssr: false });
 
 const CreateGiftPage = () => {
       return (

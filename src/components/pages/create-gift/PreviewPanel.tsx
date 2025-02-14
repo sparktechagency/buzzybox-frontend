@@ -160,7 +160,7 @@ const PreviewPanel = () => {
                                     ))}
                               </div>
 
-                              <div className="absolute bottom-[-60px] left-0 right-0 flex justify-center space-x-4">
+                              {/* <div className="absolute bottom-[-60px] left-0 right-0 flex justify-center space-x-4">
                                     <button
                                           onClick={() => turnPage(currentPage - 1)}
                                           disabled={currentPage <= 0}
@@ -183,6 +183,26 @@ const PreviewPanel = () => {
                                     >
                                           <ChevronRightIcon className="w-5 h-5" />
                                     </button>
+                              </div> */}
+
+                              <div className="absolute bg-primary bottom-[-60px] left-0 right-0 rounded-full">
+                                    <div className="flex justify-between p-2  relative">
+                                          <button
+                                                onClick={() => turnPage(currentPage - 1)}
+                                                disabled={currentPage <= 0}
+                                                className={` ${currentPage <= 0 ? 'text-gray-500' : ''} transition-colors`}
+                                          >
+                                                <ChevronLeftIcon className="w-5 h-5" />
+                                          </button>
+                                          <p className="font-medium"> Cover Page</p>
+                                          <button
+                                                onClick={() => turnPage(currentPage)}
+                                                disabled={currentPage >= pages.length}
+                                                className={` ${currentPage >= pages.length ? 'text-gray-500' : ''} transition-colors`}
+                                          >
+                                                <ChevronRightIcon className="w-5 h-5" />
+                                          </button>
+                                    </div>
                               </div>
                         </div>
                   </div>
