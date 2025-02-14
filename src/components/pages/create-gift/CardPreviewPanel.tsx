@@ -92,7 +92,7 @@ const PreviewPanel = () => {
       return (
             <div className="flex justify-center h-full items-center ">
                   <div
-                        className="absolute inset-0 bg-cover bg-center z-0"
+                        className="absolute inset-0 bg-cover bg-center z-0 rounded"
                         style={{
                               backgroundImage: `url('https://s3-alpha-sig.figma.com/img/6abd/3727/594261572678155e84eaf710709ccc9c?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=A7hcJEzO384wfjvJDyhh0sHUIyNukejgyxcwd-y4GKJsyjp2cZ6aZo5eqlH6ZvR7TLaYpPWn2N31ZBN11rSDS0109yQYHgjj-9-M2pcg6oJFfJkNUH5j5ZKZ0IkLqo4uentanMRTgOf7FvsV9HllzbUf3jMgDj1CNdt~ReQ2lmOGYCDAeY5wQCddOpJficFOMGOmpRbGlFQB5kpt0Q--pZMd1nH6Vf7ajl7qJd-SIzo6~mdMFPJaDODLjSQZSANU1bLpEAOjl1v3PcHi19vvBJDLvtRVoByhUr5GZSKWhMJtiJUwhGRummRzhrG22yCD~IwNInk7wwqp66~m0wrdPg__')`,
                               filter: 'blur(8px)',
@@ -159,31 +159,6 @@ const PreviewPanel = () => {
                                           </div>
                                     ))}
                               </div>
-
-                              {/* <div className="absolute bottom-[-60px] left-0 right-0 flex justify-center space-x-4">
-                                    <button
-                                          onClick={() => turnPage(currentPage - 1)}
-                                          disabled={currentPage <= 0}
-                                          className={`w-[120px] h-[40px] rounded-lg flex items-center justify-center gap-2 ${
-                                                currentPage <= 0
-                                                      ? 'bg-gray-300 cursor-not-allowed'
-                                                      : 'bg-[#FFB800] hover:bg-[#ffa600] text-black'
-                                          } transition-colors`}
-                                    >
-                                          <ChevronLeftIcon className="w-5 h-5" />
-                                    </button>
-                                    <button
-                                          onClick={() => turnPage(currentPage)}
-                                          disabled={currentPage >= pages.length}
-                                          className={`w-[120px] h-[40px] rounded-lg flex items-center justify-center gap-2 ${
-                                                currentPage >= pages.length
-                                                      ? 'bg-gray-300 cursor-not-allowed'
-                                                      : 'bg-[#FFB800] hover:bg-[#ffa600] text-black'
-                                          } transition-colors`}
-                                    >
-                                          <ChevronRightIcon className="w-5 h-5" />
-                                    </button>
-                              </div> */}
 
                               <div className="absolute bg-primary bottom-[-60px] left-0 right-0 rounded-full">
                                     <div className="flex justify-between p-2  relative">
