@@ -10,6 +10,7 @@
       },
       "dependencies": {
             "@ant-design/nextjs-registry": "^1.0.2",
+            "@gsap/react": "^2.1.2",
             "@reduxjs/toolkit": "^2.5.1",
             "antd": "^5.22.2",
             "framer-motion": "^12.4.2",

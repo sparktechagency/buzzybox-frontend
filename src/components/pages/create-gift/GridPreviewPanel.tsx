@@ -1,5 +1,4 @@
 // PreviewPanel.tsx
-import React from 'react';
 import Cake from '@/assets/images/preview-panel/cake.png';
 import Image from 'next/image';
 import Img1 from '@/assets/images/preview-panel/camera.png';
@@ -8,9 +7,15 @@ import Img3 from '@/assets/images/preview-panel/gfit-sketch2.png';
 import Img4 from '@/assets/images/preview-panel/couple.png';
 import AirBalloon from '@/assets/images/preview-panel/air-balloon.jpg';
 import { useAppSelector } from '@/redux/hooks';
-
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+type CardProps = {
+      description: string;
+      imageUrl?: string;
+};
 const GridPreviewPanel = () => {
       const { recipientName } = useAppSelector((state) => state.giftCardManagement);
+
       const data = [
             {
                   description:
@@ -34,13 +39,21 @@ const GridPreviewPanel = () => {
             },
       ];
 
-      type CardProps = {
-            description: string;
-            imageUrl?: string;
-      };
+      useGSAP(() => {
+            gsap.from('.grid-card-item', {
+                  duration: 1,
+                  ease: 'power2.inOut',
+                  y: 50,
+                  opacity: 0,
+                  stagger: {
+                        amount: 0.2,
+                        from: 'start',
+                  },
+            });
+      }, []);
       const Card: React.FC<CardProps> = ({ description, imageUrl }) => {
             return (
-                  <div className="bg-primary p-3 rounded-lg flex flex-col items-center">
+                  <div className="grid-card-item bg-primary p-3 rounded-lg flex flex-col items-center">
                         <div className="w-full h-[150px] bg-white rounded-lg mb-4 flex items-center justify-center">
                               {imageUrl ? (
                                     <Image
