@@ -6,8 +6,10 @@ import GiftImage from '@/assets/images/configure-panel/gift.png';
 import BookImage from '@/assets/images/configure-panel/book.png';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { updateField } from '@/redux/features/gift-card/giftCardManagementSlice';
+import { useRouter } from 'next/navigation';
 
 const ConfigurationPanel = () => {
+      const router = useRouter();
       const dispatch = useAppDispatch();
       const { boardFormat, occasionType, title, recipientName, senderName } = useAppSelector((state) => state.giftCardManagement);
 
@@ -18,6 +20,7 @@ const ConfigurationPanel = () => {
       const onFinish = (values: any) => {
             // Handle form submission here
             console.log('Form Submitted', values);
+            router.push('/create-gift/2');
       };
 
       return (

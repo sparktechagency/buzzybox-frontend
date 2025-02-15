@@ -80,7 +80,7 @@ const PreviewPanel = () => {
             gsap.to(page, {
                   rotateY: currentPage > pageIndex ? 0 : -180,
                   duration: 0.1,
-                  ease: 'power2.inOut',
+                  ease: 'expo.inOut',
                   onComplete: () => {
                         setCurrentPage(currentPage > pageIndex ? pageIndex : pageIndex + 1);
                   },
