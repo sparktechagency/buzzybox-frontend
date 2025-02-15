@@ -105,7 +105,14 @@ const PreviewPanel = () => {
                                     className="relative w-full h-full"
                                     style={{
                                           transformStyle: 'preserve-3d',
-                                          left: currentPage == 0 ? '0px' : '150px',
+                                          left:
+                                                currentPage === 0
+                                                      ? '0px'
+                                                      : currentPage === 1
+                                                      ? '150px'
+                                                      : currentPage === pages.length - 1
+                                                      ? '0px'
+                                                      : '300px',
                                           transition: 'left 0.8s ease-in-out',
                                     }}
                               >
