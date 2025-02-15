@@ -9,7 +9,7 @@ const CreateGiftPage = () => {
                         <div className="w-[35%]">
                               <Sidebar />
                         </div>
-                        <div className="w-[65%] min-h-[734px] relative">
+                        <div className="w-[65%] max-w-[792px] min-h-[734px] relative">
                               <Preview />
                         </div>
                   </div>

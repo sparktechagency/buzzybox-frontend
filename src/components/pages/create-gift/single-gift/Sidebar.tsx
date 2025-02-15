@@ -9,7 +9,7 @@ const Sidebar = () => {
       const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(true);
 
       return (
-            <div className="p-5 space-y-6">
+            <div className="p-5 space-y-4">
                   <div className="flex items-center gap-2 border border-primary rounded-lg p-2 cursor-pointer hover:text-primary duration-100">
                         <Avatar
                               style={{
@@ -48,7 +48,7 @@ const Sidebar = () => {
                   </div>
 
                   {isGiftCardEnabled && (
-                        <div className="space-y-6">
+                        <div className="space-y-4">
                               <div className="space-y-4">
                                     <h3 className="gift-card-item text-lg font-medium">Select Currency</h3>
                                     <div className="gift-card-item">
@@ -70,7 +70,7 @@ const Sidebar = () => {
                                     <InputNumber
                                           className=""
                                           style={{ width: '100%', height: '50px' }}
-                                          prefix={<DollarSign className="border rounded-full p-1 mx-5" size={25} />}
+                                          prefix={<DollarSign className="border rounded-full p-1 " size={25} />}
                                           placeholder="0.00"
                                     />
                               </div>
