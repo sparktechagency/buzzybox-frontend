@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
 const ConfigurationPanel = dynamic(() => import('@/components/pages/create-gift/ConfigurationPanel'), { ssr: false });
-const PreviewPanel = dynamic(() => import('@/components/pages/create-gift/CardPreviewPanel'), { ssr: false });
+const CardPreviewPanel = dynamic(() => import('@/components/pages/create-gift/CardPreviewPanel'), { ssr: false });
 
 const CreateGiftPage = () => {
       const { boardFormat } = useAppSelector((state) => state.giftCardManagement);
@@ -28,7 +28,7 @@ const CreateGiftPage = () => {
                               <ConfigurationPanel />
                         </div>
                         <div ref={boardRef} className="w-3/5 relative">
-                              {boardFormat === 'card' ? <PreviewPanel /> : <GridPreviewPanel />}
+                              {boardFormat === 'card' ? <CardPreviewPanel /> : <GridPreviewPanel />}
                         </div>
                   </div>
             </div>

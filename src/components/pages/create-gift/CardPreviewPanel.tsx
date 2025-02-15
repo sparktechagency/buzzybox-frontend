@@ -99,7 +99,7 @@ const PreviewPanel = () => {
                         }}
                   ></div>
                   <div className="">
-                        <div className="relative w-[300px] h-[400px] book-container">
+                        <div className="relative w-[340px] h-[460px] book-container">
                               <div
                                     ref={bookRef}
                                     className="relative w-full h-full"
@@ -109,10 +109,10 @@ const PreviewPanel = () => {
                                                 currentPage === 0
                                                       ? '0px'
                                                       : currentPage === 1
-                                                      ? '150px'
+                                                      ? '170px'
                                                       : currentPage === pages.length - 1
                                                       ? '0px'
-                                                      : '300px',
+                                                      : '340px',
                                           transition: 'left 0.8s ease-in-out',
                                     }}
                               >
