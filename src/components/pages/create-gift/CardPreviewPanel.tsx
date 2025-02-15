@@ -87,8 +87,6 @@ const PreviewPanel = () => {
             });
       };
 
-      console.log(currentPage, pages.length);
-
       return (
             <div className="flex justify-center h-full items-center ">
                   <div
