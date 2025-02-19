@@ -49,7 +49,9 @@ const AboutUsPage = () => {
                                     <div key={section.id} className={`grid grid-cols-1 md:grid-cols-2 gap-10 items-center`}>
                                           <div className={`${section.reverse ? 'md:order-last' : ''}`}>
                                                 <h2 className="text-3xl font-bold text-gray-900">{section.title}</h2>
-                                                <p className="text-gray-600 mt-4 whitespace-pre-line">{section.description}</p>
+                                                <p className="text-gray-600 mt-4 text-sm md:text-base whitespace-pre-line">
+                                                      {section.description}
+                                                </p>
                                           </div>
                                           <div className={`flex ${section.reverse ? '' : 'justify-end'}`}>
                                                 <Image

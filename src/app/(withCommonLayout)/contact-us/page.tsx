@@ -21,7 +21,7 @@ const ContactUsPage = () => {
                               <Typography.Title level={3} className="text-title mb-4">
                                     Get in Touch
                               </Typography.Title>
-                              <p className="text-paragraph">
+                              <p className="text-paragraph text-sm md:text-base">
                                     Feel free to reach out to us with any questions or inquiries. We’re here to help!
                               </p>
 
@@ -59,7 +59,7 @@ const ContactUsPage = () => {
                                           <div className="text-[#555555] text-sm">Jl. Merdeka Raya No.73B, Kuta, Badung, Bali</div>
                                     </div>
                               </div>
-                              <div className="flex gap-5">
+                              <div className="flex gap-5 w-full justify-center md:justify-start">
                                     {socialLinks.map(({ Icon, href }, index) => (
                                           <Link
                                                 key={index}
@@ -72,7 +72,7 @@ const ContactUsPage = () => {
                               </div>
                         </div>
 
-                        <div className="w-full max-w-[588px] shadow-md mx-auto lg:w-1/2 bg-primary-100/90 rounded-lg  p-8">
+                        <div className="w-full max-w-[588px] md:shadow-md mx-auto lg:w-1/2 bg-primary-100/90 rounded-lg  md:p-8 p-2">
                               <Form requiredMark={false} layout="vertical">
                                     <div className="grid grid-cols-1  gap-4">
                                           <Form.Item
