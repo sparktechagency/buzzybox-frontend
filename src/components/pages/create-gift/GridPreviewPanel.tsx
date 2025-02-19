@@ -75,12 +75,11 @@ const GridPreviewPanel = () => {
       return (
             <div className="min-h-full">
                   <div
-                        className="absolute inset-0 bg-cover bg-center z-0 rounded"
+                        className="absolute  bg-[#0000002c] bg-blend-multiply opacity-80 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
                         style={{
-                              backgroundImage: `url(${AirBalloon.src})`,
-                              //   filter: 'blur(1px)',
+                              backgroundImage: `url('${AirBalloon.src}')`,
                         }}
-                  ></div>
+                  />
                   <div className="relative p-6">
                         <div className="flex items-center gap-3 mb-4">
                               <div className="bg-primary w-fit p-1 rounded-full">
