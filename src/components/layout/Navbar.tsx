@@ -36,13 +36,19 @@ const Navbar = () => {
                         <div className="flex justify-between items-center h-full">
                               {/* Logo */}
                               <Link href={'/'}>
-                                    <Image className="w-auto h-full object-contain" alt="Logo" src={Logo} width={131} height={70} />
+                                    <Image
+                                          className="w-[150px] md:w-full h-full object-contain"
+                                          alt="Logo"
+                                          src={Logo}
+                                          width={120}
+                                          height={70}
+                                    />
                               </Link>
                               {/* Nav Items for Desktop */}
                               <div className="hidden md:flex bg-[#F6F6F6] rounded-lg p-1.5 items-center gap-8">
                                     <NavItems items={items} />
                               </div>
-                              <div className="flex items-center space-x-6">
+                              <div className=" items-center hidden md:flex space-x-6">
                                     <Link href="/sign-in">
                                           <Button iconPosition="start" icon={<UserIcon />} type="primary">
                                                 Sign In
@@ -50,14 +56,20 @@ const Navbar = () => {
                                     </Link>
                               </div>
                               <Dropdown
-                                    placement="bottomLeft"
-                                    className="cursor-pointer"
-                                    trigger={['click', 'hover']}
+                                    placement="bottom"
+                                    className="cursor-pointer hidden md:block"
+                                    trigger={['click']}
                                     dropdownRender={() => <ProfileDropdown />}
                               >
-                                    <div className="flex items-center gap-2">
-                                          <Avatar size={45} src={`https://picsum.photos/40`} style={{ border: '2px solid #FFC301' }} />
-                                          <h1 className="font-semibold text-lg">Sazzad</h1>
+                                    <div className="flex items-center">
+                                          <Avatar
+                                                size={45}
+                                                style={{
+                                                      border: '2px solid #FFC301',
+                                                }}
+                                                alt=""
+                                                src={`https://picsum.photos/40`}
+                                          />
                                     </div>
                               </Dropdown>
                               <div className="md:hidden">

@@ -38,14 +38,14 @@ const ProfileDropdown = () => {
                   <Menu
                         mode="inline"
                         style={{
-                              padding: 15,
+                              padding: 5,
                         }}
                   >
                         <div
                               onClick={() => {
                                     router.push('/dashboard');
                               }}
-                              className="flex cursor-pointer items-center text-start gap-2 mb-4"
+                              className="flex cursor-pointer items-center text-start gap-2 "
                         ></div>
                         <Menu.Item
                               onClick={() => {
