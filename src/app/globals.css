@@ -71,3 +71,10 @@
 .slick-list {
       background-color: transparent !important;
 }
+.ant-tooltip-inner {
+      background-color: #f8f8fa !important;
+      color: #333 !important;
+}
+.ant-tooltip-arrow::before {
+      background-color: #f8f8fa !important;
+}

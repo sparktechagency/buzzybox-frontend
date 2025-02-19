@@ -1,12 +1,20 @@
 'use client';
+import SubmitMessageForm from '@/components/form/MessageSubmissionForm';
+import Modal from '@/components/shared/Modal';
 import { useAppSelector } from '@/redux/hooks';
-import { Button, Carousel } from 'antd';
+import { TCard } from '@/types';
+import { Button, Carousel, Tooltip } from 'antd';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
-import { useRef } from 'react';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
+import { PiDotsThreeCircleThin } from 'react-icons/pi';
 import { TbMessageCircle } from 'react-icons/tb';
 
 const CardPreview = () => {
       const { recipientName, senderName, title } = useAppSelector((state) => state.giftCardManagement);
+      const [isModalOpen, setIsModalOpen] = useState(false);
+      const [createdCard, setCreatedCard] = useState([]);
+      console.log(createdCard);
       const carouselRef = useRef<any>(null);
 
       const handleNext = () => {
@@ -35,41 +43,77 @@ const CardPreview = () => {
                               slidesToScroll={1}
                               ref={carouselRef}
                               dots={false}
-                              className="max-w-[700px] "
+                              className="max-w-[700px]"
                         >
-                              {[1, 2, 3].map((_, index) => (
-                                    <div key={index}>
-                                          {index == 0 ? (
-                                                <div key={index} className="flex-center">
-                                                      <div
-                                                            style={{
-                                                                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/6abd/3727/594261572678155e84eaf710709ccc9c?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=A7hcJEzO384wfjvJDyhh0sHUIyNukejgyxcwd-y4GKJsyjp2cZ6aZo5eqlH6ZvR7TLaYpPWn2N31ZBN11rSDS0109yQYHgjj-9-M2pcg6oJFfJkNUH5j5ZKZ0IkLqo4uentanMRTgOf7FvsV9HllzbUf3jMgDj1CNdt~ReQ2lmOGYCDAeY5wQCddOpJficFOMGOmpRbGlFQB5kpt0Q--pZMd1nH6Vf7ajl7qJd-SIzo6~mdMFPJaDODLjSQZSANU1bLpEAOjl1v3PcHi19vvBJDLvtRVoByhUr5GZSKWhMJtiJUwhGRummRzhrG22yCD~IwNInk7wwqp66~m0wrdPg__')`,
-                                                                  backgroundPosition: 'center',
-                                                                  backgroundSize: 'cover',
-                                                            }}
-                                                            className=" w-[340px] h-[460px] flex-center  rounded-lg  "
-                                                      >
-                                                            <div className="text-center space-y-4">
-                                                                  <h1 className="text-gray-600">{recipientName || 'Recipient'}</h1>
-                                                                  <h2 className="text-2xl font-semibold">{title || 'Happy Birthday'}</h2>
-                                                                  <p className="text-gray-500">From</p>
-                                                                  <p className="text-gray-600">{senderName || 'Sender Name'}</p>
+                              {/* First Card (Cover Card) */}
+                              <div>
+                                    <div className="flex-center p-1">
+                                          <div
+                                                style={{
+                                                      backgroundImage: `url('https://s3-alpha-sig.figma.com/img/6abd/3727/594261572678155e84eaf710709ccc9c?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=A7hcJEzO384wfjvJDyhh0sHUIyNukejgyxcwd-y4GKJsyjp2cZ6aZo5eqlH6ZvR7TLaYpPWn2N31ZBN11rSDS0109yQYHgjj-9-M2pcg6oJFfJkNUH5j5ZKZ0IkLqo4uentanMRTgOf7FvsV9HllzbUf3jMgDj1CNdt~ReQ2lmOGYCDAeY5wQCddOpJficFOMGOmpRbGlFQB5kpt0Q--pZMd1nH6Vf7ajl7qJd-SIzo6~mdMFPJaDODLjSQZSANU1bLpEAOjl1v3PcHi19vvBJDLvtRVoByhUr5GZSKWhMJtiJUwhGRummRzhrG22yCD~IwNInk7wwqp66~m0wrdPg__')`,
+                                                      backgroundPosition: 'center',
+                                                      backgroundSize: 'cover',
+                                                }}
+                                                className="w-[340px] h-[460px] flex-center rounded-lg"
+                                          >
+                                                <div className="text-center space-y-4">
+                                                      <h1 className="text-gray-600">{recipientName || 'Recipient'}</h1>
+                                                      <h2 className="text-2xl font-semibold">{title || 'Happy Birthday'}</h2>
+                                                      <p className="text-gray-500">From</p>
+                                                      <p className="text-gray-600">{senderName || 'Sender Name'}</p>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+
+                              {/* User Created Cards */}
+                              {createdCard.map((card: TCard, index) => (
+                                    <div className="p-1" key={`created-${index}`}>
+                                          <div className="flex-center">
+                                                <div className="w-[340px] relative h-[460px] flex-center rounded-lg bg-white border border-dashed border-primary">
+                                                      <div className="text-center space-y-1">
+                                                            {card.image ? (
+                                                                  <div className="relative w-[192px] h-[168px]">
+                                                                        <Image
+                                                                              width={500}
+                                                                              height={500}
+                                                                              src={card.image}
+                                                                              alt={`Card image ${index + 1}`}
+                                                                              className="w-full h-full object-contain"
+                                                                        />
+                                                                  </div>
+                                                            ) : null}
+                                                            <h1 className="text-gray-600">{card.message}</h1>
+                                                            <div className="flex absolute bottom-4 right-4 justify-end text-end items-center gap-2">
+                                                                  <p className="text-gray-600 text-end">{card.senderName}</p>
+                                                                  <p>
+                                                                        <Tooltip title="Delete Card">
+                                                                              <PiDotsThreeCircleThin className="cursor-pointer text-red-500 text-2xl" />
+                                                                        </Tooltip>
+                                                                  </p>
                                                             </div>
                                                       </div>
                                                 </div>
-                                          ) : (
-                                                <div key={index} className="flex-center ">
-                                                      <div className="border border-dashed  border-primary   w-[340px] h-[460px] flex-center  rounded-lg bg-white">
-                                                            <div className="text-center space-y-4">
-                                                                  <Button type="primary" icon={<TbMessageCircle size={18} />}>
-                                                                        Submit Your Message
-                                                                  </Button>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          )}
+                                          </div>
                                     </div>
                               ))}
+
+                              {/* Submit Message Button Card */}
+                              <div className="p-1">
+                                    <div className="flex-center">
+                                          <div className="border border-dashed border-primary w-[340px] h-[460px] flex-center rounded-lg bg-white">
+                                                <div className="text-center space-y-4">
+                                                      <Button
+                                                            onClick={() => setIsModalOpen(true)}
+                                                            type="primary"
+                                                            icon={<TbMessageCircle size={18} />}
+                                                      >
+                                                            Submit Your Message
+                                                      </Button>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
                         </Carousel>
 
                         <div className="absolute w-[340px] mx-auto bg-primary bottom-[-60px] left-0 right-0 rounded-full">
@@ -84,6 +128,16 @@ const CardPreview = () => {
                               </div>
                         </div>
                   </div>
+
+                  <Modal
+                        title="Submit Your Message"
+                        visible={isModalOpen}
+                        onCancel={() => setIsModalOpen(false)}
+                        onOk={() => setIsModalOpen(false)}
+                        width={700}
+                  >
+                        <SubmitMessageForm setCreatedCard={setCreatedCard} setIsModalOpen={setIsModalOpen} />
+                  </Modal>
             </div>
       );
 };
