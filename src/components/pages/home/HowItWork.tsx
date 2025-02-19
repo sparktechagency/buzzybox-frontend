@@ -29,8 +29,10 @@ const HowItWorks = () => {
       return (
             <section className=" py-16">
                   <div className="container mx-auto text-center">
-                        <h2 className="text-4xl font-bold ">How Buzzybox Works</h2>
-                        <p className="text-paragraph mt-4">Buzzybox makes sending greeting cards & gifts effortless!</p>
+                        <h2 className="text-3xl md:text-4xl font-bold ">How Buzzybox Works</h2>
+                        <p className="text-sm md:text-base text-paragraph mt-4">
+                              Buzzybox makes sending greeting cards & gifts effortless!
+                        </p>
 
                         {/* Steps Section */}
                         <div className="flex justify-center items-center mt-12 relative">

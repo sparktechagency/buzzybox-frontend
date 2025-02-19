@@ -14,12 +14,12 @@ const logos = [
 const JoinSection = () => {
       return (
             <div className="py-16 space-y-5 container bg-white text-center">
-                  <h2 className="text-4xl font-semibold text-title">Join Over 21k+ Happy Users</h2>
-                  <p className="text-lg text-paragraph mt-2">
+                  <h2 className="text-3xl md:text-4xl font-semibold text-title">Join Over 21k+ Happy Users</h2>
+                  <p className=" text-sm md:text-lg text-paragraph mt-2">
                         Trusted by thousands of teams & businesses worldwide—seamless digital cards for every occasion
                   </p>
 
-                  <div className="mt-8 flex justify-center space-x-1">
+                  <div className="mt-8 flex   justify-center  space-x-1">
                         {logos.map((logo, index) => (
                               <div key={index} className="w-[200px]">
                                     <Image src={logo.src} alt={logo.alt} width={100} height={100} />

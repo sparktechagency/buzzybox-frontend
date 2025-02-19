@@ -40,7 +40,7 @@ const TestimonialSlider = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 text-center md:text-start">
                               <div className="mb-8">
                                     <h2 className="text-3xl font-bold text-gray-900">What Users Say About Our Service</h2>
-                                    <p className="text-paragraph mt-2 max-w-xl">
+                                    <p className="text-paragraph mt-2 text-sm md:text-base md:max-w-xl">
                                           See why thousands love Buzzybox! Real stories from happy users who made their moments special with
                                           our digital cards and group gifts. Whether it’s a heartfelt farewell, a joyful birthday, or a team
                                           celebration, Buzzybox makes every occasion memorable and effortless!
@@ -66,10 +66,10 @@ const TestimonialSlider = () => {
                                           {testimonials.map((testimonial) => (
                                                 <div
                                                       key={testimonial.id}
-                                                      className="flex items-center gap-8 bg-white py-10 border border-primary p-6 rounded-xl "
+                                                      className="flex items-center gap-8 bg-white py-10 border border-primary md:p-6 p-2 rounded-xl "
                                                 >
                                                       <div className="h-full">
-                                                            <p className="text-gray-700 italic">{testimonial.text}</p>
+                                                            <p className="text-gray-700 text-sm md:text-base italic">{testimonial.text}</p>
                                                             <div className="flex justify-between items-center">
                                                                   <div className="flex items-center gap-2">
                                                                         <div className="flex-shrink-0">
@@ -82,8 +82,10 @@ const TestimonialSlider = () => {
                                                                               />
                                                                         </div>
                                                                         <div className="mt-3 flex items-center gap-2">
-                                                                              <strong className="text-gray-900">{testimonial.name}</strong>
-                                                                              <span className="text-sm text-gray-500">
+                                                                              <strong className="text-sm md:text-base text-gray-900">
+                                                                                    {testimonial.name}
+                                                                              </strong>
+                                                                              <span className="text-sm  text-gray-500">
                                                                                     {testimonial.role}
                                                                               </span>
                                                                         </div>

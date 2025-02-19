@@ -53,8 +53,8 @@ const OccasionSlider = () => {
             <div className="bg-primary/5 py-20">
                   <div className=" container">
                         <div className="mb-6 space-y-4 text-center">
-                              <h1 className="text-4xl font-semibold">Create the perfect card for any occasion</h1>
-                              <p className="text-paragraph">
+                              <h1 className="text-3xl md:text-4xl font-semibold">Create the perfect card for any occasion</h1>
+                              <p className="text-sm md:text-normal text-paragraph">
                                     Celebrate every moment with a personalized digital card—easy to create, fun to share!
                               </p>
                         </div>

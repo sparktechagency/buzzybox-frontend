@@ -42,7 +42,7 @@ const Footer = () => {
                                                 />
                                           </Link>
                                     </div>
-                                    <p className="text-gray-300">
+                                    <p className="text-gray-300 text-sm md:text-base">
                                           Personalized digital cards and group gifts made easy—join thousands who love Buzzybox!
                                     </p>
                                     <div className="space-y-4">
@@ -89,7 +89,7 @@ const Footer = () => {
 
                               <div>
                                     <h3 className="font-medium text-lg mb-4">Follow Us</h3>
-                                    <p className="text-gray-300 mb-4">
+                                    <p className="text-gray-300 mb-4 text-sm md:text-base">
                                           Follow us for the latest updates, tips, and inspiration from the WorkNest community.
                                     </p>
                                     <div className="flex gap-4">
@@ -107,7 +107,7 @@ const Footer = () => {
                         </div>
                   </div>
                   <div className=" py-8 border-t-2 border-white/10 text-center">
-                        <p className="text-gray-300">
+                        <p className="text-gray-300 text-sm md:text-base">
                               Copyright &copy;<span className="text-white">Buzzybox {new Date().getFullYear()}</span> . All Right Reserved.
                         </p>
                   </div>

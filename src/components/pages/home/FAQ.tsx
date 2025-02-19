@@ -41,8 +41,8 @@ const FAQ = () => {
 
       return (
             <div className="w-full max-w-4xl mx-auto px-4 py-16">
-                  <h2 className="text-4xl font-bold text-center mb-6">Frequently Asked Questions</h2>
-                  <p className="text-center text-paragraph mb-12">Everything you need to know about Buzzybox!</p>
+                  <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Frequently Asked Questions</h2>
+                  <p className=" text-sm md:text-base text-center text-paragraph mb-12">Everything you need to know about Buzzybox!</p>
 
                   <div className="space-y-4">
                         {faqData.map((faq, index) => (
@@ -77,7 +77,7 @@ const FAQ = () => {
                                                             className="px-6 mx-5 flex gap-3 py-4 "
                                                       >
                                                             <span className="h-6 w-0.5 min-w-0.5 bg-primary block"></span>
-                                                            <p className="text-gray-600">{faq.answer}</p>
+                                                            <p className="text-sm md:text-base text-gray-600">{faq.answer}</p>
                                                       </motion.div>
                                                 </motion.div>
                                           )}
