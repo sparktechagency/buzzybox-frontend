@@ -10,7 +10,7 @@ const ForgotPasswordPage = () => {
       };
       return (
             <div className="min-h-[calc(100vh-96px)] flex items-center justify-center">
-                  <div className="container bg-primary/5 shadow  w-full max-w-[500px] mx-auto   rounded-lg p-8 my-20">
+                  <div className="container bg-primary/5 shadow  w-full max-w-[500px] mx-auto   rounded-lg p-3 md:p-8 my-20">
                         <div>
                               <div className="text-center">
                                     <Typography.Title style={{ color: '#FFC301' }} level={2}>

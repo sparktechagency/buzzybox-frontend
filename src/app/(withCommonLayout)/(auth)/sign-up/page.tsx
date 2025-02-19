@@ -15,14 +15,14 @@ const SignUpPage = () => {
       };
       return (
             <div className="min-h-[calc(100vh-96px)] flex items-center justify-center">
-                  <div className="container bg-primary/5 w-full max-w-[500px] mx-auto shadow  rounded-lg p-8 my-20">
+                  <div className="container bg-primary/5 w-full max-w-[500px] mx-auto shadow  rounded-lg p-2 md:p-8 my-20">
                         <div>
                               <div className="text-center">
                                     <Typography.Title style={{ color: '#FFC301' }} level={2}>
                                           Sign Up
                                     </Typography.Title>
 
-                                    <p className="text-paragraph">Create your account</p>
+                                    <p className="text-paragraph text-sm md:text-base">Create your account</p>
                               </div>
 
                               <Form form={form} onFinish={onFinish} layout="vertical" requiredMark={false}>

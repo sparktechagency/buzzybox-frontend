@@ -17,10 +17,10 @@ const SetNewPasswordPage = () => {
                   <div className="container bg-primary/5  w-full max-w-[500px] mx-auto shadow  rounded-lg p-8 my-20">
                         <div>
                               <div className="text-center">
-                                    <Typography.Title style={{ color: '#FFC301' }} level={2}>
+                                    <Typography.Title style={{ color: '#FFC301' }} level={3}>
                                           Set New Password
                                     </Typography.Title>
-                                    <Typography.Paragraph>Create a strong password for your account</Typography.Paragraph>
+                                    <p className="text-sm md:text-base my-2 text-paragraph">Create a strong password for your account</p>
                               </div>
 
                               <Form onFinish={onFinish} layout="vertical" requiredMark={false}>
