@@ -1,13 +1,19 @@
 'use client';
-import { Avatar, Button, Checkbox, InputNumber, Select } from 'antd';
+import { Avatar, Button, Checkbox, Form, Input, InputNumber, Select } from 'antd';
 import { DollarSign } from 'lucide-react';
 import { FaGifts } from 'react-icons/fa';
 import { FcAddImage, FcEditImage, FcRules } from 'react-icons/fc';
 import { useState } from 'react';
+import Modal from '@/components/shared/Modal';
 
 const Sidebar = () => {
       const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(true);
+      const [isModalOpen, setIsModalOpen] = useState(false);
 
+      const handleSubscription = (values: any) => {
+            console.log(values);
+            setIsModalOpen(false);
+      };
       return (
             <div className="p-5 space-y-4">
                   <div className="flex items-center gap-2 border border-primary rounded-lg p-2 cursor-pointer hover:text-primary duration-100">
@@ -80,6 +86,26 @@ const Sidebar = () => {
                   <Button type="primary" className="w-full h-12 bg-yellow-400 hover:bg-yellow-500 border-none">
                         Next
                   </Button>
+                  <div>
+                        <Checkbox onChange={() => setIsModalOpen(true)}>Stay up to date</Checkbox>
+                  </div>
+
+                  <Modal title="" visible={isModalOpen} onCancel={() => setIsModalOpen(false)}>
+                        <div className="text-center space-y-4">
+                              <h1 className="text-2xl font-bold">Stay up to date?</h1>
+                              <p>Keep me updated via email with the latest news, special offers, and important updates</p>
+                              <Form onFinish={handleSubscription}>
+                                    <Form.Item name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
+                                          <Input placeholder="Enter your email" />
+                                    </Form.Item>
+                                    <Form.Item>
+                                          <Button type="primary" htmlType="submit">
+                                                Submit
+                                          </Button>
+                                    </Form.Item>
+                              </Form>
+                        </div>
+                  </Modal>
             </div>
       );
 };
