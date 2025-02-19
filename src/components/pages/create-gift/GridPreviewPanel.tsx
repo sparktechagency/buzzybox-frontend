@@ -75,7 +75,7 @@ const GridPreviewPanel = () => {
       return (
             <div className="min-h-full">
                   <div
-                        className="absolute  bg-[#0000002c] bg-blend-multiply opacity-80 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
+                        className="absolute  bg-[#00000031] bg-blend-multiply opacity-80 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
                         style={{
                               backgroundImage: `url('${AirBalloon.src}')`,
                         }}

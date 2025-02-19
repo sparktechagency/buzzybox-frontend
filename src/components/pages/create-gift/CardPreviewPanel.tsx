@@ -2,9 +2,11 @@
 import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import BgImg1 from '@/assets/images/preview-panel/594261572678155e84eaf710709ccc9c.png';
 import PeopleSketch from '@/assets/images/preview-panel/people-sketch.svg';
 import GiftSketch from '@/assets/images/preview-panel/gift-sketch.png';
-import ImageBg from '@/assets/images/create-gift/img.jpg';
+// import BgImg2 from '@/assets/images/preview-panel/1.jpg';
+// import BgImg3 from '@/assets/images/preview-panel/2.jpg';
 
 import { useAppSelector } from '@/redux/hooks';
 import Image from 'next/image';
@@ -21,7 +23,7 @@ const PreviewPanel = () => {
                         recipientName: recipientName || 'Recipient Name',
                         title: title || 'Buzzybox Title',
                         senderName: senderName || 'Sender Name',
-                        bgImage: ImageBg.src,
+                        bgImage: BgImg1.src,
                   },
                   back: {
                         title: (
@@ -88,9 +90,9 @@ const PreviewPanel = () => {
       return (
             <div className="flex justify-center h-full items-center ">
                   <div
-                        className="absolute  bg-[#00000000] bg-blend-multiply opacity-60 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
+                        className="absolute  bg-[#00000038] bg-blend-multiply opacity-70 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
                         style={{
-                              backgroundImage: `url('${ImageBg.src}')`,
+                              backgroundImage: `url('${BgImg1.src}')`,
                         }}
                   />
                   <div className="">
@@ -131,14 +133,12 @@ const PreviewPanel = () => {
                                                       } 
                   ${index === 0 ? 'p-8' : 'p-6'} flex flex-col items-center justify-center`}
                                                 >
-                                                      <div className="text-center space-y-4 text-white">
-                                                            <h1 className="text-gray-300">{page.front.recipientName}</h1>
-                                                            <h2 className="text-2xl text-primary font-semibold mb-4 ">
-                                                                  {page.front.title}
-                                                            </h2>
+                                                      <div className="text-center space-y-4">
+                                                            <h1 className="text-gray-600">{page.front.recipientName}</h1>
+                                                            <h2 className="text-2xl font-semibold mb-4">{page.front.title}</h2>
                                                             <p className="text-gray-500">{page.front.content}</p>
-                                                            <p className="text-gray-300">{page.front.senderName ? 'From' : ''}</p>
-                                                            <p className="text-gray-300">{page.front.senderName}</p>
+                                                            <p className="text-gray-500">{page.front.senderName ? 'From' : ''}</p>
+                                                            <p className="text-gray-600">{page.front.senderName}</p>
                                                       </div>
                                                       <div className="book-shadow rounded-lg"></div>
                                                 </div>
