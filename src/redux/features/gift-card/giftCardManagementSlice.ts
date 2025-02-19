@@ -17,7 +17,7 @@ const initialState: GiftCardManagementState = {
       title: null,
       recipientName: null,
       senderName: null,
-      boardFormat: 'card',
+      boardFormat: 'grid',
       bgImage: '',
       occasionType: 'birthday',
 };

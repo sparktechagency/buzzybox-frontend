@@ -90,7 +90,7 @@ const PreviewPanel = () => {
       return (
             <div className="flex justify-center h-full items-center ">
                   <div
-                        className="absolute  bg-[#00000038] bg-blend-multiply opacity-70 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
+                        className="absolute  bg-[#0000003f] bg-blend-multiply opacity-70 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
                         style={{
                               backgroundImage: `url('${BgImg1.src}')`,
                         }}

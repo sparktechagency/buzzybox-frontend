@@ -20,7 +20,7 @@ const ConfigurationPanel = () => {
       const onFinish = (values: any) => {
             // Handle form submission here
             console.log('Form Submitted', values);
-            router.push('/create-gift/2');
+            router.push(`/create-gift/${1}`);
       };
 
       return (
