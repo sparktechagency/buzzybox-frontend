@@ -37,20 +37,11 @@ const ConfigurationPanel = () => {
                         }}
                         layout="vertical"
                   >
-                        <div className="w-full bg-primary/5 p-6 rounded-xl mx-auto">
+                        <div className="w-full bg-primary/5 p-1 md:p-6 rounded-xl mx-auto">
                               <h2 className="text-2xl font-bold text-title">Create Your Buzzybox?</h2>
 
                               <p className="text-gray-700 mt-3 font-medium">Select board format</p>
-                              <div className="flex items-center gap-6">
-                                    <div
-                                          onClick={() => handleDispatch('boardFormat', 'card')}
-                                          className={`flex flex-col items-center justify-center p-4 w-1/2 border rounded-lg cursor-pointer transition ${
-                                                boardFormat === 'card' ? 'border-red-500 bg-yellow-100' : 'border-gray-300 bg-[#B8D8FD]'
-                                          }`}
-                                    >
-                                          <Image width={500} height={500} src={BookImage.src} alt="Memory Book" className="w-8 h-8" />
-                                          <p className="mt-2 font-medium">Memory Book</p>
-                                    </div>
+                              <div className="flex  items-center gap-6">
                                     <div
                                           onClick={() => handleDispatch('boardFormat', 'grid')}
                                           className={`flex flex-col items-center justify-center p-4 w-1/2 border rounded-lg cursor-pointer transition ${
@@ -59,6 +50,15 @@ const ConfigurationPanel = () => {
                                     >
                                           <Image width={500} height={500} src={GiftImage.src} alt="Greetings Card" className="w-8 h-8" />
                                           <p className="mt-2 font-medium">Greetings Card</p>
+                                    </div>
+                                    <div
+                                          onClick={() => handleDispatch('boardFormat', 'card')}
+                                          className={`flex flex-col items-center justify-center p-4 w-1/2 border rounded-lg cursor-pointer transition ${
+                                                boardFormat === 'card' ? 'border-red-500 bg-yellow-100' : 'border-gray-300 bg-[#B8D8FD]'
+                                          }`}
+                                    >
+                                          <Image width={500} height={500} src={BookImage.src} alt="Memory Book" className="w-8 h-8" />
+                                          <p className="mt-2 font-medium">Memory Book</p>
                                     </div>
                               </div>
 

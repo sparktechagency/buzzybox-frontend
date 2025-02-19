@@ -80,14 +80,14 @@ const GridPreviewPanel = () => {
                               backgroundImage: `url('${AirBalloon.src}')`,
                         }}
                   />
-                  <div className="relative p-6">
+                  <div className="relative p-2 md:p-6">
                         <div className="flex items-center gap-3 mb-4">
                               <div className="bg-primary w-fit p-1 rounded-full">
                                     <Image className="w-[48px]" width={500} height={500} src={Cake} alt="cake" />
                               </div>
                               <h1 className="text-xl font-bold text-white">{recipientName ? recipientName : 'Recipient Name'}</h1>
                         </div>
-                        <div className="grid grid-cols-2 gap-5">
+                        <div className="grid grid-cols-1 md:grid-cols-2  gap-5">
                               {data.map((item, index) => (
                                     <Card key={index} description={item.description} imageUrl={item.imageUrl} />
                               ))}

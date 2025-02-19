@@ -84,7 +84,7 @@ const GridPreview = () => {
             <div className="min-h-full">
                   <BackgroundOverlay />
 
-                  <div className="relative p-6">
+                  <div className="relative p-2 md:p-6">
                         <HeaderSection recipientName={recipientName as string} />
                         <SubmitButton onClick={() => setIsModalOpen(true)} />
 

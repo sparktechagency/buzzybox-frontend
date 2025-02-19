@@ -5,8 +5,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import BgImg1 from '@/assets/images/preview-panel/594261572678155e84eaf710709ccc9c.png';
 import PeopleSketch from '@/assets/images/preview-panel/people-sketch.svg';
 import GiftSketch from '@/assets/images/preview-panel/gift-sketch.png';
-// import BgImg2 from '@/assets/images/preview-panel/1.jpg';
-// import BgImg3 from '@/assets/images/preview-panel/2.jpg';
 
 import { useAppSelector } from '@/redux/hooks';
 import Image from 'next/image';
@@ -88,7 +86,7 @@ const PreviewPanel = () => {
       };
 
       return (
-            <div className="flex justify-center h-full items-center ">
+            <div className="flex min-h- justify-center h-full items-center ">
                   <div
                         className="absolute  bg-[#0000003f] bg-blend-multiply opacity-70 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
                         style={{
@@ -96,7 +94,7 @@ const PreviewPanel = () => {
                         }}
                   />
                   <div className="">
-                        <div className="relative w-[340px] h-[460px] book-container">
+                        <div className="relative w-[150px] md:w-[340px] h-[170px] md:h-[460px]  book-container">
                               <div
                                     ref={bookRef}
                                     className="relative w-full h-full"

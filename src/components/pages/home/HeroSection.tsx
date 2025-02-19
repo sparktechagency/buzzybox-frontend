@@ -61,7 +61,7 @@ const HeroSection = () => {
                         </div>
                         <div className="order-1 md:order-2 my-5 md:my-0">
                               <Image
-                                    className="w-auto  md:h-[647.63px] m-auto object-contain"
+                                    className="w-auto md:h-[647.63px] m-auto object-contain"
                                     alt="Hero Image"
                                     src={HeroImg.src}
                                     width={500}
