@@ -15,7 +15,7 @@ const HeroSection = () => {
                   className="md:h-[calc(100vh-96px)] bg-no-repeat bg-cover py-10"
             >
                   <div className="container h-full  justify-center items-center  grid grid-cols-1 md:grid-cols-2  ">
-                        <div className="space-y-8 text-center md:text-start">
+                        <div className="space-y-8 order-2 md:order-2 text-center md:text-start">
                               <h1 className="text-3xl md:text-6xl space-y-4 font-bold">
                                     <span className="block"> Effortless Digital</span>
                                     <span className="block"> Cards & Group Gifts.</span>
@@ -59,9 +59,9 @@ const HeroSection = () => {
                                     </div>
                               </div>
                         </div>
-                        <div>
+                        <div className="order-1 md:order-2 my-5 md:my-0">
                               <Image
-                                    className="w-auto mt-10 md:mt-0 md:h-[647.63px] m-auto object-contain"
+                                    className="w-auto  md:h-[647.63px] m-auto object-contain"
                                     alt="Hero Image"
                                     src={HeroImg.src}
                                     width={500}

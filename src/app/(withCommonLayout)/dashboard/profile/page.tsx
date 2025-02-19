@@ -43,7 +43,7 @@ export default function ProfileCard() {
                               Edit
                         </Button>
                   </div>
-                  <div className="relative custom-shadow bg-white p-5">
+                  <div className="relative md:custom-shadow  w-full p-3 md:p-5">
                         <div className="space-y-6">
                               <div className="space-y-1">
                                     <h3 className="text-title">Full Name</h3>

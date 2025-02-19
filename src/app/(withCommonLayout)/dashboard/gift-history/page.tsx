@@ -109,6 +109,7 @@ export default function GiftTable() {
                         style={{
                               border: 'none',
                         }}
+                        scroll={{ x: 1000 }}
                         className="[&_.ant-table-cell]:!border-0 [&_.ant-table]:!border-0 [&_.ant-table-container]:!border-0 [&_.ant-table-thead>tr>th]:!border-0 [&_.ant-table-tbody>tr>td]:!border-0 border rounded-lg shadow-sm"
                         bordered={false}
                         columns={columns}

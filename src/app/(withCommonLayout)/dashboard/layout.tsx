@@ -26,12 +26,12 @@ const ProfileLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                               }}
                         >
                               <Sider
-                                    width={282}
+                                    width={280}
                                     theme="light"
                                     // breakpoint="lg"
                                     collapsedWidth="0"
                                     // collapsible
-                                    className="custom-shadow p-2"
+                                    className={`custom-shadow ${collapsed ? 'p-0' : 'p-5'}`}
                                     collapsed={collapsed}
                                     onCollapse={(isCollapsed) => setCollapsed(isCollapsed)}
                               >
@@ -50,7 +50,7 @@ const ProfileLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                                     </button>
                               </Header>
                               <Content>
-                                    <div className="w-full p-6 overflow-x-scroll hide-scrollbar">{children}</div>
+                                    <div className="w-full p-2 md:p-6 overflow-x-scroll hide-scrollbar">{children}</div>
                               </Content>
                         </Layout>
                   </Layout>

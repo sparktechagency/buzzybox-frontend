@@ -9,7 +9,7 @@ const ChangePassword = () => {
 
       return (
             <Form
-                  className="w-full max-w-lg"
+                  className="w-full md:max-w-lg"
                   requiredMark={false}
                   layout="vertical"
                   form={form}

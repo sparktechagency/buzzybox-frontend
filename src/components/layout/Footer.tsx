@@ -42,6 +42,7 @@ const Footer = () => {
                                                 />
                                           </Link>
                                     </div>
+
                                     <p className="text-gray-300 text-sm md:text-base">
                                           Personalized digital cards and group gifts made easy—join thousands who love Buzzybox!
                                     </p>

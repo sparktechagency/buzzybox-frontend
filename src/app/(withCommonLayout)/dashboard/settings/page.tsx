@@ -6,7 +6,7 @@ import DeleteAccount from './DeleteAccount';
 
 const Settings = () => {
       return (
-            <div className="p-5 custom-shadow w-fit min-w-[500px]">
+            <div className=" p-3 md:p-5 custom-shadow w-fit min-w-[500px]">
                   <CustomTab
                         tabs={[
                               { key: 'change-password', label: 'Change Password', content: <ChangePassword /> },
