@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { PiDotsThreeCircleThin } from 'react-icons/pi';
 import { TbMessageCircle } from 'react-icons/tb';
+import ImageBg from '@/assets/images/create-gift/birthday.jpg';
 
 // Card Components
 const CoverCard = ({ recipientName, senderName, title }: { recipientName: string; senderName: string; title: string }) => (
@@ -16,7 +17,7 @@ const CoverCard = ({ recipientName, senderName, title }: { recipientName: string
             <div className="flex-center p-1">
                   <div
                         style={{
-                              backgroundImage: `url('https://s3-alpha-sig.figma.com/img/6abd/3727/594261572678155e84eaf710709ccc9c?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=A7hcJEzO384wfjvJDyhh0sHUIyNukejgyxcwd-y4GKJsyjp2cZ6aZo5eqlH6ZvR7TLaYpPWn2N31ZBN11rSDS0109yQYHgjj-9-M2pcg6oJFfJkNUH5j5ZKZ0IkLqo4uentanMRTgOf7FvsV9HllzbUf3jMgDj1CNdt~ReQ2lmOGYCDAeY5wQCddOpJficFOMGOmpRbGlFQB5kpt0Q--pZMd1nH6Vf7ajl7qJd-SIzo6~mdMFPJaDODLjSQZSANU1bLpEAOjl1v3PcHi19vvBJDLvtRVoByhUr5GZSKWhMJtiJUwhGRummRzhrG22yCD~IwNInk7wwqp66~m0wrdPg__')`,
+                              backgroundImage: `url('${ImageBg.src}')`,
                               backgroundPosition: 'center',
                               backgroundSize: 'cover',
                         }}
@@ -105,10 +106,9 @@ const CardPreview = () => {
             <div className="relative flex items-center justify-center h-full w-full">
                   {/* Background */}
                   <div
-                        className="absolute inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
+                        className="absolute  bg-[#0000005b] bg-blend-multiply opacity-60 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
                         style={{
-                              backgroundImage: `url('https://s3-alpha-sig.figma.com/img/6abd/3727/594261572678155e84eaf710709ccc9c?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=A7hcJEzO384wfjvJDyhh0sHUIyNukejgyxcwd-y4GKJsyjp2cZ6aZo5eqlH6ZvR7TLaYpPWn2N31ZBN11rSDS0109yQYHgjj-9-M2pcg6oJFfJkNUH5j5ZKZ0IkLqo4uentanMRTgOf7FvsV9HllzbUf3jMgDj1CNdt~ReQ2lmOGYCDAeY5wQCddOpJficFOMGOmpRbGlFQB5kpt0Q--pZMd1nH6Vf7ajl7qJd-SIzo6~mdMFPJaDODLjSQZSANU1bLpEAOjl1v3PcHi19vvBJDLvtRVoByhUr5GZSKWhMJtiJUwhGRummRzhrG22yCD~IwNInk7wwqp66~m0wrdPg__')`,
-                              filter: 'blur(3px)',
+                              backgroundImage: `url('${ImageBg.src}')`,
                         }}
                   />
 
