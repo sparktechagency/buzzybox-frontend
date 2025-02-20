@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import BgImg1 from '@/assets/images/preview-panel/594261572678155e84eaf710709ccc9c.png';
@@ -14,7 +14,16 @@ const PreviewPanel = () => {
       const [currentPage, setCurrentPage] = useState(0);
       const bookRef = useRef(null);
       const pageRefs = [useRef(null), useRef(null), useRef(null)];
+      const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+      useEffect(() => {
+            const handleResize = () => {
+                  setIsMobile(window.innerWidth < 768);
+            };
+
+            window.addEventListener('resize', handleResize);
+            return () => window.removeEventListener('resize', handleResize);
+      }, []);
       const pages = [
             {
                   front: {
@@ -86,7 +95,7 @@ const PreviewPanel = () => {
       };
 
       return (
-            <div className="flex min-h- justify-center h-full items-center ">
+            <div className="flex min-h-[80vh] overflow-hidden justify-center h-full items-center ">
                   <div
                         className="absolute  bg-[#0000003f] bg-blend-multiply opacity-70 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
                         style={{
@@ -94,7 +103,7 @@ const PreviewPanel = () => {
                         }}
                   />
                   <div className="">
-                        <div className="relative w-[150px] md:w-[340px] h-[170px] md:h-[460px]  book-container">
+                        <div className="relative  w-[45dvw] md:w-[340px] h-[40dvh] md:h-[460px]  book-container">
                               <div
                                     ref={bookRef}
                                     className="relative w-full h-full"
@@ -104,10 +113,10 @@ const PreviewPanel = () => {
                                                 currentPage === 0
                                                       ? '0px'
                                                       : currentPage === 1
-                                                      ? '170px'
+                                                      ? `${isMobile ? '22dvw' : '170px'}`
                                                       : currentPage === pages.length - 1
                                                       ? '0px'
-                                                      : '340px',
+                                                      : `${isMobile ? '45dvw' : '340px'}`,
                                           transition: 'left 0.8s ease-in-out',
                                     }}
                               >
