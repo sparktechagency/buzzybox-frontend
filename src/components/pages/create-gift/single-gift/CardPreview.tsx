@@ -103,7 +103,7 @@ const CardPreview = () => {
       const handlePrev = () => carouselRef.current.prev();
 
       return (
-            <div className="relative flex items-center justify-center h-full w-full">
+            <div className="relative flex items-center justify-center h-full w-full overflow-hidden">
                   {/* Background */}
                   <div
                         className="absolute  bg-[#0000005b] bg-blend-multiply opacity-60 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
@@ -117,6 +117,26 @@ const CardPreview = () => {
                         <Carousel
                               style={{ backgroundColor: 'red' }}
                               slidesToShow={2}
+                              responsive={[
+                                    {
+                                          breakpoint: 768,
+                                          settings: {
+                                                slidesToShow: 1,
+                                                infinite: true,
+                                                slidesToScroll: 1,
+                                                dots: false,
+                                          },
+                                    },
+                                    {
+                                          breakpoint: 1024,
+                                          settings: {
+                                                slidesToShow: 2,
+                                                infinite: false,
+                                                slidesToScroll: 1,
+                                                dots: false,
+                                          },
+                                    },
+                              ]}
                               infinite={false}
                               slidesToScroll={1}
                               ref={carouselRef}
