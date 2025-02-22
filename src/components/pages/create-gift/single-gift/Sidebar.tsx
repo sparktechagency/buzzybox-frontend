@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Modal from '@/components/shared/Modal';
 
 const Sidebar = () => {
-      const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(true);
+      const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(false);
       const [isModalOpen, setIsModalOpen] = useState(false);
 
       const handleSubscription = (values: any) => {

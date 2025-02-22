@@ -10,7 +10,7 @@ const NavItems = ({ items, onClose }: { items: any[]; onClose?: () => void }) =>
                         <Link
                               key={index}
                               onClick={onClose}
-                              className={` leading-4 ${pathname === item.path ? 'bg-primary font-medium p-2 rounded-lg' : ''}`}
+                              className={` leading-4 p-2 ${pathname === item.path ? 'bg-primary font-medium p-2 rounded-lg' : ''}`}
                               href={item.path}
                         >
                               {item.label}
