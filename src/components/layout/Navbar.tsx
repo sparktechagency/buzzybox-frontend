@@ -40,8 +40,8 @@ const Navbar = () => {
                                           className="w-[150px] md:w-full h-full object-contain"
                                           alt="Logo"
                                           src={Logo}
-                                          width={120}
-                                          height={70}
+                                          width={500}
+                                          height={500}
                                     />
                               </Link>
                               {/* Nav Items for Desktop */}
