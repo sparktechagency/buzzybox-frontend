@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import Logo from '@/assets/images/logo.svg';
+import Logo from '@/assets/images/logo.png';
 
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useState } from 'react';
@@ -37,11 +37,13 @@ const Navbar = () => {
                               {/* Logo */}
                               <Link href={'/'}>
                                     <Image
-                                          className="w-[150px] md:w-full h-full object-contain"
+                                          className="w-[180px] md:w-full h-[70px] object-contain"
                                           alt="Logo"
                                           src={Logo}
-                                          width={500}
-                                          height={500}
+                                          width={300}
+                                          height={100}
+                                          priority
+                                          quality={100}
                                     />
                               </Link>
                               {/* Nav Items for Desktop */}
