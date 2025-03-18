@@ -6,6 +6,7 @@ import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { LogInIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const SignInPage = () => {
       const [login] = useLoginMutation();
@@ -14,14 +15,16 @@ const SignInPage = () => {
 
       // login submit handler
       const onFinish = async (values: any) => {
+            toast.loading('Logging in...', { id: 'loginToast' });
             try {
                   const res = await login(values).unwrap();
                   if (res.success) {
-                        console.log(res.message);
+                        toast.success(res.message || 'Login successful!', { id: 'loginToast' });
                         dispatch(saveToAuth(res));
                         router.push('/');
                   }
             } catch (error: any) {
+                  toast.error(error?.data?.message || 'Login failed', { id: 'loginToast' });
                   console.log(error?.data?.message);
             }
       };
