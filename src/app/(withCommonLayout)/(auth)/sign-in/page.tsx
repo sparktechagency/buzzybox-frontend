@@ -1,11 +1,16 @@
 'use client';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
+import { saveToAuth } from '@/redux/features/auth/authSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { LogInIcon } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const SignInPage = () => {
       const [login] = useLoginMutation();
+      const dispatch = useAppDispatch();
+      const router = useRouter();
 
       // login submit handler
       const onFinish = async (values: any) => {
@@ -13,13 +18,14 @@ const SignInPage = () => {
                   const res = await login(values).unwrap();
                   if (res.success) {
                         console.log(res.message);
-                        console.log(res.data);
-                        // router.push('/');
+                        dispatch(saveToAuth(res));
+                        router.push('/');
                   }
             } catch (error: any) {
                   console.log(error?.data?.message);
             }
       };
+
       return (
             <div className="min-h-[calc(100vh-96px)]  flex items-center justify-center">
                   <div className="container bg-primary/5  w-full max-w-[500px] mx-auto shadow  rounded-lg p-2 md:p-8 my-20">
