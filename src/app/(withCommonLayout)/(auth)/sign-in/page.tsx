@@ -1,15 +1,45 @@
 'use client';
+import { useLoginMutation } from '@/redux/features/auth/authApi';
+import { saveToAuth } from '@/redux/features/auth/authSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { LogInIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const SignInPage = () => {
+      const [form] = Form.useForm();
+      const [login] = useLoginMutation();
+      const dispatch = useAppDispatch();
       const router = useRouter();
+
+      // login submit handler
       const onFinish = async (values: any) => {
-            console.log('Success:', values);
-            router.push('/');
+            toast.loading('Logging in...', { id: 'loginToast' });
+            try {
+                  const res = await login(values).unwrap();
+                  if (res.success) {
+                        toast.success(res.message || 'Login successful!', { id: 'loginToast' });
+                        dispatch(saveToAuth(res));
+                        router.push('/');
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Login failed', { id: 'loginToast' });
+                  console.log(error?.data?.message);
+            }
       };
+
+      // Set user credentials - for testing mode only. remove on production mode
+      const setUserCredentials = () => {
+            form.setFieldsValue({ email: 'user@gmail.com', password: 'kothinpassword' });
+      };
+
+      // Set admin credentials - for testing mode only. remove on production mode
+      const setAdminCredentials = () => {
+            form.setFieldsValue({ email: 'apusutradhar77@gmail.com', password: 'kothinpassword' });
+      };
+
       return (
             <div className="min-h-[calc(100vh-96px)]  flex items-center justify-center">
                   <div className="container bg-primary/5  w-full max-w-[500px] mx-auto shadow  rounded-lg p-2 md:p-8 my-20">
@@ -23,8 +53,7 @@ const SignInPage = () => {
                                           Log in to continue your journey and access your sessions
                                     </p>
                               </div>
-
-                              <Form onFinish={onFinish} layout="vertical" requiredMark={false}>
+                              <Form form={form} onFinish={onFinish} layout="vertical" requiredMark={false}>
                                     <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
                                           <Input placeholder="Enter your email" />
                                     </Form.Item>
@@ -64,7 +93,15 @@ const SignInPage = () => {
                                           </Button>
                                     </Form.Item>
                               </Form>
-
+                              {/* this section is for testing mode only. remove on production mode */}
+                              <div className="flex justify-between items-center gap-2 mt-4">
+                                    <Button onClick={setUserCredentials} type="default" style={{ flex: 1 }}>
+                                          User Credentials
+                                    </Button>
+                                    <Button onClick={setAdminCredentials} type="default" style={{ flex: 1 }}>
+                                          Admin Credentials
+                                    </Button>
+                              </div>
                               <div>
                                     <div className="flex items-center justify-center mt-4">
                                           <span className="text-sm text-paragraph mr-2">Don’t have an account ? </span>
