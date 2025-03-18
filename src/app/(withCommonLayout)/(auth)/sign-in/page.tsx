@@ -1,14 +1,24 @@
 'use client';
+import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { LogInIcon } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 const SignInPage = () => {
-      const router = useRouter();
+      const [login] = useLoginMutation();
+
+      // login submit handler
       const onFinish = async (values: any) => {
-            console.log('Success:', values);
-            router.push('/');
+            try {
+                  const res = await login(values).unwrap();
+                  if (res.success) {
+                        console.log(res.message);
+                        console.log(res.data);
+                        // router.push('/');
+                  }
+            } catch (error: any) {
+                  console.log(error?.data?.message);
+            }
       };
       return (
             <div className="min-h-[calc(100vh-96px)]  flex items-center justify-center">
