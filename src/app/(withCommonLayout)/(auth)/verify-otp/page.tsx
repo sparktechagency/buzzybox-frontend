@@ -1,9 +1,12 @@
 'use client';
 import { Button, Form, Input, Typography } from 'antd';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const VerifyOtpPage = () => {
       const router = useRouter();
+      const searchParams = useSearchParams();
+      const email = searchParams.get('email');
+
       const onFinish = async (values: any) => {
             console.log('Success:', values);
             router.push('/set-new-password');
