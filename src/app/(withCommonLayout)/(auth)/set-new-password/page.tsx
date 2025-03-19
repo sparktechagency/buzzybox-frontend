@@ -1,15 +1,31 @@
 'use client';
 
+import { useResetPasswordMutation } from '@/redux/features/auth/authApi';
 import { Button, ConfigProvider, Form, Input, Typography } from 'antd';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const SetNewPasswordPage = () => {
       const router = useRouter();
-      const onFinish = async (values: any) => {
-            console.log('Success:', values);
+      const searchParams = useSearchParams();
+      const token = searchParams.get('auth');
 
-            router.push('/sign-in');
+      const [resetPassword] = useResetPasswordMutation();
+
+      // reset password handler
+      const onFinish = async (values: any) => {
+            toast.loading('Saving...', { id: 'resetPasswordToast' });
+            try {
+                  const res = await resetPassword({ payload: values, token }).unwrap();
+                  if (res.success) {
+                        toast.success(res.message || 'Password reset successful', { id: 'resetPasswordToast' });
+                        router.push(`/sign-in`);
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Failed to reset password', { id: 'resetPasswordToast' });
+                  console.log(error?.data?.message);
+            }
       };
 
       return (

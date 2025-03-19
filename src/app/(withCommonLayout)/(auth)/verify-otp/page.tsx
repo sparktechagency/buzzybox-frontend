@@ -1,8 +1,10 @@
 'use client';
+import { Suspense } from 'react';
 import { useResendOtpMutation, useVerifyOtpMutation } from '@/redux/features/auth/authApi';
 import { Button, Form, Input, Typography } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
+import Loader from '@/components/shared/Loader';
 
 const VerifyOtpPage = () => {
       const router = useRouter();
@@ -19,11 +21,11 @@ const VerifyOtpPage = () => {
                   const res = await verifyOtp({ oneTimeCode: Number(values.otp), email }).unwrap();
                   if (res.success) {
                         toast.success(res.message || 'Otp verification successful', { id: 'verifyOtpToast' });
-                        router.push(`/set-new-password`);
+                        router.push(`/set-new-password?auth=${res.data}`);
                   }
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Verification failed', { id: 'verifyOtpToast' });
-                  console.log(error?.data);
+                  console.log(error?.data?.message);
             }
       };
 
@@ -85,4 +87,10 @@ const VerifyOtpPage = () => {
       );
 };
 
-export default VerifyOtpPage;
+const VerifyOtpPageWrapper = () => (
+      <Suspense fallback={<Loader />}>
+            <VerifyOtpPage />
+      </Suspense>
+);
+
+export default VerifyOtpPageWrapper;
