@@ -6,9 +6,12 @@ import { CameraIcon, GiftIcon, LogOut, Settings2, UserIcon } from 'lucide-react'
 import { UploadChangeParam } from 'antd/es/upload';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useAppDispatch } from '@/redux/hooks';
+import { logOut } from '@/redux/features/auth/authSlice';
 const ProfileSidebar = () => {
       const pathname = usePathname();
       const router = useRouter();
+      const dispatch = useAppDispatch();
       const activeKey = pathname.split('/').pop();
       const [previewImage, setPreviewImage] = useState<undefined | string>('https://i.ibb.co.com/yN2vT01/me.jpg');
 
@@ -71,6 +74,7 @@ const ProfileSidebar = () => {
                   },
 
                   onOk() {
+                        dispatch(logOut());
                         router.push('/sign-in');
                   },
             });
