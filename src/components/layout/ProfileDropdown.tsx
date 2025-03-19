@@ -2,9 +2,14 @@ import React from 'react';
 import { Menu, Avatar, Modal } from 'antd';
 import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useAppDispatch } from '@/redux/hooks';
+import { logOut } from '@/redux/features/auth/authSlice';
 
 const ProfileDropdown = () => {
       const router = useRouter();
+      const dispatch = useAppDispatch();
+      // const user = useAppSelector(selectAccessToken);
+      // console.log(user);
 
       const handleLogout = () => {
             Modal.confirm({
@@ -28,7 +33,8 @@ const ProfileDropdown = () => {
                   },
 
                   onOk() {
-                        router.push('/sign-in');
+                        dispatch(logOut());
+                        // router.push('/sign-in');
                   },
             });
       };
