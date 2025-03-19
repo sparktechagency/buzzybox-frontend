@@ -1,17 +1,32 @@
 'use client';
 
+import { useSignUpMutation } from '@/redux/features/auth/authApi';
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { Send } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const SignUpPage = () => {
       const router = useRouter();
       const [form] = Form.useForm();
 
+      const [signUp] = useSignUpMutation();
+
+      // login submit handler
       const onFinish = async (values: any) => {
-            console.log('Success:', values);
-            router.push('/');
+            toast.loading('Account creating...', { id: 'signUpToast' });
+            try {
+                  const res = await signUp(values).unwrap();
+                  console.log(res);
+                  if (res.success) {
+                        toast.success(res.message || 'Sign up successful!', { id: 'signUpToast' });
+                        router.push(`/verify-otp?email=${values.email}`);
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Sign up failed', { id: 'signUpToast' });
+                  console.log(error?.data);
+            }
       };
       return (
             <div className="min-h-[calc(100vh-96px)] flex items-center justify-center">
@@ -28,7 +43,7 @@ const SignUpPage = () => {
                               <Form form={form} onFinish={onFinish} layout="vertical" requiredMark={false}>
                                     <Form.Item
                                           label="Full Name"
-                                          name="fullName"
+                                          name="name"
                                           rules={[{ required: true, message: 'Please input your full name!' }]}
                                     >
                                           <Input placeholder="Enter your full name" />
@@ -41,7 +56,10 @@ const SignUpPage = () => {
                                     <Form.Item
                                           label="Password"
                                           name="password"
-                                          rules={[{ required: true, message: 'Please input your password!' }]}
+                                          rules={[
+                                                { required: true, message: 'Please input your password!' },
+                                                { min: 8, message: 'Password must be at least 8 characters long!' },
+                                          ]}
                                     >
                                           <Input.Password placeholder="********" />
                                     </Form.Item>

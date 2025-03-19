@@ -2,6 +2,15 @@ import { baseApi } from '../../api/baseApi';
 
 const authApi = baseApi.injectEndpoints({
       endpoints: (builder) => ({
+            signUp: builder.mutation({
+                  query: (payload) => {
+                        return {
+                              url: `/users/create-user`,
+                              method: 'POST',
+                              body: payload,
+                        };
+                  },
+            }),
             login: builder.mutation({
                   query: (payload) => {
                         return {
@@ -54,5 +63,11 @@ const authApi = baseApi.injectEndpoints({
       }),
 });
 
-export const { useLoginMutation, useForgetPasswordMutation, useVerifyOtpMutation, useResendOtpMutation, useResetPasswordMutation } =
-      authApi;
+export const {
+      useSignUpMutation,
+      useLoginMutation,
+      useForgetPasswordMutation,
+      useVerifyOtpMutation,
+      useResendOtpMutation,
+      useResetPasswordMutation,
+} = authApi;
