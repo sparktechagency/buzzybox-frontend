@@ -5,6 +5,8 @@ import { MdOutlineArrowOutward } from 'react-icons/md';
 import PageHeader from '@/components/shared/PageHeader';
 import { Facebook, Twitter, Instagram } from 'lucide-react';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
+import { useCreateContactMutation } from '@/redux/features/website/contact/contactApi';
 
 const socialLinks = [
       { Icon: Facebook, href: '#' },
@@ -13,6 +15,23 @@ const socialLinks = [
 ];
 
 const ContactUsPage = () => {
+      const [createContact] = useCreateContactMutation();
+
+      // submit handler
+      const handleSubmit = async (values: any) => {
+            toast.loading('Sending...', { id: 'contactToast' });
+            try {
+                  const res = await createContact(values).unwrap();
+                  console.log(res);
+                  if (res.success) {
+                        toast.success(res.message || 'Successfully sent!', { id: 'contactToast' });
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Failed to send', { id: 'contactToast' });
+                  console.log(error?.data?.message);
+            }
+      };
+
       return (
             <div className="">
                   <PageHeader title="Contact Us" />
@@ -73,7 +92,7 @@ const ContactUsPage = () => {
                         </div>
 
                         <div className="w-full max-w-[588px] md:shadow-md mx-auto lg:w-1/2 bg-primary-100/90 rounded-lg  md:p-8 p-2">
-                              <Form requiredMark={false} layout="vertical">
+                              <Form onFinish={handleSubmit} requiredMark={false} layout="vertical">
                                     <div className="grid grid-cols-1  gap-4">
                                           <Form.Item
                                                 label="Name"

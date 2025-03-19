@@ -11,9 +11,12 @@ import NavItems from './NavItems';
 import MobileDrawer from './MobileDrawer';
 import { UserIcon } from 'lucide-react';
 import ProfileDropdown from './ProfileDropdown';
+import { useAppSelector } from '@/redux/hooks';
+import { selectAccessToken } from '@/redux/features/auth/authSlice';
 
 const Navbar = () => {
       const [showDrawer, setShowDrawer] = useState(false);
+      const token = useAppSelector(selectAccessToken);
 
       const items = [
             { label: 'Home', path: '/' },
@@ -50,13 +53,15 @@ const Navbar = () => {
                               <div className="hidden md:flex bg-[#F6F6F6] rounded-lg p-1.5 items-center gap-8">
                                     <NavItems items={items} />
                               </div>
-                              <div className=" items-center hidden md:flex space-x-6">
-                                    <Link href="/sign-in">
-                                          <Button iconPosition="start" icon={<UserIcon />} type="primary">
-                                                Sign In
-                                          </Button>
-                                    </Link>
-                              </div>
+                              {!token && (
+                                    <div className=" items-center hidden md:flex space-x-6">
+                                          <Link href="/sign-in">
+                                                <Button iconPosition="start" icon={<UserIcon />} type="primary">
+                                                      Sign In
+                                                </Button>
+                                          </Link>
+                                    </div>
+                              )}
                               <Dropdown
                                     placement="bottom"
                                     className="cursor-pointer hidden md:block"
