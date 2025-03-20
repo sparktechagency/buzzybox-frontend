@@ -1,11 +1,11 @@
 import { baseApi } from '@/redux/api/baseApi';
 
-const categoryApi = baseApi.injectEndpoints({
+const aboutApi = baseApi.injectEndpoints({
       endpoints: (builder) => ({
-            getCategories: builder.query({
+            getAllAbout: builder.query({
                   query: () => {
                         return {
-                              url: `/categories`,
+                              url: `/about`,
                               method: 'GET',
                         };
                   },
@@ -13,4 +13,4 @@ const categoryApi = baseApi.injectEndpoints({
       }),
 });
 
-export const { useGetCategoriesQuery } = categoryApi;
+export const { useGetAllAboutQuery } = aboutApi;

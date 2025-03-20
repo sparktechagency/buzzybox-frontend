@@ -20,7 +20,6 @@ const VerifyOtpPage = () => {
             toast.loading('Verifying...', { id: 'verifyOtpToast' });
             try {
                   const res = await verifyOtp({ oneTimeCode: Number(values.otp), email }).unwrap();
-                  console.log(res);
                   if (res.success) {
                         toast.success(res.message || 'Otp verification successful', { id: 'verifyOtpToast' });
                         if (status === 'reset') {
