@@ -53,7 +53,25 @@ const Navbar = () => {
                               <div className="hidden md:flex bg-[#F6F6F6] rounded-lg p-1.5 items-center gap-8">
                                     <NavItems items={items} />
                               </div>
-                              {!token && (
+                              {token ? (
+                                    <Dropdown
+                                          placement="bottom"
+                                          className="cursor-pointer hidden md:block"
+                                          trigger={['click']}
+                                          dropdownRender={() => <ProfileDropdown />}
+                                    >
+                                          <div className="flex items-center">
+                                                <Avatar
+                                                      size={45}
+                                                      style={{
+                                                            border: '2px solid #FFC301',
+                                                      }}
+                                                      alt=""
+                                                      src={`https://picsum.photos/40`}
+                                                />
+                                          </div>
+                                    </Dropdown>
+                              ) : (
                                     <div className=" items-center hidden md:flex space-x-6">
                                           <Link href="/sign-in">
                                                 <Button iconPosition="start" icon={<UserIcon />} type="primary">
@@ -62,23 +80,7 @@ const Navbar = () => {
                                           </Link>
                                     </div>
                               )}
-                              <Dropdown
-                                    placement="bottom"
-                                    className="cursor-pointer hidden md:block"
-                                    trigger={['click']}
-                                    dropdownRender={() => <ProfileDropdown />}
-                              >
-                                    <div className="flex items-center">
-                                          <Avatar
-                                                size={45}
-                                                style={{
-                                                      border: '2px solid #FFC301',
-                                                }}
-                                                alt=""
-                                                src={`https://picsum.photos/40`}
-                                          />
-                                    </div>
-                              </Dropdown>
+
                               <div className="md:hidden">
                                     <AiOutlineMenu
                                           onClick={() => setShowDrawer(!showDrawer)}

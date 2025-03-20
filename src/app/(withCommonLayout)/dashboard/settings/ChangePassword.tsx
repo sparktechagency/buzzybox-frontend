@@ -11,13 +11,12 @@ const ChangePassword = () => {
             toast.loading('Saving...', { id: 'changePasswordToast' });
             try {
                   const res = await changePassword({ payload: values }).unwrap();
-                  console.log(res);
                   if (res.success) {
                         toast.success(res.message || 'Password updated successful', { id: 'changePasswordToast' });
                   }
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Failed to update password', { id: 'changePasswordToast' });
-                  console.log(error?.data);
+                  console.log(error?.data?.message);
             }
       };
 
