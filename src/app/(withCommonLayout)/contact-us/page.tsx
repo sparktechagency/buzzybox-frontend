@@ -1,18 +1,11 @@
 'use client';
-import { Input, Button, Form, Typography } from 'antd';
-import { PhoneOutlined, MailOutlined, EnvironmentOutlined } from '@ant-design/icons';
+import { Input, Button, Form } from 'antd';
+
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import PageHeader from '@/components/shared/PageHeader';
-import { Facebook, Twitter, Instagram } from 'lucide-react';
-import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { useCreateContactMutation } from '@/redux/features/website/contact/contactApi';
-
-const socialLinks = [
-      { Icon: Facebook, href: '#' },
-      { Icon: Twitter, href: '#' },
-      { Icon: Instagram, href: '#' },
-];
+import ContactInfo from '@/components/pages/contact/ContactInfo';
 
 const ContactUsPage = () => {
       const [createContact] = useCreateContactMutation();
@@ -36,60 +29,8 @@ const ContactUsPage = () => {
             <div className="">
                   <PageHeader title="Contact Us" />
                   <div className="container my-20 mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 ">
-                        <div className="w-full space-y-10 lg:w-1/2 ">
-                              <Typography.Title level={3} className="text-title mb-4">
-                                    Get in Touch
-                              </Typography.Title>
-                              <p className="text-paragraph text-sm md:text-base">
-                                    Feel free to reach out to us with any questions or inquiries. We’re here to help!
-                              </p>
-
-                              <div className=" rounded-xl bg-white flex items-start gap-4 mb-6">
-                                    <div className="bg-primary text-black w-12 h-12  flex items-center justify-center rounded-full">
-                                          <PhoneOutlined style={{ fontSize: '20px' }} />
-                                    </div>
-                                    <div>
-                                          <Typography.Text strong className="text-title">
-                                                Phone
-                                          </Typography.Text>
-                                          <div className="text-[#555555] text-sm">(907) 555-0101</div>
-                                    </div>
-                              </div>
-
-                              <div className=" rounded-xl bg-white flex items-start gap-4 mb-6">
-                                    <div className="w-12 h-12 bg-primary text-black flex items-center justify-center rounded-full">
-                                          <MailOutlined style={{ fontSize: '20px' }} />
-                                    </div>
-                                    <div>
-                                          <Typography.Text strong className="text-title">
-                                                Email Address
-                                          </Typography.Text>
-                                          <div className="text-[#555555] text-sm">info@example.com</div>
-                                    </div>
-                              </div>
-                              <div className=" rounded-xl bg-white flex items-start gap-4 mb-6">
-                                    <div className="w-12 h-12 bg-primary text-black flex items-center justify-center rounded-full">
-                                          <EnvironmentOutlined style={{ fontSize: '20px' }} />
-                                    </div>
-                                    <div>
-                                          <Typography.Text strong className="text-title">
-                                                Location
-                                          </Typography.Text>
-                                          <div className="text-[#555555] text-sm">Jl. Merdeka Raya No.73B, Kuta, Badung, Bali</div>
-                                    </div>
-                              </div>
-                              <div className="flex gap-5 w-full justify-center md:justify-start">
-                                    {socialLinks.map(({ Icon, href }, index) => (
-                                          <Link
-                                                key={index}
-                                                href={href}
-                                                className="w-8 bg-primary h-8 flex items-center justify-center rounded  transition-colors"
-                                          >
-                                                <Icon className="w-5 h-5" />
-                                          </Link>
-                                    ))}
-                              </div>
-                        </div>
+                        {/* contact info */}
+                        <ContactInfo />
 
                         <div className="w-full max-w-[588px] md:shadow-md mx-auto lg:w-1/2 bg-primary-100/90 rounded-lg  md:p-8 p-2">
                               <Form onFinish={handleSubmit} requiredMark={false} layout="vertical">
