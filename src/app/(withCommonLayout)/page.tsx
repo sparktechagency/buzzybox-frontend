@@ -1,4 +1,4 @@
-import FAQ from '@/components/pages/home/FAQ';
+import FAQ from '@/components/pages/faq/FAQ';
 import HeroSection from '@/components/pages/home/HeroSection';
 import HowItWorks from '@/components/pages/home/HowItWork';
 import JoinSection from '@/components/pages/home/JoinSection';

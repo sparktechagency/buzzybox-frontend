@@ -10,7 +10,8 @@ const VerifyOtpPage = () => {
       const router = useRouter();
       const searchParams = useSearchParams();
       const email = searchParams.get('email');
-      const status = searchParams.get('status');
+      const action = searchParams.get('action');
+      console.log(action);
 
       const [verifyOtp] = useVerifyOtpMutation();
       const [resendOtp] = useResendOtpMutation();
@@ -20,12 +21,14 @@ const VerifyOtpPage = () => {
             toast.loading('Verifying...', { id: 'verifyOtpToast' });
             try {
                   const res = await verifyOtp({ oneTimeCode: Number(values.otp), email }).unwrap();
+                  console.log(res);
                   if (res.success) {
                         toast.success(res.message || 'Otp verification successful', { id: 'verifyOtpToast' });
-                        if (status === 'reset') {
+                        if (action == 'reset-password') {
                               router.push(`/set-new-password?auth=${res.data}`);
+                        } else {
+                              router.push(`/sign-in`);
                         }
-                        router.push(`/sign-in`);
                   }
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Verification failed', { id: 'verifyOtpToast' });

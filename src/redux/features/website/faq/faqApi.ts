@@ -3,9 +3,9 @@ import { baseApi } from '@/redux/api/baseApi';
 const faqApi = baseApi.injectEndpoints({
       endpoints: (builder) => ({
             getFaqs: builder.query({
-                  query: () => {
+                  query: ({ limit }) => {
                         return {
-                              url: `/faqs`,
+                              url: `/faqs?limit=${limit}`,
                               method: 'GET',
                         };
                   },
