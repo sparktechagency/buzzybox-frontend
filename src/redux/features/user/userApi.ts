@@ -35,7 +35,7 @@ const userApi = baseApi.injectEndpoints({
                   query: () => {
                         return {
                               url: `/users/delete-account`,
-                              method: 'DELETE',
+                              method: 'PATCH',
                         };
                   },
                   invalidatesTags: ['Profile'],
