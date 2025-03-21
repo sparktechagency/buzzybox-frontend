@@ -107,7 +107,7 @@ const ProfileSidebar = () => {
                                     <Image
                                           width={500}
                                           height={500}
-                                          src={`${process.env.NEXT_PUBLIC_SERVER_URL}${profile?.profile}`}
+                                          src={profile?.profile || `${process.env.NEXT_PUBLIC_SERVER_URL}${profile?.profile}`}
                                           alt="Profile"
                                           className="w-full h-full  object-cover rounded-full"
                                     />

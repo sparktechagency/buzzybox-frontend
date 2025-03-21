@@ -15,7 +15,7 @@ const ForgotPasswordPage = () => {
                   const res = await forgetPassword(values).unwrap();
                   if (res.success) {
                         toast.success(res.message || 'Please check your email', { id: 'forgetPassswordToast' });
-                        router.push(`/verify-otp?email=${values.email}`);
+                        router.push(`/verify-otp?email=${values.email}&action=reset-password`);
                   }
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Failed to send code', { id: 'forgetPassswordToast' });

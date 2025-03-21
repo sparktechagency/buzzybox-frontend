@@ -21,7 +21,7 @@ const SignUpPage = () => {
                   console.log(res);
                   if (res.success) {
                         toast.success(res.message || 'Sign up successful!', { id: 'signUpToast' });
-                        router.push(`/verify-otp?email=${values.email}`);
+                        router.push(`/verify-otp?email=${values.email}&action=verify-account`);
                   }
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Sign up failed', { id: 'signUpToast' });
