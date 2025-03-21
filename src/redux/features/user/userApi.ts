@@ -32,10 +32,11 @@ const userApi = baseApi.injectEndpoints({
                   invalidatesTags: ['Profile'],
             }),
             deleteUserProfile: builder.mutation({
-                  query: () => {
+                  query: ({ payload }) => {
                         return {
                               url: `/users/delete-account`,
                               method: 'PATCH',
+                              body: payload,
                         };
                   },
                   invalidatesTags: ['Profile'],
