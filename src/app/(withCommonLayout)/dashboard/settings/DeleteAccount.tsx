@@ -2,7 +2,7 @@ import { Button, message } from 'antd';
 
 const DeleteAccount = () => {
       const handleDeleteAccount = () => {
-            message.success('Account deleted!');
+            message.loading('Account deleted!');
       };
       return (
             <div>
