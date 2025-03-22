@@ -5,7 +5,7 @@ import { LucideImage } from 'lucide-react';
 import { useAddNewPageMutation } from '@/redux/features/website/gift-card/giftCardApi';
 import toast from 'react-hot-toast';
 
-const SubmitMessageForm = ({ setCreatedCard, setIsModalOpen, id }: { setCreatedCard: any; setIsModalOpen: any; id: string }) => {
+const SubmitMessageForm = ({ setIsModalOpen, id }: { setIsModalOpen: any; id: string }) => {
       const { recipientName, senderName, title } = useAppSelector((state) => state.giftCardManagement);
       const [form] = Form.useForm();
 
@@ -27,26 +27,11 @@ const SubmitMessageForm = ({ setCreatedCard, setIsModalOpen, id }: { setCreatedC
                   const res = await addNewPage({ payload: formData, id }).unwrap();
                   if (res.success) {
                         toast.success(res?.message || 'Added successfully', { id: 'addCardToast' });
+                        setIsModalOpen(false);
                   }
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Failed to add', { id: 'addCardToast' });
                   console.log(error?.data?.message);
-            }
-
-            const reader = new FileReader();
-            if (values.image?.file?.originFileObj) {
-                  reader.readAsDataURL(values.image.file.originFileObj);
-                  reader.onload = () => {
-                        const newCard = {
-                              ...values,
-                              image: reader.result as string,
-                        };
-                        setCreatedCard((prev: any) => [...prev, newCard]);
-                        setIsModalOpen(false);
-                  };
-            } else {
-                  setCreatedCard((prev: any) => [...prev, values]);
-                  setIsModalOpen(false);
             }
       };
 
