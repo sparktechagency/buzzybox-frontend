@@ -1,9 +1,8 @@
 'use client';
 import SubmitMessageForm from '@/components/form/MessageSubmissionForm';
 import Modal from '@/components/shared/Modal';
-import { useAppSelector } from '@/redux/hooks';
-import { TCard } from '@/types';
-import { Button, Carousel, Tooltip } from 'antd';
+import { TCard, TGift } from '@/types';
+import { Button, Carousel, Skeleton, Tooltip } from 'antd';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
@@ -12,7 +11,7 @@ import { TbMessageCircle } from 'react-icons/tb';
 import ImageBg from '@/assets/images/create-gift/birthday.jpg';
 
 // Card Components
-const CoverCard = ({ recipientName, senderName, title }: { recipientName: string; senderName: string; title: string }) => (
+const CoverCard = ({ gift, isLoading }: { gift: TGift; isLoading: boolean }) => (
       <div>
             <div className="flex-center p-1">
                   <div
@@ -23,12 +22,16 @@ const CoverCard = ({ recipientName, senderName, title }: { recipientName: string
                         }}
                         className="w-[340px] h-[460px] flex-center rounded-lg"
                   >
-                        <div className="text-center space-y-4">
-                              <h1 className="text-gray-600">{recipientName || 'Recipient'}</h1>
-                              <h2 className="text-2xl font-semibold">{title || 'Happy Birthday'}</h2>
-                              <p className="text-gray-500">From</p>
-                              <p className="text-gray-600">{senderName || 'Sender Name'}</p>
-                        </div>
+                        {isLoading ? (
+                              <Skeleton />
+                        ) : (
+                              <div className="text-center space-y-4">
+                                    <h1 className="text-gray-600">{gift?.coverPage?.recipientName || 'Recipient'}</h1>
+                                    <h2 className="text-2xl font-semibold">{gift?.coverPage?.title || 'Happy Birthday'}</h2>
+                                    <p className="text-gray-500">From</p>
+                                    <p className="text-gray-600">{gift?.coverPage?.senderName || 'Sender Name'}</p>
+                              </div>
+                        )}
                   </div>
             </div>
       </div>
@@ -93,8 +96,7 @@ const CarouselNavigation = ({ onPrev, onNext }: { onPrev: () => void; onNext: ()
       </div>
 );
 
-const CardPreview = () => {
-      const { recipientName, senderName, title } = useAppSelector((state) => state.giftCardManagement);
+const CardPreview = ({ gift, isLoading }: { gift: TGift; isLoading: boolean }) => {
       const [isModalOpen, setIsModalOpen] = useState(false);
       const [createdCard, setCreatedCard] = useState([]);
       const carouselRef = useRef<any>(null);
@@ -143,11 +145,7 @@ const CardPreview = () => {
                               dots={false}
                               className="max-w-[700px]"
                         >
-                              <CoverCard
-                                    recipientName={recipientName as string}
-                                    senderName={senderName as string}
-                                    title={title as string}
-                              />
+                              <CoverCard gift={gift} isLoading={isLoading} />
                               {createdCard.map((card: TCard, index) => (
                                     <MessageCard key={`created-${index}`} card={card} index={index} />
                               ))}
@@ -165,7 +163,7 @@ const CardPreview = () => {
                         onOk={() => setIsModalOpen(false)}
                         width={700}
                   >
-                        <SubmitMessageForm setCreatedCard={setCreatedCard} setIsModalOpen={setIsModalOpen} />
+                        <SubmitMessageForm setCreatedCard={setCreatedCard} setIsModalOpen={setIsModalOpen} id={gift?._id} />
                   </Modal>
             </div>
       );

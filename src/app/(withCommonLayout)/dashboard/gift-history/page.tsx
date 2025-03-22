@@ -103,6 +103,9 @@ const columns = [
 ];
 
 export default function GiftTable() {
+      // const { data: cards } = useGetMyGiftCardsQuery(undefined);
+      // console.log(cards);
+
       return (
             <div className="">
                   <Table

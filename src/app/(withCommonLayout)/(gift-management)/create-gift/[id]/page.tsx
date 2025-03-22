@@ -4,8 +4,12 @@ import Sidebar from '@/components/pages/create-gift/single-gift/Sidebar';
 import { Button, Drawer } from 'antd';
 import { useState } from 'react';
 import { MenuOutlined } from '@ant-design/icons';
+import { useParams } from 'next/navigation';
 
 const CreateGiftPage = () => {
+      const params = useParams();
+      const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
+
       const [isDrawerOpen, setIsDrawerOpen] = useState(false);
       return (
             <div className="container relative min-h-[calc(100vh-96px)]">
@@ -32,7 +36,7 @@ const CreateGiftPage = () => {
                               <Sidebar />
                         </Drawer>
                         <div className="md:w-[65%] w-full max-w-[792px] min-h-[734px] relative">
-                              <Preview />
+                              <Preview id={id} />
                         </div>
                   </div>
             </div>
