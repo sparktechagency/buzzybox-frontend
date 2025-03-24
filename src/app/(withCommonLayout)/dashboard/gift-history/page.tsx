@@ -110,7 +110,6 @@ const columns = [
 export default function GiftTable() {
       const { data, isLoading } = useGetMyGiftCardsQuery(undefined);
       const giftCards = data?.data;
-      console.log(giftCards);
 
       // format giftCards data
       const formatedData = giftCards?.map((giftCard: TGift) => ({

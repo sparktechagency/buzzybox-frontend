@@ -5,11 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useAppDispatch } from '@/redux/hooks';
 import { logOut } from '@/redux/features/auth/authSlice';
 
-const ProfileDropdown = () => {
+const ProfileDropdown = ({ profile }: { profile: any }) => {
       const router = useRouter();
       const dispatch = useAppDispatch();
-      // const user = useAppSelector(selectAccessToken);
-      // console.log(user);
 
       const handleLogout = () => {
             Modal.confirm({
@@ -63,9 +61,16 @@ const ProfileDropdown = () => {
                               key="profile"
                         >
                               <div className="flex gap-3">
-                                    <Avatar size={50} src="https://picsum.photos/40" />
+                                    <Avatar
+                                          size={50}
+                                          src={
+                                                profile?.profile?.includes('http')
+                                                      ? profile?.profile
+                                                      : `${process.env.NEXT_PUBLIC_SERVER_URL}${profile?.profile}`
+                                          }
+                                    />
                                     <div>
-                                          <h3 className="font-semibold">Sazzad Chowdhury</h3>
+                                          <h3 className="font-semibold">{profile?.name}</h3>
                                           <p className="text-primary cursor-pointer text-sm">View Profile</p>
                                     </div>
                               </div>
