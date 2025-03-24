@@ -10,13 +10,16 @@ import { useAddNewPageMutation } from '@/redux/features/website/gift-card/giftCa
 import toast from 'react-hot-toast';
 import invite_icon from '@/assets/icons/invite-icon.png';
 import InviteModal from '../InviteModal';
+import { useCreatePaymentLinkMutation } from '@/redux/features/website/payment/paymentApi';
 
 const Sidebar = ({ id }: { id: string }) => {
       const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(false);
       const [isModalOpen, setIsModalOpen] = useState(false);
       const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
       const [updateImage] = useAddNewPageMutation();
+      const [createPayment] = useCreatePaymentLinkMutation();
 
+      // handle background image change
       const handleFileChange = async (info: UploadChangeParam) => {
             const uploadedFile = info.file.originFileObj;
             const formData = new FormData();
@@ -39,6 +42,19 @@ const Sidebar = ({ id }: { id: string }) => {
       const handleSubscription = (values: any) => {
             console.log(values);
             setIsModalOpen(false);
+      };
+
+      // handle payment
+      const handlePayment = async () => {
+            try {
+                  const res = await createPayment({ payload: { giftCardId: id } }).unwrap();
+                  if (res.success) {
+                        window.location.href = res.data.url;
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Failed to create payment link');
+                  console.log(error);
+            }
       };
       return (
             <div className="p-5 space-y-4">
@@ -116,9 +132,10 @@ const Sidebar = ({ id }: { id: string }) => {
                         </div>
                   )}
 
-                  <Button type="primary" className="w-full h-12 bg-yellow-400 hover:bg-yellow-500 border-none">
+                  <Button onClick={handlePayment} type="primary" className="w-full h-12 bg-yellow-400 hover:bg-yellow-500 border-none">
                         Next
                   </Button>
+
                   <div>
                         <Checkbox onChange={() => setIsModalOpen(true)}>Stay up to date</Checkbox>
                   </div>

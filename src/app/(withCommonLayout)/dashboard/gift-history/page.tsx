@@ -2,6 +2,7 @@
 
 import { Table, Dropdown, Menu } from 'antd';
 import { MoreOutlined } from '@ant-design/icons';
+import { useGetMyGiftCardsQuery } from '@/redux/features/website/gift-card/giftCardApi';
 
 const data = [
       {
@@ -103,8 +104,8 @@ const columns = [
 ];
 
 export default function GiftTable() {
-      // const { data: cards } = useGetMyGiftCardsQuery(undefined);
-      // console.log(cards);
+      const { data: cards } = useGetMyGiftCardsQuery(undefined);
+      console.log(cards);
 
       return (
             <div className="">
