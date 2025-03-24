@@ -13,10 +13,13 @@ import { UserIcon } from 'lucide-react';
 import ProfileDropdown from './ProfileDropdown';
 import { useAppSelector } from '@/redux/hooks';
 import { selectAccessToken } from '@/redux/features/auth/authSlice';
+import { useGetUserProfileQuery } from '@/redux/features/user/userApi';
 
 const Navbar = () => {
       const [showDrawer, setShowDrawer] = useState(false);
       const token = useAppSelector(selectAccessToken);
+      const { data } = useGetUserProfileQuery(undefined);
+      const profile = data?.data;
 
       const items = [
             { label: 'Home', path: '/' },
@@ -56,9 +59,9 @@ const Navbar = () => {
                               {token ? (
                                     <Dropdown
                                           placement="bottom"
-                                          className="cursor-pointer hidden md:block"
+                                          className="cursor-pointer hidden md:block ml-24"
                                           trigger={['click']}
-                                          dropdownRender={() => <ProfileDropdown />}
+                                          dropdownRender={() => <ProfileDropdown profile={profile} />}
                                     >
                                           <div className="flex items-center">
                                                 <Avatar
@@ -67,7 +70,11 @@ const Navbar = () => {
                                                             border: '2px solid #FFC301',
                                                       }}
                                                       alt=""
-                                                      src={`https://picsum.photos/40`}
+                                                      src={
+                                                            profile?.profile?.includes('http')
+                                                                  ? profile?.profile
+                                                                  : `${process.env.NEXT_PUBLIC_SERVER_URL}${profile?.profile}`
+                                                      }
                                                 />
                                           </div>
                                     </Dropdown>

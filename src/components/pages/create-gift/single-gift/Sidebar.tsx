@@ -8,12 +8,18 @@ import Modal from '@/components/shared/Modal';
 import { UploadChangeParam } from 'antd/es/upload';
 import { useAddNewPageMutation } from '@/redux/features/website/gift-card/giftCardApi';
 import toast from 'react-hot-toast';
+import invite_icon from '@/assets/icons/invite-icon.png';
+import InviteModal from '../InviteModal';
+import { useCreatePaymentLinkMutation } from '@/redux/features/website/payment/paymentApi';
 
 const Sidebar = ({ id }: { id: string }) => {
       const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(false);
       const [isModalOpen, setIsModalOpen] = useState(false);
+      const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
       const [updateImage] = useAddNewPageMutation();
+      const [createPayment] = useCreatePaymentLinkMutation();
 
+      // handle background image change
       const handleFileChange = async (info: UploadChangeParam) => {
             const uploadedFile = info.file.originFileObj;
             const formData = new FormData();
@@ -25,10 +31,10 @@ const Sidebar = ({ id }: { id: string }) => {
                   toast.loading('Uploading...', { id: 'uploadImage' });
                   const res = await updateImage({ id, payload: formData }).unwrap();
                   if (res.success) {
-                        toast.success(res.message || 'Image uploaded successfully', { id: 'uploadImage' });
+                        toast.success('Background updated successfully', { id: 'uploadImage' });
                   }
             } catch (error: any) {
-                  toast.error(error?.data?.message || 'Failed to upload image', { id: 'uploadImage' });
+                  toast.error(error?.data?.message || 'Failed to update', { id: 'uploadImage' });
                   console.log(error);
             }
       };
@@ -37,18 +43,29 @@ const Sidebar = ({ id }: { id: string }) => {
             console.log(values);
             setIsModalOpen(false);
       };
+
+      // handle payment
+      const handlePayment = async () => {
+            try {
+                  const res = await createPayment({ payload: { giftCardId: id } }).unwrap();
+                  if (res.success) {
+                        window.location.href = res.data.url;
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Failed to create payment link');
+                  console.log(error);
+            }
+      };
       return (
             <div className="p-5 space-y-4">
-                  <div className="flex items-center gap-2 border border-primary rounded-lg p-2 cursor-pointer hover:text-primary duration-100">
-                        <Avatar
-                              style={{
-                                    border: '2px solid #FFC301',
-                              }}
-                              size={40}
-                              src="https://i.pravatar.cc/150"
-                        />
+                  <div
+                        onClick={() => setIsInviteModalOpen(true)}
+                        className="flex items-center gap-2 border border-primary rounded-lg p-2 cursor-pointer hover:text-primary duration-100"
+                  >
+                        <Avatar size={40} src={invite_icon.src} />
                         <span className="text-base font-medium">Invite Others</span>
                   </div>
+                  <InviteModal open={isInviteModalOpen} setOpen={setIsInviteModalOpen} />
 
                   <div className="space-y-4">
                         <h3 className="text-lg font-medium">Edit Design</h3>
@@ -115,9 +132,10 @@ const Sidebar = ({ id }: { id: string }) => {
                         </div>
                   )}
 
-                  <Button type="primary" className="w-full h-12 bg-yellow-400 hover:bg-yellow-500 border-none">
+                  <Button onClick={handlePayment} type="primary" className="w-full h-12 bg-yellow-400 hover:bg-yellow-500 border-none">
                         Next
                   </Button>
+
                   <div>
                         <Checkbox onChange={() => setIsModalOpen(true)}>Stay up to date</Checkbox>
                   </div>

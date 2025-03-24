@@ -26,7 +26,7 @@ const ConfigurationPanel = () => {
 
       const [createGift, { isLoading }] = useCreateGiftCardMutation();
 
-      // submit handler
+      // handle create gift card form submission
       const onFinish = async (values: any) => {
             toast.loading('Creating...', { id: 'createGiftToast' });
 

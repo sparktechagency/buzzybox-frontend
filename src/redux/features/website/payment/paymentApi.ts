@@ -19,7 +19,7 @@ const paymentApi = baseApi.injectEndpoints({
                   },
             }),
             createPaymentLink: builder.mutation({
-                  query: (payload) => {
+                  query: ({ payload }) => {
                         return {
                               url: `/payments/create-checkout-session`,
                               method: 'POST',
