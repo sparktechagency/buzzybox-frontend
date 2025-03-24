@@ -1,69 +1,92 @@
 'use client';
 import SubmitMessageForm from '@/components/form/MessageSubmissionForm';
 import Modal from '@/components/shared/Modal';
-import { useAppSelector } from '@/redux/hooks';
-import { TCard } from '@/types';
-import { Button, Carousel, Tooltip } from 'antd';
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import { useRemovePageMutation } from '@/redux/features/website/gift-card/giftCardApi';
+import { TCard, TGift } from '@/types';
+import { Button, Carousel, Skeleton, Tooltip } from 'antd';
+import { ChevronLeftIcon, ChevronRightIcon, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
-import { PiDotsThreeCircleThin } from 'react-icons/pi';
+import toast from 'react-hot-toast';
 import { TbMessageCircle } from 'react-icons/tb';
-import ImageBg from '@/assets/images/create-gift/birthday.jpg';
 
 // Card Components
-const CoverCard = ({ recipientName, senderName, title }: { recipientName: string; senderName: string; title: string }) => (
-      <div>
-            <div className="flex-center p-1">
-                  <div
-                        style={{
-                              backgroundImage: `url('${ImageBg.src}')`,
-                              backgroundPosition: 'center',
-                              backgroundSize: 'cover',
-                        }}
-                        className="w-[340px] h-[460px] flex-center rounded-lg"
-                  >
-                        <div className="text-center space-y-4">
-                              <h1 className="text-gray-600">{recipientName || 'Recipient'}</h1>
-                              <h2 className="text-2xl font-semibold">{title || 'Happy Birthday'}</h2>
-                              <p className="text-gray-500">From</p>
-                              <p className="text-gray-600">{senderName || 'Sender Name'}</p>
+const CoverCard = ({ gift, isLoading }: { gift: TGift; isLoading: boolean }) => {
+      return (
+            <div>
+                  <div className="flex-center p-1">
+                        <div
+                              style={{
+                                    backgroundColor: 'white',
+                                    backgroundImage: `url('${process.env.NEXT_PUBLIC_SERVER_URL}${gift?.image}')`,
+                                    backgroundPosition: 'center',
+                                    backgroundSize: 'cover',
+                              }}
+                              className="w-[340px] h-[460px] flex-center rounded-lg"
+                        >
+                              {isLoading ? (
+                                    <Skeleton />
+                              ) : (
+                                    <div className="text-center space-y-4">
+                                          <h1 className="text-gray-600">{gift?.coverPage?.recipientName || 'Recipient'}</h1>
+                                          <h2 className="text-2xl font-semibold">{gift?.coverPage?.title || 'Happy Birthday'}</h2>
+                                          <p className="text-gray-500">From</p>
+                                          <p className="text-gray-600">{gift?.coverPage?.senderName || 'Sender Name'}</p>
+                                    </div>
+                              )}
                         </div>
                   </div>
             </div>
-      </div>
-);
+      );
+};
 
-const MessageCard = ({ card, index }: { card: TCard; index: number }) => (
-      <div className="p-1">
-            <div className="flex-center">
-                  <div className="w-[340px] relative h-[460px] flex-center rounded-lg bg-white border border-dashed border-primary">
-                        <div className="text-center space-y-1">
-                              {card.image ? (
-                                    <div className="relative w-[192px] h-[168px]">
-                                          <Image
-                                                width={500}
-                                                height={500}
-                                                src={card.image}
-                                                alt={`Card image ${index + 1}`}
-                                                className="w-full h-full object-contain"
-                                          />
+const MessageCard = ({ card, index, gift }: { card: TCard; index: number; gift: TGift }) => {
+      const [removePage] = useRemovePageMutation();
+
+      const handleDelete = async () => {
+            toast.loading('Deleting...', { id: 'deleteCardToast' });
+            try {
+                  const res = await removePage({ id: gift?._id, payload: { pageId: card?._id } }).unwrap();
+                  if (res.success) {
+                        toast.success(res.message || 'Card deleted successfully', { id: 'deleteCardToast' });
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Failed to delete card', { id: 'deleteCardToast' });
+                  console.log(error?.data);
+            }
+      };
+
+      return (
+            <div className="p-1">
+                  <div className="flex-center">
+                        <div className="w-[340px] relative h-[460px] flex-center rounded-lg bg-white border border-dashed border-primary">
+                              <div className="text-center space-y-1">
+                                    {card?.image ? (
+                                          <div className="relative w-[192px] h-[168px]">
+                                                <Image
+                                                      width={500}
+                                                      height={500}
+                                                      src={`${process.env.NEXT_PUBLIC_SERVER_URL}${card?.image}`}
+                                                      alt={`Card image ${index + 1}`}
+                                                      className="w-full h-full object-contain"
+                                                />
+                                          </div>
+                                    ) : null}
+                                    <h1 className="text-gray-600">{card?.message}</h1>
+                                    <div className="flex absolute bottom-4 right-4 justify-end text-end items-center gap-2">
+                                          <p className="text-gray-600 text-end">{card?.senderName}</p>
+                                          <p>
+                                                <Tooltip title="Delete Card">
+                                                      <Trash2 onClick={handleDelete} className="cursor-pointer text-red-500 size-5" />
+                                                </Tooltip>
+                                          </p>
                                     </div>
-                              ) : null}
-                              <h1 className="text-gray-600">{card.message}</h1>
-                              <div className="flex absolute bottom-4 right-4 justify-end text-end items-center gap-2">
-                                    <p className="text-gray-600 text-end">{card.senderName}</p>
-                                    <p>
-                                          <Tooltip title="Delete Card">
-                                                <PiDotsThreeCircleThin className="cursor-pointer text-red-500 text-2xl" />
-                                          </Tooltip>
-                                    </p>
                               </div>
                         </div>
                   </div>
             </div>
-      </div>
-);
+      );
+};
 
 const SubmitCard = ({ onClick }: { onClick: () => void }) => (
       <div className="p-1">
@@ -93,10 +116,8 @@ const CarouselNavigation = ({ onPrev, onNext }: { onPrev: () => void; onNext: ()
       </div>
 );
 
-const CardPreview = () => {
-      const { recipientName, senderName, title } = useAppSelector((state) => state.giftCardManagement);
+const CardPreview = ({ gift, isLoading }: { gift: TGift; isLoading: boolean; category: any }) => {
       const [isModalOpen, setIsModalOpen] = useState(false);
-      const [createdCard, setCreatedCard] = useState([]);
       const carouselRef = useRef<any>(null);
 
       const handleNext = () => carouselRef.current.next();
@@ -108,7 +129,7 @@ const CardPreview = () => {
                   <div
                         className="absolute  bg-[#0000005b] bg-blend-multiply opacity-60 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
                         style={{
-                              backgroundImage: `url('${ImageBg.src}')`,
+                              backgroundImage: `url('${process.env.NEXT_PUBLIC_SERVER_URL}${gift?.image}')`,
                         }}
                   />
 
@@ -143,13 +164,9 @@ const CardPreview = () => {
                               dots={false}
                               className="max-w-[700px]"
                         >
-                              <CoverCard
-                                    recipientName={recipientName as string}
-                                    senderName={senderName as string}
-                                    title={title as string}
-                              />
-                              {createdCard.map((card: TCard, index) => (
-                                    <MessageCard key={`created-${index}`} card={card} index={index} />
+                              <CoverCard gift={gift} isLoading={isLoading} />
+                              {gift?.pages?.map((card: TCard, index) => (
+                                    <MessageCard key={`created-${index}`} card={card} index={index} gift={gift} />
                               ))}
                               <SubmitCard onClick={() => setIsModalOpen(true)} />
                         </Carousel>
@@ -165,7 +182,7 @@ const CardPreview = () => {
                         onOk={() => setIsModalOpen(false)}
                         width={700}
                   >
-                        <SubmitMessageForm setCreatedCard={setCreatedCard} setIsModalOpen={setIsModalOpen} />
+                        <SubmitMessageForm setIsModalOpen={setIsModalOpen} id={gift?._id} />
                   </Modal>
             </div>
       );

@@ -1,14 +1,37 @@
 'use client';
-import { Avatar, Button, Checkbox, Form, Input, InputNumber, Select } from 'antd';
+import { Avatar, Button, Checkbox, Form, Input, InputNumber, Select, Upload } from 'antd';
 import { DollarSign } from 'lucide-react';
 import { FaGifts } from 'react-icons/fa';
-import { FcAddImage, FcEditImage, FcRules } from 'react-icons/fc';
+import { FcEditImage } from 'react-icons/fc';
 import { useState } from 'react';
 import Modal from '@/components/shared/Modal';
+import { UploadChangeParam } from 'antd/es/upload';
+import { useAddNewPageMutation } from '@/redux/features/website/gift-card/giftCardApi';
+import toast from 'react-hot-toast';
 
-const Sidebar = () => {
+const Sidebar = ({ id }: { id: string }) => {
       const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(false);
       const [isModalOpen, setIsModalOpen] = useState(false);
+      const [updateImage] = useAddNewPageMutation();
+
+      const handleFileChange = async (info: UploadChangeParam) => {
+            const uploadedFile = info.file.originFileObj;
+            const formData = new FormData();
+            if (uploadedFile) {
+                  formData.append('image', uploadedFile);
+            }
+
+            try {
+                  toast.loading('Uploading...', { id: 'uploadImage' });
+                  const res = await updateImage({ id, payload: formData }).unwrap();
+                  if (res.success) {
+                        toast.success(res.message || 'Image uploaded successfully', { id: 'uploadImage' });
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Failed to upload image', { id: 'uploadImage' });
+                  console.log(error);
+            }
+      };
 
       const handleSubscription = (values: any) => {
             console.log(values);
@@ -30,18 +53,27 @@ const Sidebar = () => {
                   <div className="space-y-4">
                         <h3 className="text-lg font-medium">Edit Design</h3>
                         <div className="space-y-3 bg-primary/5 p-3 rounded-lg border-primary border">
-                              <button className="w-full flex items-center gap-3 p-3 hover:text-primary duration-100 rounded-lg">
+                              {/* <button className="w-full flex items-center gap-3 p-3 hover:text-primary duration-100 rounded-lg">
                                     <FcRules size={30} />
                                     <span>Edit Message</span>
-                              </button>
-                              <button className="w-full flex items-center gap-3 p-3 hover:text-primary duration-100 rounded-lg">
-                                    <FcEditImage size={30} />
-                                    <span>Change Background</span>
-                              </button>
-                              <button className="w-full flex items-center gap-3 p-3 hover:text-primary duration-100 rounded-lg">
+                              </button> */}
+                              <Upload
+                                    accept="image/png, image/jpeg"
+                                    maxCount={1}
+                                    style={{
+                                          width: '100%',
+                                    }}
+                                    onChange={handleFileChange}
+                              >
+                                    <button className="w-full flex items-center gap-3 p-3 hover:text-primary duration-100 rounded-lg">
+                                          <FcEditImage size={30} />
+                                          <span>Change Background</span>
+                                    </button>
+                              </Upload>
+                              {/* <button className="w-full flex items-center gap-3 p-3 hover:text-primary duration-100 rounded-lg">
                                     <FcAddImage size={30} />
                                     <span>Change Image</span>
-                              </button>
+                              </button> */}
                         </div>
                   </div>
 

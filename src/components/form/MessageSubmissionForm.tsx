@@ -1,29 +1,37 @@
 'use client';
-import { Input, Button, Select, Form, Upload } from 'antd';
+import { Input, Button, Form, Upload } from 'antd';
 import { useAppSelector } from '@/redux/hooks';
 import { LucideImage } from 'lucide-react';
-import { useState } from 'react';
+import { useAddNewPageMutation } from '@/redux/features/website/gift-card/giftCardApi';
+import toast from 'react-hot-toast';
 
-const SubmitMessageForm = ({ setCreatedCard, setIsModalOpen }: { setCreatedCard: any; setIsModalOpen: any }) => {
+const SubmitMessageForm = ({ setIsModalOpen, id }: { setIsModalOpen: any; id: string }) => {
       const { recipientName, senderName, title } = useAppSelector((state) => state.giftCardManagement);
       const [form] = Form.useForm();
-      const [selectedFont, setSelectedFont] = useState('');
 
-      const onFinish = (values: any) => {
-            const reader = new FileReader();
-            if (values.image?.file?.originFileObj) {
-                  reader.readAsDataURL(values.image.file.originFileObj);
-                  reader.onload = () => {
-                        const newCard = {
-                              ...values,
-                              image: reader.result as string,
-                        };
-                        setCreatedCard((prev: any) => [...prev, newCard]);
+      const [addNewPage] = useAddNewPageMutation();
+
+      const onFinish = async (values: any) => {
+            const formData = new FormData();
+            formData.append(
+                  'page',
+                  JSON.stringify({
+                        senderName: values.senderName,
+                        message: values.message,
+                  })
+            );
+            formData.append('pageImage', values.image?.file?.originFileObj);
+
+            try {
+                  toast.loading('Adding card...', { id: 'addCardToast' });
+                  const res = await addNewPage({ payload: formData, id }).unwrap();
+                  if (res.success) {
+                        toast.success(res?.message || 'Added successfully', { id: 'addCardToast' });
                         setIsModalOpen(false);
-                  };
-            } else {
-                  setCreatedCard((prev: any) => [...prev, values]);
-                  setIsModalOpen(false);
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Failed to add', { id: 'addCardToast' });
+                  console.log(error?.data?.message);
             }
       };
 
@@ -55,10 +63,9 @@ const SubmitMessageForm = ({ setCreatedCard, setIsModalOpen }: { setCreatedCard:
                                     <Input.TextArea
                                           placeholder="Tip: Personalize your message with an image, GIF, or video to make it more memorable."
                                           rows={4}
-                                          style={{ fontFamily: selectedFont }}
                                     />
                               </Form.Item>
-
+                              {/* 
                               <Form.Item label="Change Message Font" name="font">
                                     <Select placeholder="Select a font style" className="w-full" onChange={setSelectedFont}>
                                           <Select.Option value="Arial">Arial</Select.Option>
@@ -66,10 +73,11 @@ const SubmitMessageForm = ({ setCreatedCard, setIsModalOpen }: { setCreatedCard:
                                           <Select.Option value="Times New Roman">Times New Roman</Select.Option>
                                           <Select.Option value="Verdana">Verdana</Select.Option>
                                     </Select>
-                              </Form.Item>
+                              </Form.Item> */}
 
                               <Form.Item name={'image'} label="Add Photo or Video">
                                     <Upload
+                                          maxCount={1}
                                           style={{
                                                 width: '100%',
                                           }}

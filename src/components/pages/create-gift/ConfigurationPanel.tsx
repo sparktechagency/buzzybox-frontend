@@ -7,6 +7,10 @@ import BookImage from '@/assets/images/configure-panel/book.png';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { updateField } from '@/redux/features/gift-card/giftCardManagementSlice';
 import { useRouter } from 'next/navigation';
+import { useCreateGiftCardMutation } from '@/redux/features/website/gift-card/giftCardApi';
+import toast from 'react-hot-toast';
+import { useGetCategoriesQuery } from '@/redux/features/website/category/categoryApi';
+import { v4 as uuidv4 } from 'uuid';
 
 const ConfigurationPanel = () => {
       const router = useRouter();
@@ -17,10 +21,36 @@ const ConfigurationPanel = () => {
             dispatch(updateField({ field, value }));
       };
 
-      const onFinish = (values: any) => {
-            // Handle form submission here
-            console.log('Form Submitted', values);
-            router.push(`/create-gift/${1}`);
+      const { data } = useGetCategoriesQuery(undefined);
+      const occasionsData = data?.data.map((item: any) => ({ label: item.name, value: item._id }));
+
+      const [createGift, { isLoading }] = useCreateGiftCardMutation();
+
+      // submit handler
+      const onFinish = async (values: any) => {
+            toast.loading('Creating...', { id: 'createGiftToast' });
+
+            const giftData = {
+                  category: values.occasionType,
+                  uniqueId: uuidv4(),
+                  coverPage: {
+                        title: values.title,
+                        senderName: values.senderName,
+                        recipientName: values.recipientName,
+                  },
+            };
+
+            try {
+                  const res = await createGift({ payload: giftData }).unwrap();
+                  console.log(res);
+                  if (res.success) {
+                        toast.success(res.message || 'Successfully created!', { id: 'createGiftToast' });
+                        router.push(`/create-gift/${res.data.uniqueId}`);
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Failed to create', { id: 'createGiftToast' });
+                  console.log(error?.data?.message);
+            }
       };
 
       return (
@@ -68,11 +98,7 @@ const ConfigurationPanel = () => {
                                           placeholder="Select an occasion"
                                           className="w-full mt-2"
                                           onChange={(value) => handleDispatch('occasionType', value)}
-                                          options={[
-                                                { value: 'birthday', label: 'Birthday' },
-                                                { value: 'farewell', label: 'Farewell' },
-                                                { value: 'wedding', label: 'Wedding' },
-                                          ]}
+                                          options={occasionsData}
                                     />
                               </Form.Item>
 
@@ -105,8 +131,8 @@ const ConfigurationPanel = () => {
                         </div>
 
                         <div>
-                              <Button type="primary" htmlType="submit" className="w-full mt-5">
-                                    Next
+                              <Button type="primary" htmlType="submit" className="w-full mt-5" disabled={isLoading}>
+                                    {isLoading ? 'Loading...' : 'Next'}
                               </Button>
                         </div>
                   </Form>

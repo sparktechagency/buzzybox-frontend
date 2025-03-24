@@ -1,9 +1,7 @@
 'use client';
 import Cake from '@/assets/images/preview-panel/cake.png';
-import AirBalloon from '@/assets/images/preview-panel/air-balloon.jpg';
 import SubmitMessageForm from '@/components/form/MessageSubmissionForm';
-import { useAppSelector } from '@/redux/hooks';
-import { TCard } from '@/types';
+import { TCard, TGift } from '@/types';
 import { Button, Tooltip } from 'antd';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -52,19 +50,17 @@ const HeaderSection = ({ recipientName }: { recipientName: string }) => (
       </div>
 );
 
-const BackgroundOverlay = () => (
+const BackgroundOverlay = ({ bgImage }: { bgImage: string }) => (
       <div
             className="absolute bg-[#00000031] bg-blend-multiply opacity-80 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
             style={{
-                  backgroundImage: `url('${AirBalloon.src}')`,
+                  backgroundImage: `url('${process.env.NEXT_PUBLIC_SERVER_URL}${bgImage}')`,
             }}
       />
 );
 
-const GridPreview = () => {
-      const { recipientName } = useAppSelector((state) => state.giftCardManagement);
+const GridPreview = ({ gift }: { gift: TGift; isLoading?: boolean; category: any }) => {
       const [isModalOpen, setIsModalOpen] = useState(false);
-      const [createdCard, setCreatedCard] = useState([]);
 
       // Animation
       useGSAP(() => {
@@ -82,15 +78,15 @@ const GridPreview = () => {
 
       return (
             <div className="min-h-full">
-                  <BackgroundOverlay />
+                  <BackgroundOverlay bgImage={gift?.image} />
 
                   <div className="relative p-2 md:p-6">
-                        <HeaderSection recipientName={recipientName as string} />
+                        <HeaderSection recipientName={gift?.coverPage?.recipientName as string} />
                         <SubmitButton onClick={() => setIsModalOpen(true)} />
 
                         <div className="grid grid-cols-2 gap-5 mt-5">
-                              {createdCard.map((item: TCard, index) => (
-                                    <MessageCard key={index} message={item.message} image={item.image} senderName={item.senderName} />
+                              {gift?.pages?.map((item: TCard, index) => (
+                                    <MessageCard key={index} message={item?.message} image={item?.image} senderName={item?.senderName} />
                               ))}
                         </div>
                   </div>
@@ -102,7 +98,7 @@ const GridPreview = () => {
                         onOk={() => setIsModalOpen(false)}
                         width={700}
                   >
-                        <SubmitMessageForm setCreatedCard={setCreatedCard} setIsModalOpen={setIsModalOpen} />
+                        <SubmitMessageForm setIsModalOpen={setIsModalOpen} id={gift?._id} />
                   </Modal>
             </div>
       );

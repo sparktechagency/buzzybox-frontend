@@ -9,6 +9,7 @@ const giftCardApi = baseApi.injectEndpoints({
                               method: 'GET',
                         };
                   },
+                  providesTags: ['GiftCard'],
             }),
             getSingleGiftCard: builder.query({
                   query: ({ id }) => {
@@ -17,6 +18,7 @@ const giftCardApi = baseApi.injectEndpoints({
                               method: 'GET',
                         };
                   },
+                  providesTags: ['GiftCard'],
             }),
             createGiftCard: builder.mutation({
                   query: ({ payload }) => {
@@ -26,6 +28,7 @@ const giftCardApi = baseApi.injectEndpoints({
                               body: payload,
                         };
                   },
+                  invalidatesTags: ['GiftCard'],
             }),
             addNewPage: builder.mutation({
                   query: ({ payload, id }) => {
@@ -35,6 +38,7 @@ const giftCardApi = baseApi.injectEndpoints({
                               body: payload,
                         };
                   },
+                  invalidatesTags: ['GiftCard'],
             }),
             removePage: builder.mutation({
                   query: ({ payload, id }) => {
@@ -44,14 +48,17 @@ const giftCardApi = baseApi.injectEndpoints({
                               body: payload,
                         };
                   },
+                  invalidatesTags: ['GiftCard'],
             }),
             deleteCard: builder.mutation({
                   query: ({ id }) => {
+                        console.log(id);
                         return {
                               url: `/gift-cards/${id}`,
                               method: 'DELETE',
                         };
                   },
+                  invalidatesTags: ['GiftCard'],
             }),
       }),
 });
