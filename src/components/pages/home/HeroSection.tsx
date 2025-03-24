@@ -4,8 +4,12 @@ import HeroImg from '@/assets/images/hero-section/hero.png';
 import { Avatar, Button } from 'antd';
 import { GiftIcon, LucideCirclePlay } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
+import DemoVideoModal from './DemoVideoModal';
 const HeroSection = () => {
+      const [open, setOpen] = useState(false);
+
       return (
             <div
                   style={{
@@ -31,6 +35,7 @@ const HeroSection = () => {
                                           Create a Buzzybox
                                     </Button>
                                     <Button
+                                          onClick={() => setOpen(true)}
                                           style={{
                                                 border: '1px solid #FFC301',
                                                 color: '#FFC301',
@@ -40,6 +45,7 @@ const HeroSection = () => {
                                     >
                                           View Demo
                                     </Button>
+                                    <DemoVideoModal open={open} setOpen={setOpen} />
                               </div>
                               <div className="flex items-center gap-8">
                                     <Avatar.Group>
