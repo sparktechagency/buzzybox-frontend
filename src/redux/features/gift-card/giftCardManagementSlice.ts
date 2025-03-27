@@ -19,7 +19,7 @@ const initialState: GiftCardManagementState = {
       senderName: null,
       boardFormat: 'card',
       bgImage: '',
-      occasionType: 'birthday',
+      occasionType: 'Birthday',
 };
 
 const giftCardManagementSlice = createSlice({

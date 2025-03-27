@@ -10,6 +10,7 @@ const ConfigurationPanel = dynamic(() => import('@/components/pages/create-gift/
 const CardPreviewPanel = dynamic(() => import('@/components/pages/create-gift/CardPreviewPanel'), { ssr: false });
 
 const CreateGiftPage = () => {
+
       const { boardFormat } = useAppSelector((state) => state.giftCardManagement);
       const boardRef = useRef(null);
 

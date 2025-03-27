@@ -4,54 +4,7 @@ import { Table, Dropdown, Menu, Skeleton } from 'antd';
 import { MoreOutlined } from '@ant-design/icons';
 import { useGetMyGiftCardsQuery } from '@/redux/features/website/gift-card/giftCardApi';
 import { TGift } from '@/types';
-
-// const data = [
-//       {
-//             key: '1',
-//             date: 'Jan 1, 2024',
-//             recipient: 'Jack Watson',
-//             giftVoucher: '$10',
-//             message: 1,
-//             price: '$5',
-//             status: 'Sent',
-//       },
-//       {
-//             key: '2',
-//             date: 'Jan 1, 2024',
-//             recipient: 'Jack Watson',
-//             giftVoucher: '$10',
-//             message: 1,
-//             price: '$5',
-//             status: 'Not Sent',
-//       },
-//       {
-//             key: '3',
-//             date: 'Jan 1, 2024',
-//             recipient: 'Jack Watson',
-//             giftVoucher: '$10',
-//             message: 1,
-//             price: '$5',
-//             status: 'Sent',
-//       },
-//       {
-//             key: '4',
-//             date: 'Jan 1, 2024',
-//             recipient: 'Jack Watson',
-//             giftVoucher: '$10',
-//             message: 1,
-//             price: '$5',
-//             status: 'Not Sent',
-//       },
-//       {
-//             key: '5',
-//             date: 'Jan 1, 2024',
-//             recipient: 'Jack Watson',
-//             giftVoucher: '$10',
-//             message: 1,
-//             price: '$5',
-//             status: 'Sent',
-//       },
-// ];
+import Link from 'next/link';
 
 const columns = [
       {
@@ -91,19 +44,22 @@ const columns = [
       {
             title: '',
             key: 'action',
-            render: () => (
-                  <Dropdown
-                        overlay={
-                              <Menu>
-                                    <Menu.Item key="1">Resend</Menu.Item>
-                                    <Menu.Item key="2">View Details</Menu.Item>
-                              </Menu>
-                        }
-                        trigger={['click']}
-                  >
-                        <MoreOutlined className="cursor-pointer text-gray-600 text-lg" />
-                  </Dropdown>
-            ),
+            render: (item: any) => {
+                  return (
+                        <Dropdown
+                              overlay={
+                                    <Menu>
+                                          <Menu.Item key="1">
+                                                <Link href={`/create-gift/${item?.uniqueId}`}>View Details</Link>
+                                          </Menu.Item>
+                                    </Menu>
+                              }
+                              trigger={['click']}
+                        >
+                              <MoreOutlined className="cursor-pointer text-gray-600 text-lg" />
+                        </Dropdown>
+                  );
+            },
       },
 ];
 

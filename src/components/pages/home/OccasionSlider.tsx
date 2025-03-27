@@ -1,50 +1,16 @@
 'use client';
-import ani from '@/assets/images/occasion-slider/ani.png';
-import brithday from '@/assets/images/occasion-slider/brithday.png';
-import cele from '@/assets/images/occasion-slider/cele.png';
-import congra from '@/assets/images/occasion-slider/congra.png';
-import farewell from '@/assets/images/occasion-slider/farewell.png';
-import like from '@/assets/images/occasion-slider/like.png';
 
 import { useRef } from 'react';
 import React from 'react';
 import { Carousel } from 'antd';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import { useGetCategoriesQuery } from '@/redux/features/website/category/categoryApi';
 
 const OccasionSlider = () => {
-      const occasions = [
-            {
-                  id: 1,
-                  title: 'Anniversary',
-                  image: ani,
-            },
-            {
-                  id: 2,
-                  title: 'Birthday',
-                  image: brithday,
-            },
-            {
-                  id: 3,
-                  title: 'Celebration',
-                  image: cele,
-            },
-            {
-                  id: 4,
-                  title: 'Congratulations',
-                  image: congra,
-            },
-            {
-                  id: 5,
-                  title: 'Farewell',
-                  image: farewell,
-            },
-            {
-                  id: 6,
-                  title: 'Like',
-                  image: like,
-            },
-      ];
+      const { data } = useGetCategoriesQuery(undefined);
+      const categoriesData = data?.data;
+
       const carouselRef = useRef<any>();
 
       const next = () => carouselRef.current?.next();
@@ -76,17 +42,17 @@ const OccasionSlider = () => {
                                     autoplay
                                     className="md:mx-12"
                               >
-                                    {occasions.map((occasion) => (
-                                          <div key={occasion.id} className="p-4">
+                                    {categoriesData?.map((item: any) => (
+                                          <div key={item?._id} className="p-4">
                                                 <div className="relative text-center  rounded-xl  overflow-hidden p-6 bg-white border border-primary">
                                                       <Image
                                                             className="size-[60px] m-auto"
-                                                            src={occasion.image.src}
+                                                            src={`${process.env.NEXT_PUBLIC_SERVER_URL}${item?.categoryImage}`}
                                                             width={200}
                                                             height={200}
-                                                            alt={occasion.title}
+                                                            alt={item?.name}
                                                       />
-                                                      <h1 className="text-lg mt-3 font-medium">{occasion.title}</h1>
+                                                      <h1 className="text-lg mt-3 font-medium">{item?.name}</h1>
                                                 </div>
                                           </div>
                                     ))}

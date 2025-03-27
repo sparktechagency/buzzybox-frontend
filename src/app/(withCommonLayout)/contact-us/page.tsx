@@ -15,7 +15,6 @@ const ContactUsPage = () => {
             toast.loading('Sending...', { id: 'contactToast' });
             try {
                   const res = await createContact(values).unwrap();
-                  console.log(res);
                   if (res.success) {
                         toast.success(res.message || 'Successfully sent!', { id: 'contactToast' });
                   }

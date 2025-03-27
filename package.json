@@ -5,7 +5,7 @@
       "scripts": {
             "dev": "next dev -H 10.0.70.128 -p 3004",
             "build": "next build",
-            "start": "next start",
+            "start": "next start -H 10.0.70.128 -p 3004",
             "lint": "next lint"
       },
       "dependencies": {
@@ -15,6 +15,7 @@
             "@tailwindcss/typography": "^0.5.16",
             "antd": "^5.22.2",
             "clsx": "^2.1.1",
+            "dayjs": "^1.11.13",
             "framer-motion": "^12.4.2",
             "gsap": "^3.12.7",
             "lucide-react": "^0.462.0",

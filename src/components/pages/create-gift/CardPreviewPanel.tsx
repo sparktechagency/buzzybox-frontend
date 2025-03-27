@@ -2,19 +2,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
-import BgImg1 from '@/assets/images/preview-panel/594261572678155e84eaf710709ccc9c.png';
 import PeopleSketch from '@/assets/images/preview-panel/people-sketch.svg';
 import GiftSketch from '@/assets/images/preview-panel/gift-sketch.png';
 
 import { useAppSelector } from '@/redux/hooks';
 import Image from 'next/image';
+import { useGetCategoriesQuery } from '@/redux/features/website/category/categoryApi';
 
 const PreviewPanel = () => {
-      const { title, recipientName, senderName } = useAppSelector((state) => state.giftCardManagement);
+      const { title, recipientName, senderName, occasionType } = useAppSelector((state) => state.giftCardManagement);
       const [currentPage, setCurrentPage] = useState(0);
       const bookRef = useRef(null);
       const pageRefs = [useRef(null), useRef(null), useRef(null)];
       const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+      const { data } = useGetCategoriesQuery(undefined);
+      const category = data?.data?.find((item: any) => item?._id === occasionType || item?.name === occasionType);
 
       useEffect(() => {
             const handleResize = () => {
@@ -30,7 +33,7 @@ const PreviewPanel = () => {
                         recipientName: recipientName || 'Recipient Name',
                         title: title || 'Buzzybox Title',
                         senderName: senderName || 'Sender Name',
-                        bgImage: BgImg1.src,
+                        bgImage: `${process.env.NEXT_PUBLIC_SERVER_URL}${category?.occasionImage}`,
                   },
                   back: {
                         title: (
@@ -99,7 +102,7 @@ const PreviewPanel = () => {
                   <div
                         className="absolute  bg-[#0000003f] bg-blend-multiply opacity-70 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
                         style={{
-                              backgroundImage: `url('${BgImg1.src}')`,
+                              backgroundImage: `url('${process.env.NEXT_PUBLIC_SERVER_URL}${category?.occasionImage}')`,
                         }}
                   />
                   <div className="">
