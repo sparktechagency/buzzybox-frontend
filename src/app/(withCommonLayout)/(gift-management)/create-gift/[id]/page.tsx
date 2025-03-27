@@ -27,7 +27,7 @@ const CreateGiftPage = () => {
                   </div>
                   <div className="flex h-full justify-center gap-6 py-20">
                         <div className="w-[35%] hidden md:block ">
-                              <Sidebar id={giftCard?._id} />
+                              <Sidebar id={giftCard?._id} uniqueId={giftCard?.uniqueId} />
                         </div>
                         <Drawer
                               title="Configuration"
@@ -37,7 +37,7 @@ const CreateGiftPage = () => {
                               width="100%"
                               className="md:hidden"
                         >
-                              <Sidebar id={giftCard?._id} />
+                              <Sidebar id={giftCard?._id} uniqueId={giftCard?.uniqueId} />
                         </Drawer>
                         <div className="md:w-[65%] w-full max-w-[792px] min-h-[734px] relative">
                               <Preview id={id} />

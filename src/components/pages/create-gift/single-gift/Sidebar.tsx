@@ -14,7 +14,7 @@ import utc from 'dayjs/plugin/utc';
 
 dayjs.extend(utc);
 
-const Sidebar = ({ id }: { id: string }) => {
+const Sidebar = ({ id, uniqueId }: { id: string; uniqueId: string }) => {
       // const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(false);
       const [isModalOpen, setIsModalOpen] = useState(false);
       const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
@@ -56,7 +56,7 @@ const Sidebar = ({ id }: { id: string }) => {
                   giftCardId: id,
                   receiverEmail: values.email,
                   emailScheduleDate: combinedDateTime,
-                  url: 'https://example.com/redeem',
+                  url: `${process.env.NEXT_PUBLIC_SITE_URL}/preview-gift/${uniqueId}`,
             };
 
             try {
