@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 const ConfigurationPanel = () => {
       const router = useRouter();
       const dispatch = useAppDispatch();
-      const { boardFormat, occasionType, title, recipientName, senderName } = useAppSelector((state) => state.giftCardManagement);
+      const { boardFormat, title, recipientName, senderName } = useAppSelector((state) => state.giftCardManagement);
 
       const handleDispatch = (field: any, value: any) => {
             dispatch(updateField({ field, value }));
@@ -42,7 +42,6 @@ const ConfigurationPanel = () => {
 
             try {
                   const res = await createGift({ payload: giftData }).unwrap();
-                  console.log(res);
                   if (res.success) {
                         toast.success(res.message || 'Successfully created!', { id: 'createGiftToast' });
                         router.push(`/create-gift/${res.data.uniqueId}`);
@@ -60,7 +59,7 @@ const ConfigurationPanel = () => {
                         onFinish={onFinish}
                         initialValues={{
                               boardFormat: boardFormat,
-                              occasionType: occasionType,
+                              occasionType: occasionsData?.[0]?.value,
                               title: title,
                               recipientName: recipientName,
                               senderName: senderName,

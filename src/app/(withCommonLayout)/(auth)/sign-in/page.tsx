@@ -19,7 +19,6 @@ const SignInPage = () => {
             toast.loading('Logging in...', { id: 'loginToast' });
             try {
                   const res = await login(values).unwrap();
-                  console.log(res);
                   if (res.success) {
                         toast.success(res.message || 'Login successful!', { id: 'loginToast' });
                         dispatch(saveToAuth(res));

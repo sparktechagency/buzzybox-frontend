@@ -31,7 +31,6 @@ export default function ProfileCard() {
             toast.loading('Updating...', { id: 'ProfileUpdateToast' });
             try {
                   const res = await updateProfile({ payload: values }).unwrap();
-                  console.log(res);
                   if (res.success) {
                         toast.success(res.message || 'Updated successfully', { id: 'ProfileUpdateToast' });
                   }

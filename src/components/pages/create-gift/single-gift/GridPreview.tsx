@@ -7,31 +7,56 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Image from 'next/image';
 import { useState } from 'react';
-import { PiDotsThreeCircleThin } from 'react-icons/pi';
 import { TbMessageCircle } from 'react-icons/tb';
 import Modal from '@/components/shared/Modal';
+import toast from 'react-hot-toast';
+import { useRemovePageMutation } from '@/redux/features/website/gift-card/giftCardApi';
+import { Trash2 } from 'lucide-react';
 
 // Sub Components
-const MessageCard = ({ message, image, senderName }: { message: string; image?: string; senderName: string }) => (
-      <div className="grid-card-item relative bg-primary p-3 rounded-lg flex flex-col items-center">
-            <div className="w-full h-[200px] bg-white rounded-lg mb-4 flex items-center justify-center">
-                  {image ? (
-                        <div className="relative w-[150px]">
-                              <Image width={500} height={500} src={image} alt="Card image" className="w-full h-full object-contain" />
-                        </div>
-                  ) : null}
+const MessageCard = ({ card, gift }: { card: TCard; gift: TGift }) => {
+      const [removePage] = useRemovePageMutation();
+
+      const handleDelete = async () => {
+            toast.loading('Deleting...', { id: 'deleteCardToast' });
+            try {
+                  const res = await removePage({ id: gift?._id, payload: { pageId: card?._id } }).unwrap();
+                  if (res.success) {
+                        toast.success(res.message || 'Card deleted successfully', { id: 'deleteCardToast' });
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Failed to delete card', { id: 'deleteCardToast' });
+                  console.log(error?.data);
+            }
+      };
+
+      return (
+            <div className="grid-card-item relative bg-primary p-3 rounded-lg flex flex-col items-center">
+                  <div className="w-full h-[200px] bg-white rounded-lg mb-4 flex items-center justify-center">
+                        {card?.image ? (
+                              <div className="relative w-[150px]">
+                                    <Image
+                                          width={500}
+                                          height={500}
+                                          src={`${process.env.NEXT_PUBLIC_SERVER_URL}${card?.image}}`}
+                                          alt="Card image"
+                                          className="w-full h-full object-contain"
+                                    />
+                              </div>
+                        ) : null}
+                  </div>
+                  <p className="text-xs italic text-gray-500 text-center mt-2">{card?.message}</p>
+                  <div className="flex gap-2 w-full mt-1 justify-end text-end">
+                        <p className="text-gray-600 text-end">{card?.senderName}</p>
+                        <p>
+                              <Tooltip title="Delete Card">
+                                    <Trash2 onClick={handleDelete} className="cursor-pointer text-red-500 text-2xl" />
+                              </Tooltip>
+                        </p>
+                  </div>
             </div>
-            <p className="text-xs italic text-gray-500 text-center mt-2">{message}</p>
-            <div className="flex gap-2 w-full mt-1 justify-end text-end">
-                  <p className="text-gray-600 text-end">{senderName}</p>
-                  <p>
-                        <Tooltip title="Delete Card">
-                              <PiDotsThreeCircleThin className="cursor-pointer text-red-500 text-2xl" />
-                        </Tooltip>
-                  </p>
-            </div>
-      </div>
-);
+      );
+};
 
 const SubmitButton = ({ onClick }: { onClick: () => void }) => (
       <div className="p-1">
@@ -86,7 +111,7 @@ const GridPreview = ({ gift }: { gift: TGift; isLoading?: boolean; category: any
 
                         <div className="grid grid-cols-2 gap-5 mt-5">
                               {gift?.pages?.map((item: TCard, index) => (
-                                    <MessageCard key={index} message={item?.message} image={item?.image} senderName={item?.senderName} />
+                                    <MessageCard key={index} card={item} gift={gift} />
                               ))}
                         </div>
                   </div>

@@ -1,20 +1,22 @@
 // PreviewPanel.tsx
-import Cake from '@/assets/images/preview-panel/cake.png';
 import Image from 'next/image';
 import Img1 from '@/assets/images/preview-panel/camera.png';
 import Img2 from '@/assets/images/preview-panel/gift-sketch.png';
 import Img3 from '@/assets/images/preview-panel/gfit-sketch2.png';
 import Img4 from '@/assets/images/preview-panel/couple.png';
-import AirBalloon from '@/assets/images/preview-panel/air-balloon.jpg';
 import { useAppSelector } from '@/redux/hooks';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useGetCategoriesQuery } from '@/redux/features/website/category/categoryApi';
 type CardProps = {
       description: string;
       imageUrl?: string;
 };
 const GridPreviewPanel = () => {
-      const { recipientName } = useAppSelector((state) => state.giftCardManagement);
+      const { recipientName, occasionType } = useAppSelector((state) => state.giftCardManagement);
+
+      const { data: categoryData } = useGetCategoriesQuery(undefined);
+      const category = categoryData?.data?.find((item: any) => item?._id === occasionType || item?.name === occasionType);
 
       const data = [
             {
@@ -77,13 +79,19 @@ const GridPreviewPanel = () => {
                   <div
                         className="absolute  bg-[#00000031] bg-blend-multiply opacity-80 inset-0 bg-center bg-cover bg-no-repeat rounded-lg"
                         style={{
-                              backgroundImage: `url('${AirBalloon.src}')`,
+                              backgroundImage: `url('${process.env.NEXT_PUBLIC_SERVER_URL}${category?.occasionImage}')`,
                         }}
                   />
                   <div className="relative p-2 md:p-6">
                         <div className="flex items-center gap-3 mb-4">
                               <div className="bg-primary w-fit p-1 rounded-full">
-                                    <Image className="w-[48px]" width={500} height={500} src={Cake} alt="cake" />
+                                    <Image
+                                          className="w-[48px]"
+                                          width={500}
+                                          height={500}
+                                          src={`${process.env.NEXT_PUBLIC_SERVER_URL}${category?.categoryImage}`}
+                                          alt="cake"
+                                    />
                               </div>
                               <h1 className="text-xl font-bold text-white">{recipientName ? recipientName : 'Recipient Name'}</h1>
                         </div>

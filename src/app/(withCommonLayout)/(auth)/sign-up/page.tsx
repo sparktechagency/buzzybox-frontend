@@ -18,7 +18,6 @@ const SignUpPage = () => {
             toast.loading('Account creating...', { id: 'signUpToast' });
             try {
                   const res = await signUp(values).unwrap();
-                  console.log(res);
                   if (res.success) {
                         toast.success(res.message || 'Sign up successful!', { id: 'signUpToast' });
                         router.push(`/verify-otp?email=${values.email}&action=verify-account`);
