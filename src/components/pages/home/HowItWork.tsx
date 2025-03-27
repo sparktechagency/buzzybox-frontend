@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Image1 from '@/assets/images/how-it-work/1.png';
 import Image2 from '@/assets/images/how-it-work/2.png';
 import Image3 from '@/assets/images/how-it-work/3.png';
+import Link from 'next/link';
 
 const steps = [
       {
@@ -63,7 +64,7 @@ const HowItWorks = () => {
 
                         {/* Button */}
                         <div className="mt-10">
-                              <Button type="primary">Get Started</Button>
+                              <Link href={'/create-gift'}><Button type="primary">Get Started</Button></Link>
                         </div>
                   </div>
             </section>

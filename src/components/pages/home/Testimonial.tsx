@@ -4,32 +4,12 @@ import { Carousel } from 'antd';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { RiDoubleQuotesR } from 'react-icons/ri';
-
-const testimonials = [
-      {
-            id: 1,
-            name: 'Catrina Yoder',
-            role: 'Happy Client',
-            text: 'Absolutely loved the experience! Creating a birthday card with GIFs and videos was so easy, and my friend was thrilled!',
-            image: 'https://picsum.photos/50',
-      },
-      {
-            id: 2,
-            name: 'John Doe',
-            role: 'Verified User',
-            text: 'Buzzybox made our farewell party even more special. The ability to collaborate on a card was amazing!',
-            image: 'https://picsum.photos/50',
-      },
-      {
-            id: 3,
-            name: 'Emily Smith',
-            role: 'Loyal Customer',
-            text: 'Creating and sending group greeting cards has never been this easy. Highly recommended!',
-            image: 'https://picsum.photos/50',
-      },
-];
+import { useGetAllReviewsQuery } from '@/redux/features/website/reviews/reviewApi';
 
 const TestimonialSlider = () => {
+      const { data } = useGetAllReviewsQuery(undefined);
+      const reviewsData = data?.data;
+
       const carouselRef = useRef<any>();
       const [activeIndex, setActiveIndex] = useState(0);
 
@@ -63,30 +43,30 @@ const TestimonialSlider = () => {
                                           )}
                                           className="max-w-3xl mx-auto"
                                     >
-                                          {testimonials.map((testimonial) => (
+                                          {reviewsData?.map((item: any) => (
                                                 <div
-                                                      key={testimonial.id}
+                                                      key={item?._id}
                                                       className="flex items-center gap-8 bg-white py-10 border border-primary md:p-6 p-2 rounded-xl "
                                                 >
                                                       <div className="h-full">
-                                                            <p className="text-gray-700 text-sm md:text-base italic">{testimonial.text}</p>
+                                                            <p className="text-gray-700 text-sm md:text-base italic">{item?.message}</p>
                                                             <div className="flex justify-between items-center">
-                                                                  <div className="flex items-center gap-2">
+                                                                  <div className="flex items-center gap-2 mt-3">
                                                                         <div className="flex-shrink-0">
                                                                               <Image
-                                                                                    src={testimonial.image}
+                                                                                    src={`${process.env.NEXT_PUBLIC_SERVER_URL}${item?.userImage}`}
                                                                                     width={50}
                                                                                     height={50}
-                                                                                    alt={testimonial.name}
+                                                                                    alt={item?.username}
                                                                                     className="rounded-full size-[50px] object-cover border-2 border-yellow-500"
                                                                               />
                                                                         </div>
-                                                                        <div className="mt-3 flex items-center gap-2">
+                                                                        <div className="grid items-center">
                                                                               <strong className="text-sm md:text-base text-gray-900">
-                                                                                    {testimonial.name}
+                                                                                    {item?.username}
                                                                               </strong>
                                                                               <span className="text-sm  text-gray-500">
-                                                                                    {testimonial.role}
+                                                                                    {item?.occupation}
                                                                               </span>
                                                                         </div>
                                                                   </div>

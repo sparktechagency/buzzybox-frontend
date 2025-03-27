@@ -30,17 +30,19 @@ const MessageCard = ({ card, gift }: { card: TCard; gift: TGift }) => {
             }
       };
 
+      console.log(card?.image);
+
       return (
             <div className="grid-card-item relative bg-primary p-3 rounded-lg flex flex-col items-center">
-                  <div className="w-full h-[200px] bg-white rounded-lg mb-4 flex items-center justify-center">
+                  <div className="w-full max-h-[200px] overflow-hidden bg-white rounded-lg mb-4 flex items-center justify-center">
                         {card?.image ? (
-                              <div className="relative w-[150px]">
+                              <div className="relative">
                                     <Image
                                           width={500}
                                           height={500}
-                                          src={`${process.env.NEXT_PUBLIC_SERVER_URL}${card?.image}}`}
+                                          src={`${process.env.NEXT_PUBLIC_SERVER_URL}${card?.image}`}
                                           alt="Card image"
-                                          className="w-full h-full object-contain"
+                                          className="w-full h-full object-cover"
                                     />
                               </div>
                         ) : null}
