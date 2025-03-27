@@ -99,7 +99,7 @@ const Navbar = () => {
                   </nav>
 
                   {/* Mobile Drawer */}
-                  <MobileDrawer open={showDrawer} setOpen={setShowDrawer} items={items} />
+                  <MobileDrawer open={showDrawer} setOpen={setShowDrawer} items={items} profile={profile} />
             </header>
       );
 };

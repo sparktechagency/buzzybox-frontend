@@ -1,7 +1,5 @@
 'use client';
-import { Avatar, Button, Checkbox, Form, Input, InputNumber, Select, Upload } from 'antd';
-import { DollarSign } from 'lucide-react';
-import { FaGifts } from 'react-icons/fa';
+import { Avatar, Button, DatePicker, Form, Input, TimePicker, Upload } from 'antd';
 import { FcEditImage } from 'react-icons/fc';
 import { useState } from 'react';
 import Modal from '@/components/shared/Modal';
@@ -11,9 +9,13 @@ import toast from 'react-hot-toast';
 import invite_icon from '@/assets/icons/invite-icon.png';
 import InviteModal from '../InviteModal';
 import { useCreatePaymentLinkMutation } from '@/redux/features/website/payment/paymentApi';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 const Sidebar = ({ id }: { id: string }) => {
-      const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(false);
+      // const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(false);
       const [isModalOpen, setIsModalOpen] = useState(false);
       const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
       const [updateImage] = useAddNewPageMutation();
@@ -39,15 +41,26 @@ const Sidebar = ({ id }: { id: string }) => {
             }
       };
 
-      const handleSubscription = (values: any) => {
-            console.log(values);
-            setIsModalOpen(false);
-      };
-
       // handle payment
-      const handlePayment = async () => {
+      const handlePayment = async (values: any) => {
+            toast.loading('Pending...', { id: 'paymentToast' });
+            // Combine date and time into a single datetime
+            const combinedDateTime = dayjs(values.date)
+                  .hour(dayjs(values.time).hour())
+                  .minute(dayjs(values.time).minute())
+                  .second(0)
+                  .utc()
+                  .format(); // Converts to ISO 8601 UTC format
+
+            const payload = {
+                  giftCardId: id,
+                  receiverEmail: values.email,
+                  emailScheduleDate: combinedDateTime,
+                  url: 'https://example.com/redeem',
+            };
+
             try {
-                  const res = await createPayment({ payload: { giftCardId: id } }).unwrap();
+                  const res = await createPayment({ payload }).unwrap();
                   if (res.success) {
                         window.location.href = res.data.url;
                   }
@@ -93,16 +106,44 @@ const Sidebar = ({ id }: { id: string }) => {
                               </button> */}
                         </div>
                   </div>
+                  <div className="space-y-4">
+                        <h3 className="text-lg font-medium">Set Schedule</h3>
+                        <Form onFinish={handlePayment} layout="vertical" requiredMark="optional">
+                              <Form.Item
+                                    name="email"
+                                    label="Reciever Email"
+                                    rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
+                              >
+                                    <Input placeholder="Enter your email" />
+                              </Form.Item>
+                              <Form.Item name="date" label="Schedule Date" rules={[{ required: true, message: 'Please select a date!' }]}>
+                                    <DatePicker style={{ width: '100%', height: '45px' }} placeholder="Select a date" />
+                              </Form.Item>
+                              <Form.Item name="time" label="Schedule Time" rules={[{ required: true, message: 'Please select a time!' }]}>
+                                    <TimePicker use12Hours format="h:mm a" style={{ width: '100%', height: '45px' }} />
+                              </Form.Item>
+                              <Form.Item>
+                                    <Button
+                                          htmlType="submit"
+                                          type="primary"
+                                          className="w-full h-12 bg-yellow-400 hover:bg-yellow-500 border-none"
+                                    >
+                                          Pay $5 and Proceed
+                                    </Button>
+                              </Form.Item>
+                        </Form>
+                  </div>
 
-                  <div className="flex items-center gap-2">
+                  {/* Add gift card checkbox */}
+                  {/* <div className="flex items-center gap-2">
                         <Checkbox onChange={(e) => setIsGiftCardEnabled(e.target.checked)} checked={isGiftCardEnabled} />
                         <span className="flex items-center gap-2">
                               Add gift Card
                               <FaGifts className="text-red-500" size={30} />
                         </span>
-                  </div>
+                  </div> */}
 
-                  {isGiftCardEnabled && (
+                  {/* {isGiftCardEnabled && (
                         <div className="space-y-4">
                               <div className="space-y-4">
                                     <h3 className="gift-card-item text-lg font-medium">Select Currency</h3>
@@ -130,21 +171,18 @@ const Sidebar = ({ id }: { id: string }) => {
                                     />
                               </div>
                         </div>
-                  )}
+                  )} */}
 
-                  <Button onClick={handlePayment} type="primary" className="w-full h-12 bg-yellow-400 hover:bg-yellow-500 border-none">
-                        Next
-                  </Button>
-
-                  <div>
+                  {/* stay up to date      */}
+                  {/* <div>
                         <Checkbox onChange={() => setIsModalOpen(true)}>Stay up to date</Checkbox>
-                  </div>
+                  </div> */}
 
                   <Modal title="" visible={isModalOpen} onCancel={() => setIsModalOpen(false)}>
                         <div className="text-center space-y-4">
                               <h1 className="text-2xl font-bold">Stay up to date?</h1>
                               <p>Keep me updated via email with the latest news, special offers, and important updates</p>
-                              <Form onFinish={handleSubscription}>
+                              <Form>
                                     <Form.Item name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
                                           <Input placeholder="Enter your email" />
                                     </Form.Item>
