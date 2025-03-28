@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 // Sub Components
 const MessageCard = ({ card }: { card: TCard }) => {
-      console.log(card?.image);
+      // console.log(card?.image);
 
       return (
             <div className="grid-card-item relative bg-primary p-3 rounded-lg flex flex-col items-center">
@@ -55,7 +55,6 @@ const PreviewGiftPage = ({ params }: { params: { id: string } }) => {
 
       const { data } = useGetSingleGiftCardQuery({ id });
       const gift = data?.data;
-      console.log(gift);
 
       // Animation
       useGSAP(() => {

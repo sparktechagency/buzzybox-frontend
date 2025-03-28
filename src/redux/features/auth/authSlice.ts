@@ -1,5 +1,6 @@
 import { RootState } from '@/redux/store';
 import { createSlice } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
 
 const initialState: { accessToken: string | null } = {
       accessToken: null,
@@ -15,6 +16,7 @@ const authSlice = createSlice({
             },
             logOut: () => {
                   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  Cookies.remove('accessToken');
                   return initialState;
             },
       },

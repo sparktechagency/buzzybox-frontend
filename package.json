@@ -1,5 +1,5 @@
 {
-      "name": "high-times",
+      "name": "buzzybox-frontend",
       "version": "0.1.0",
       "private": true,
       "scripts": {
@@ -13,11 +13,13 @@
             "@gsap/react": "^2.1.2",
             "@reduxjs/toolkit": "^2.5.1",
             "@tailwindcss/typography": "^0.5.16",
+            "@types/js-cookie": "^3.0.6",
             "antd": "^5.22.2",
             "clsx": "^2.1.1",
             "dayjs": "^1.11.13",
             "framer-motion": "^12.4.2",
             "gsap": "^3.12.7",
+            "js-cookie": "^3.0.5",
             "lucide-react": "^0.462.0",
             "next": "^14.2.25",
             "nextjs-toploader": "^3.7.15",
