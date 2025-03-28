@@ -24,3 +24,15 @@ export type TGift = {
       };
 };
     
+export type TProfile = {
+      _id: string;
+      name: string;
+      role: 'USER' | 'ADMIN';
+      email: string;
+      profile: string;
+      status: string;
+      verified: boolean;
+      createdAt: string;
+      updatedAt: string;
+      contact: string;
+};

@@ -5,15 +5,15 @@ import Logo from '@/assets/images/logo.png';
 
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useState } from 'react';
-import { Avatar, Button, Dropdown } from 'antd';
 
 import NavItems from './NavItems';
 import MobileDrawer from './MobileDrawer';
-import { UserIcon } from 'lucide-react';
-import ProfileDropdown from './ProfileDropdown';
 import { useAppSelector } from '@/redux/hooks';
 import { selectAccessToken } from '@/redux/features/auth/authSlice';
 import { useGetUserProfileQuery } from '@/redux/features/user/userApi';
+import { Avatar, Button, Dropdown } from 'antd';
+import ProfileDropdown from './ProfileDropdown';
+import { UserIcon } from 'lucide-react';
 
 const Navbar = () => {
       const [showDrawer, setShowDrawer] = useState(false);

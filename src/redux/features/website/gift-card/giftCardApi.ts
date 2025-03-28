@@ -52,7 +52,6 @@ const giftCardApi = baseApi.injectEndpoints({
             }),
             deleteCard: builder.mutation({
                   query: ({ id }) => {
-                        console.log(id);
                         return {
                               url: `/gift-cards/${id}`,
                               method: 'DELETE',
