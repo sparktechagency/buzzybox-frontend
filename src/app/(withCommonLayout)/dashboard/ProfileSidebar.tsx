@@ -104,17 +104,19 @@ const ProfileSidebar = () => {
                   ) : (
                         <div className="flex flex-col items-center my-2 mt-2">
                               <div className="relative size-[86px] rounded-full border-2 border-primary p-1">
-                                    <Image
-                                          width={500}
-                                          height={500}
-                                          src={
-                                                profile?.profile?.includes('http')
-                                                      ? profile?.profile
-                                                      : `${process.env.NEXT_PUBLIC_SERVER_URL}${profile?.profile}`
-                                          }
-                                          alt="Profile"
-                                          className="w-full h-full  object-cover rounded-full"
-                                    />
+                                    {profile && (
+                                          <Image
+                                                width={500}
+                                                height={500}
+                                                src={
+                                                      profile?.profile?.includes('http')
+                                                            ? profile?.profile
+                                                            : `${process.env.NEXT_PUBLIC_SERVER_URL}${profile?.profile}`
+                                                }
+                                                alt="Profile"
+                                                className="w-full h-full  object-cover rounded-full"
+                                          />
+                                    )}
                                     <div className="absolute right-0 bottom-0 cursor-pointer bg-white w-8 h-8 rounded-lg text-center flex items-center justify-center">
                                           <Upload showUploadList={false} onChange={handleFileChange}>
                                                 <div className="bg-primary p-2 rounded-full text-white">

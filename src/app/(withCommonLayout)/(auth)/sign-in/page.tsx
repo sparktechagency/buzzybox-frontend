@@ -7,6 +7,7 @@ import { LogInIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 const SignInPage = () => {
       const [form] = Form.useForm();
@@ -22,22 +23,14 @@ const SignInPage = () => {
                   if (res.success) {
                         toast.success(res.message || 'Login successful!', { id: 'loginToast' });
                         dispatch(saveToAuth(res));
+                        Cookies.set('accessToken', res?.data?.accessToken);
                         router.push('/');
+                        window.location.reload();
                   }
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Login failed', { id: 'loginToast' });
                   console.log(error?.data?.message);
             }
-      };
-
-      // Set user credentials - for testing mode only. remove on production mode
-      const setUserCredentials = () => {
-            form.setFieldsValue({ email: 'user@gmail.com', password: 'kothinpassword' });
-      };
-
-      // Set admin credentials - for testing mode only. remove on production mode
-      const setAdminCredentials = () => {
-            form.setFieldsValue({ email: 'apusutradhar77@gmail.com', password: 'kothinpassword' });
       };
 
       return (
@@ -93,15 +86,7 @@ const SignInPage = () => {
                                           </Button>
                                     </Form.Item>
                               </Form>
-                              {/* this section is for testing mode only. remove on production mode */}
-                              <div className="flex justify-between items-center gap-2 mt-4">
-                                    <Button onClick={setUserCredentials} type="default" style={{ flex: 1 }}>
-                                          User Credentials
-                                    </Button>
-                                    <Button onClick={setAdminCredentials} type="default" style={{ flex: 1 }}>
-                                          Admin Credentials
-                                    </Button>
-                              </div>
+
                               <div>
                                     <div className="flex items-center justify-center mt-4">
                                           <span className="text-sm text-paragraph mr-2">Don’t have an account ? </span>

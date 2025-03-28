@@ -30,8 +30,6 @@ const MessageCard = ({ card, gift }: { card: TCard; gift: TGift }) => {
             }
       };
 
-      console.log(card?.image);
-
       return (
             <div className="grid-card-item relative bg-primary p-3 rounded-lg flex flex-col items-center">
                   <div className="w-full max-h-[200px] overflow-hidden bg-white rounded-lg mb-4 flex items-center justify-center">

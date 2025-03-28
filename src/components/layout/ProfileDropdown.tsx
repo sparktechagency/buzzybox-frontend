@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Menu, Avatar, Modal } from 'antd';
 import { LogOut } from 'lucide-react';
@@ -32,7 +34,7 @@ const ProfileDropdown = ({ profile }: { profile: any }) => {
 
                   onOk() {
                         dispatch(logOut());
-                        // router.push('/sign-in');
+                        router.push('/sign-in');
                   },
             });
       };

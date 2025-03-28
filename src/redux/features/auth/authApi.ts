@@ -10,6 +10,7 @@ const authApi = baseApi.injectEndpoints({
                               body: payload,
                         };
                   },
+                  invalidatesTags: ['Profile'],
             }),
             login: builder.mutation({
                   query: (payload) => {
@@ -19,6 +20,7 @@ const authApi = baseApi.injectEndpoints({
                               body: payload,
                         };
                   },
+                  invalidatesTags: ['Profile'],
             }),
             forgetPassword: builder.mutation({
                   query: (payload) => {
@@ -67,6 +69,7 @@ const authApi = baseApi.injectEndpoints({
                               body: payload,
                         };
                   },
+                  invalidatesTags: ['Profile'],
             }),
       }),
 });

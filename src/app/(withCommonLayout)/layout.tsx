@@ -1,20 +1,12 @@
-'use client';
-
 import Footer from '@/components/layout/Footer';
-import Navbar from '@/components/layout/Navbar';
-// import dynamic from 'next/dynamic';
+import NavbarWrapper from '@/components/layout/NavbarWrapper';
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
 
 const CommonLayout = ({ children }: { children: React.ReactNode }) => {
-      // const Navbar = dynamic(() => import('@/components/layout/Navbar'), {
-      //       loading: () => <p>Loading...</p>,
-      //       ssr: false,
-      // });
-
       return (
             <div>
-                  <Navbar />
+                  <NavbarWrapper />
                   {children}
                   <Footer />
                   <Toaster

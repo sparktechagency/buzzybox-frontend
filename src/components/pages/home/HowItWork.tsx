@@ -26,7 +26,8 @@ const steps = [
       },
 ];
 
-const HowItWorks = () => {
+const HowItWorks = async () => {
+
       return (
             <section className=" py-16">
                   <div className="container mx-auto text-center">
@@ -64,7 +65,9 @@ const HowItWorks = () => {
 
                         {/* Button */}
                         <div className="mt-10">
-                              <Link href={'/create-gift'}><Button type="primary">Get Started</Button></Link>
+                              <Link href={'/create-gift'}>
+                                    <Button type="primary">Get Started</Button>
+                              </Link>
                         </div>
                   </div>
             </section>
