@@ -1,5 +1,5 @@
 'use client';
-import { Avatar, Button, DatePicker, Form, Input, TimePicker, Upload } from 'antd';
+import { Avatar, Button, Form, Input, Upload } from 'antd';
 import { FcEditImage } from 'react-icons/fc';
 import { useState } from 'react';
 import Modal from '@/components/shared/Modal';
@@ -8,7 +8,7 @@ import { useAddNewPageMutation } from '@/redux/features/website/gift-card/giftCa
 import toast from 'react-hot-toast';
 import invite_icon from '@/assets/icons/invite-icon.png';
 import InviteModal from '../InviteModal';
-import { useCreatePaymentLinkMutation } from '@/redux/features/website/payment/paymentApi';
+import { useCreateContributionMutation, useCreatePaymentLinkMutation } from '@/redux/features/website/payment/paymentApi';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
@@ -19,6 +19,7 @@ const Sidebar = ({ id, uniqueId }: { id: string; uniqueId: string }) => {
       const [isModalOpen, setIsModalOpen] = useState(false);
       const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
       const [updateImage] = useAddNewPageMutation();
+      const [createContribution] = useCreateContributionMutation();
       const [createPayment] = useCreatePaymentLinkMutation();
 
       // handle background image change
@@ -41,22 +42,36 @@ const Sidebar = ({ id, uniqueId }: { id: string; uniqueId: string }) => {
             }
       };
 
-      // handle payment
-      const handlePayment = async (values: any) => {
-            toast.loading('Pending...', { id: 'paymentToast' });
-            // Combine date and time into a single datetime
-            const combinedDateTime = dayjs(values.date)
-                  .hour(dayjs(values.time).hour())
-                  .minute(dayjs(values.time).minute())
-                  .second(0)
-                  .utc()
-                  .format(); // Converts to ISO 8601 UTC format
+      // handle contribution
+      const handleContribution = async (values: any) => {
+            toast.loading('Pending...', { id: 'contributionToast' });
 
             const payload = {
                   giftCardId: id,
-                  receiverEmail: values.email,
-                  emailScheduleDate: combinedDateTime,
-                  url: `${process.env.NEXT_PUBLIC_SITE_URL}/preview-gift/${uniqueId}`,
+                  email: values.email,
+                  amount: values.amount,
+            };
+
+            try {
+                  const res = await createContribution({ payload }).unwrap();
+                  if (res.success) {
+                        window.location.href = res.data;
+                  }
+            } catch (error: any) {
+                  toast.error(error?.data?.message || 'Failed to create payment link');
+                  console.log(error);
+            }
+      };
+
+      // handle payment
+      const handlePayment = async (values: any) => {
+            toast.loading('Pending...', { id: 'paymentToast' });
+
+            const payload = {
+                  giftCardId: id,
+                  email: values.email,
+                  amount: values.amount,
+                  // url: `${process.env.NEXT_PUBLIC_SITE_URL}/preview-gift/${uniqueId}`,
             };
 
             try {
@@ -107,28 +122,21 @@ const Sidebar = ({ id, uniqueId }: { id: string; uniqueId: string }) => {
                         </div>
                   </div>
                   <div className="space-y-4">
-                        <h3 className="text-lg font-medium">Set Schedule</h3>
-                        <Form onFinish={handlePayment} layout="vertical" requiredMark="optional">
+                        <h3 className="text-lg font-medium">Contribute in this Gift</h3>
+                        <Form onFinish={handleContribution} layout="vertical" requiredMark="optional">
                               <Form.Item
                                     name="email"
-                                    label="Reciever Email"
+                                    label="Email"
                                     rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
                               >
                                     <Input placeholder="Enter your email" />
                               </Form.Item>
-                              <Form.Item name="date" label="Schedule Date" rules={[{ required: true, message: 'Please select a date!' }]}>
-                                    <DatePicker style={{ width: '100%', height: '45px' }} placeholder="Select a date" />
-                              </Form.Item>
-                              <Form.Item name="time" label="Schedule Time" rules={[{ required: true, message: 'Please select a time!' }]}>
-                                    <TimePicker use12Hours format="h:mm a" style={{ width: '100%', height: '45px' }} />
+                              <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Please input amount!' }]}>
+                                    <Input placeholder="Enter gift amount" type="number" />
                               </Form.Item>
                               <Form.Item>
-                                    <Button
-                                          htmlType="submit"
-                                          type="primary"
-                                          className="w-full h-12 bg-yellow-400 hover:bg-yellow-500 border-none"
-                                    >
-                                          Pay $5 and Proceed
+                                    <Button htmlType="submit" type="primary" className="w-full">
+                                          Pay Now
                                     </Button>
                               </Form.Item>
                         </Form>

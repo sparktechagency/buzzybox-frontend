@@ -18,6 +18,15 @@ const paymentApi = baseApi.injectEndpoints({
                         };
                   },
             }),
+            createContribution: builder.mutation({
+                  query: ({ payload }) => {
+                        return {
+                              url: `/payments/give-contribution`,
+                              method: 'POST',
+                              body: payload,
+                        };
+                  },
+            }),
             createPaymentLink: builder.mutation({
                   query: ({ payload }) => {
                         return {
@@ -30,4 +39,4 @@ const paymentApi = baseApi.injectEndpoints({
       }),
 });
 
-export const { useGetAllPaymentsQuery, useGetMyCardsQuery, useCreatePaymentLinkMutation } = paymentApi;
+export const { useGetAllPaymentsQuery, useGetMyCardsQuery, useCreateContributionMutation, useCreatePaymentLinkMutation } = paymentApi;
