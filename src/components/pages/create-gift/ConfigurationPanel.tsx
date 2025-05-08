@@ -1,6 +1,6 @@
 'use client';
 
-import { Form, Select, Input, Button } from 'antd';
+import { Form, Select, Input, Button, DatePicker } from 'antd';
 import Image from 'next/image';
 import GiftImage from '@/assets/images/configure-panel/gift.png';
 import BookImage from '@/assets/images/configure-panel/book.png';
@@ -11,6 +11,8 @@ import { useCreateGiftCardMutation } from '@/redux/features/website/gift-card/gi
 import toast from 'react-hot-toast';
 import { useGetCategoriesQuery } from '@/redux/features/website/category/categoryApi';
 import { v4 as uuidv4 } from 'uuid';
+import dayjs from 'dayjs';
+import { RangePickerProps } from 'antd/es/date-picker';
 
 const ConfigurationPanel = () => {
       const router = useRouter();
@@ -28,6 +30,7 @@ const ConfigurationPanel = () => {
 
       // handle create gift card form submission
       const onFinish = async (values: any) => {
+            console.log(values?.emailScheduleDate?.toISOString());
             toast.loading('Creating...', { id: 'createGiftToast' });
 
             const giftData = {
@@ -37,6 +40,10 @@ const ConfigurationPanel = () => {
                         title: values.title,
                         senderName: values.senderName,
                         recipientName: values.recipientName,
+                  },
+                  receiverInfo: {
+                        receiverEmail: values?.recipientEmail,
+                        emailScheduleDate: values?.emailScheduleDate?.toISOString(),
                   },
             };
 
@@ -50,6 +57,11 @@ const ConfigurationPanel = () => {
                   toast.error(error?.data?.message || 'Failed to create', { id: 'createGiftToast' });
                   console.log(error?.data?.message);
             }
+      };
+
+      const disabledDate: RangePickerProps['disabledDate'] = (current) => {
+            // Can not select days before today and today
+            return current && current < dayjs().endOf('day');
       };
 
       return (
@@ -101,15 +113,6 @@ const ConfigurationPanel = () => {
                                     />
                               </Form.Item>
 
-                              <p className="text-gray-700 mt-5 font-medium">Recipient Name</p>
-                              <Form.Item name="recipientName" rules={[{ required: true, message: 'Please input the recipient name' }]}>
-                                    <Input
-                                          placeholder="Who is this card for?"
-                                          className="mt-2"
-                                          onChange={(e) => handleDispatch('recipientName', e.target.value)}
-                                    />
-                              </Form.Item>
-
                               <p className="text-gray-700 mt-5 font-medium">Buzzybox Title</p>
                               <Form.Item name="title" rules={[{ required: true, message: 'Please input the Buzzybox title' }]}>
                                     <Input
@@ -125,6 +128,37 @@ const ConfigurationPanel = () => {
                                           placeholder="e.g. Adam John"
                                           className="mt-2"
                                           onChange={(e) => handleDispatch('senderName', e.target.value)}
+                                    />
+                              </Form.Item>
+
+                              <p className="text-gray-700 mt-5 font-medium">Recipient Name</p>
+                              <Form.Item name="recipientName" rules={[{ required: true, message: 'Please input the recipient name' }]}>
+                                    <Input
+                                          placeholder="Who is this card for?"
+                                          className="mt-2"
+                                          onChange={(e) => handleDispatch('recipientName', e.target.value)}
+                                    />
+                              </Form.Item>
+
+                              <p className="text-gray-700 mt-5 font-medium">Recipient Email</p>
+                              <Form.Item name="recipientEmail" rules={[{ required: true, message: 'Please input the recipient email' }]}>
+                                    <Input
+                                          placeholder="john@example.com"
+                                          className="mt-2"
+                                          onChange={(e) => handleDispatch('recieverEmail', e.target.value)}
+                                    />
+                              </Form.Item>
+
+                              <p className="text-gray-700 mt-5 font-medium">Schedule Date</p>
+                              <Form.Item name="emailScheduleDate" rules={[{ required: true, message: 'Please input the schedule date' }]}>
+                                    <DatePicker
+                                          format="YYYY-MM-DD HH:mm:ss"
+                                          disabledDate={disabledDate}
+                                          showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
+                                          placeholder="Select date and time"
+                                          onChange={(value) => handleDispatch('emailScheduleDate', value.toISOString())}
+                                          className="mt-2 w-full"
+                                          style={{ padding: '9px 20px' }}
                                     />
                               </Form.Item>
                         </div>
