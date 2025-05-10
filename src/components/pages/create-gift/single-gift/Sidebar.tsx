@@ -11,10 +11,11 @@ import InviteModal from '../InviteModal';
 import { useCreateContributionMutation, useCreatePaymentLinkMutation } from '@/redux/features/website/payment/paymentApi';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { TGift } from '@/types';
 
 dayjs.extend(utc);
 
-const Sidebar = ({ id, uniqueId }: { id: string; uniqueId: string }) => {
+const Sidebar = ({ gift }: { gift: TGift }) => {
       // const [isGiftCardEnabled, setIsGiftCardEnabled] = useState(false);
       const [isModalOpen, setIsModalOpen] = useState(false);
       const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
@@ -32,7 +33,7 @@ const Sidebar = ({ id, uniqueId }: { id: string; uniqueId: string }) => {
 
             try {
                   toast.loading('Uploading...', { id: 'uploadImage' });
-                  const res = await updateImage({ id, payload: formData }).unwrap();
+                  const res = await updateImage({ id: gift?._id, payload: formData }).unwrap();
                   if (res.success) {
                         toast.success('Background updated successfully', { id: 'uploadImage' });
                   }
@@ -47,7 +48,7 @@ const Sidebar = ({ id, uniqueId }: { id: string; uniqueId: string }) => {
             toast.loading('Pending...', { id: 'contributionToast' });
 
             const payload = {
-                  giftCardId: id,
+                  giftCardId: gift?._id,
                   email: values.email,
                   amount: values.amount,
             };
@@ -64,21 +65,20 @@ const Sidebar = ({ id, uniqueId }: { id: string; uniqueId: string }) => {
       };
 
       // handle payment
-      const handlePayment = async (values: any) => {
+      const handlePayment = async () => {
             toast.loading('Pending...', { id: 'paymentToast' });
 
             const payload = {
-                  giftCardId: id,
-                  email: values.email,
-                  amount: values.amount,
+                  giftCardId: gift?._id,
                   // url: `${process.env.NEXT_PUBLIC_SITE_URL}/preview-gift/${uniqueId}`,
             };
 
             try {
                   const res = await createPayment({ payload }).unwrap();
                   if (res.success) {
-                        window.location.href = res.data.url;
+                        window.location.href = res.data;
                   }
+                  toast.success('Successfully created payment link');
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Failed to create payment link');
                   console.log(error);
@@ -98,10 +98,6 @@ const Sidebar = ({ id, uniqueId }: { id: string; uniqueId: string }) => {
                   <div className="space-y-4">
                         <h3 className="text-lg font-medium">Edit Design</h3>
                         <div className="space-y-3 bg-primary/5 p-3 rounded-lg border-primary border">
-                              {/* <button className="w-full flex items-center gap-3 p-3 hover:text-primary duration-100 rounded-lg">
-                                    <FcRules size={30} />
-                                    <span>Edit Message</span>
-                              </button> */}
                               <Upload
                                     accept="image/png, image/jpeg"
                                     maxCount={1}
@@ -115,32 +111,42 @@ const Sidebar = ({ id, uniqueId }: { id: string; uniqueId: string }) => {
                                           <span>Change Background</span>
                                     </button>
                               </Upload>
-                              {/* <button className="w-full flex items-center gap-3 p-3 hover:text-primary duration-100 rounded-lg">
-                                    <FcAddImage size={30} />
-                                    <span>Change Image</span>
-                              </button> */}
                         </div>
                   </div>
-                  <div className="space-y-4">
-                        <h3 className="text-lg font-medium">Contribute in this Gift</h3>
-                        <Form onFinish={handleContribution} layout="vertical" requiredMark="optional">
-                              <Form.Item
-                                    name="email"
-                                    label="Email"
-                                    rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
-                              >
-                                    <Input placeholder="Enter your email" />
-                              </Form.Item>
-                              <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Please input amount!' }]}>
-                                    <Input placeholder="Enter gift amount" type="number" />
-                              </Form.Item>
-                              <Form.Item>
-                                    <Button htmlType="submit" type="primary" className="w-full">
-                                          Pay Now
-                                    </Button>
-                              </Form.Item>
-                        </Form>
-                  </div>
+
+                  {/* payment */}
+                  {!(gift?.paymentStatus === 'paid') && (
+                        <div className="space-y-4">
+                              <h3 className="text-lg font-medium">Pay $5 and send this gift</h3>
+                              <Button onClick={handlePayment} type="primary" className="w-full">
+                                    Pay Now
+                              </Button>
+                        </div>
+                  )}
+
+                  {/* contribution */}
+                  {gift?.paymentStatus === 'paid' && (
+                        <div className="space-y-4">
+                              <h3 className="text-lg font-medium">Contribute in this Gift</h3>
+                              <Form onFinish={handleContribution} layout="vertical" requiredMark="optional">
+                                    <Form.Item
+                                          name="email"
+                                          label="Email"
+                                          rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
+                                    >
+                                          <Input placeholder="Enter your email" />
+                                    </Form.Item>
+                                    <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Please input amount!' }]}>
+                                          <Input placeholder="Enter gift amount" type="number" />
+                                    </Form.Item>
+                                    <Form.Item>
+                                          <Button htmlType="submit" type="primary" className="w-full">
+                                                Pay Now
+                                          </Button>
+                                    </Form.Item>
+                              </Form>
+                        </div>
+                  )}
 
                   {/* Add gift card checkbox */}
                   {/* <div className="flex items-center gap-2">

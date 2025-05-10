@@ -12,7 +12,7 @@ const CreateGiftPage = () => {
       const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
 
       const { data } = useGetSingleGiftCardQuery({ id });
-      const giftCard = data?.data;
+      const gift = data?.data;
 
       const [isDrawerOpen, setIsDrawerOpen] = useState(false);
       return (
@@ -27,7 +27,7 @@ const CreateGiftPage = () => {
                   </div>
                   <div className="flex h-full justify-center gap-6 py-20">
                         <div className="w-[35%] hidden md:block ">
-                              <Sidebar id={giftCard?._id} uniqueId={giftCard?.uniqueId} />
+                              <Sidebar gift={gift} />
                         </div>
                         <Drawer
                               title="Configuration"
@@ -37,7 +37,7 @@ const CreateGiftPage = () => {
                               width="100%"
                               className="md:hidden"
                         >
-                              <Sidebar id={giftCard?._id} uniqueId={giftCard?.uniqueId} />
+                              <Sidebar gift={gift} />
                         </Drawer>
                         <div className="md:w-[65%] w-full max-w-[792px] min-h-[734px] relative">
                               <Preview id={id} />
