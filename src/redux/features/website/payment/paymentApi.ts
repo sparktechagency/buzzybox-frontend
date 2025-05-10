@@ -45,13 +45,32 @@ const paymentApi = baseApi.injectEndpoints({
                         };
                   },
             }),
+            withdrawFunds: builder.mutation({
+                  query: ({ payload }) => {
+                        return {
+                              url: `/payments/withdraw-funds`,
+                              method: 'POST',
+                              body: payload,
+                        };
+                  },
+            }),
+            getSinglePayment: builder.query({
+                  query: ({ id }) => {
+                        return {
+                              url: `/payments/${id}`,
+                              method: 'GET',
+                        };
+                  },
+            }),
       }),
 });
 
 export const {
       useGetAllPaymentsQuery,
+      useGetSinglePaymentQuery,
       useGetMyCardsQuery,
       useCreateContributionMutation,
       useCreatePaymentLinkMutation,
       useConnectAccountMutation,
+      useWithdrawFundsMutation,
 } = paymentApi;
