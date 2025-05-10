@@ -36,7 +36,22 @@ const paymentApi = baseApi.injectEndpoints({
                         };
                   },
             }),
+            connectAccount: builder.mutation({
+                  query: ({ payload }) => {
+                        return {
+                              url: `/payments/connect-account`,
+                              method: 'POST',
+                              body: payload,
+                        };
+                  },
+            }),
       }),
 });
 
-export const { useGetAllPaymentsQuery, useGetMyCardsQuery, useCreateContributionMutation, useCreatePaymentLinkMutation } = paymentApi;
+export const {
+      useGetAllPaymentsQuery,
+      useGetMyCardsQuery,
+      useCreateContributionMutation,
+      useCreatePaymentLinkMutation,
+      useConnectAccountMutation,
+} = paymentApi;
