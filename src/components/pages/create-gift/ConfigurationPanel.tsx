@@ -152,10 +152,9 @@ const ConfigurationPanel = () => {
                               <p className="text-gray-700 mt-5 font-medium">Schedule Date</p>
                               <Form.Item name="emailScheduleDate" rules={[{ required: true, message: 'Please input the schedule date' }]}>
                                     <DatePicker
-                                          format="YYYY-MM-DD HH:mm:ss"
+                                          format="YYYY-MM-DD"
                                           disabledDate={disabledDate}
-                                          showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }}
-                                          placeholder="Select date and time"
+                                          placeholder="Select schedule date"
                                           onChange={(value) => handleDispatch('emailScheduleDate', value.toISOString())}
                                           className="mt-2 w-full"
                                           style={{ padding: '9px 20px' }}

@@ -19,6 +19,7 @@ const ConnectPage = ({ params }: { params: { id: string } }) => {
             try {
                   const res = await connectAccount({ payload }).unwrap();
                   if (res.success) {
+                        window.location.href = res?.data;
                         toast.success('Connected successfully');
                   }
             } catch (error: any) {
