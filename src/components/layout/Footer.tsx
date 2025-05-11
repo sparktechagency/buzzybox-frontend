@@ -5,6 +5,7 @@ import Logo from '@/assets/images/footer-logo.svg';
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useGetContactInfoQuery } from '@/redux/features/website/contact-info/contactInfoApi';
 
 const socialLinks = [
       { Icon: Facebook, href: '#' },
@@ -27,6 +28,10 @@ const quickLinksTwo = [
 ];
 
 const Footer = () => {
+      const { data } = useGetContactInfoQuery(undefined);
+      const contactInfo = data?.data[0];
+      console.log(contactInfo);
+
       return (
             <footer className="bg-[#1E1E1E] text-white">
                   <div className="container px-4 py-16">
@@ -52,13 +57,13 @@ const Footer = () => {
                                                 <span className="bg-primary text-black p-1 rounded-full">
                                                       <PhoneIcon />
                                                 </span>
-                                                <span>+1 (555) 123-4567</span>
+                                                <span>{contactInfo?.phone}</span>
                                           </div>
                                           <div className="flex items-center gap-2">
                                                 <span className="bg-primary text-black p-1 rounded-full">
                                                       <MailIcon />
                                                 </span>
-                                                <span>Support@buzzybox.com</span>
+                                                <span>{contactInfo?.email}</span>
                                           </div>
                                     </div>
                               </div>
