@@ -56,7 +56,7 @@ const FAQ = () => {
                   </div>
 
                   <div className="text-center mt-8">
-                        {total > 5 && (
+                        {total > 5 && limit <= 5 && (
                               <Button onClick={() => setLimit(total)} type="primary">
                                     View All
                               </Button>
