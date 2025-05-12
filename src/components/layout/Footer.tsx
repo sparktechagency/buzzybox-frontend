@@ -30,7 +30,6 @@ const quickLinksTwo = [
 const Footer = () => {
       const { data } = useGetContactInfoQuery(undefined);
       const contactInfo = data?.data[0];
-      console.log(contactInfo);
 
       return (
             <footer className="bg-[#1E1E1E] text-white">
