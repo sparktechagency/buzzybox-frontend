@@ -3,9 +3,5 @@ export const getContactInfo = async () => {
             cache: 'no-store',
       });
 
-      if (!res.ok) {
-            throw new Error('Failed to fetch contact info');
-      }
-
       return res.json();
 };

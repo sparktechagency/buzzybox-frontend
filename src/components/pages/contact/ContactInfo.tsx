@@ -2,16 +2,16 @@ import { Typography } from 'antd';
 import { PhoneOutlined, MailOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { Facebook, Twitter, Instagram } from 'lucide-react';
 import Link from 'next/link';
-import { getContactInfo } from '@/services/contact';
+import { useGetContactInfoQuery } from '@/redux/features/website/contact-info/contactInfoApi';
 
 const socialLinks = [
       { Icon: Facebook, href: '#' },
       { Icon: Twitter, href: '#' },
       { Icon: Instagram, href: '#' },
 ];
-const ContactInfo = async () => {
-      const { data } = await getContactInfo();
-      const info = data[0];
+const ContactInfo = () => {
+      const { data } = useGetContactInfoQuery(undefined);
+      const info = data?.data?.[0];
 
       return (
             <div className="w-full space-y-10 lg:w-1/2 ">
@@ -30,7 +30,7 @@ const ContactInfo = async () => {
                               <Typography.Text strong className="text-title">
                                     Phone
                               </Typography.Text>
-                              <div className="text-[#555555] text-sm">{info.phone}</div>
+                              <div className="text-[#555555] text-sm">{info?.phone}</div>
                         </div>
                   </div>
 
@@ -42,7 +42,7 @@ const ContactInfo = async () => {
                               <Typography.Text strong className="text-title">
                                     Email Address
                               </Typography.Text>
-                              <div className="text-[#555555] text-sm">{info.email}</div>
+                              <div className="text-[#555555] text-sm">{info?.email}</div>
                         </div>
                   </div>
                   <div className=" rounded-xl bg-white flex items-start gap-4 mb-6">
@@ -53,7 +53,7 @@ const ContactInfo = async () => {
                               <Typography.Text strong className="text-title">
                                     Location
                               </Typography.Text>
-                              <div className="text-[#555555] text-sm">{info.location}</div>
+                              <div className="text-[#555555] text-sm">{info?.location}</div>
                         </div>
                   </div>
                   <div className="flex gap-5 w-full justify-center md:justify-start">
