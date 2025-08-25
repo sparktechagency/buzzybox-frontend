@@ -44,7 +44,7 @@ const InviteModal = ({ open, setOpen }: InviteModalProps) => {
       //   handle send invite link by email
       const handleSendEmail = async (values: { email: string; message: string }) => {
             try {
-                  const response = await sendInvite({ payload: { ...values, link: url } }).unwrap();
+                  const response = await sendInvite({ payload: { ...values, message: values.message || '', link: url } }).unwrap();
 
                   if (response.success) {
                         toast.success('Email sent successfully!');
@@ -71,7 +71,7 @@ const InviteModal = ({ open, setOpen }: InviteModalProps) => {
                               <Input placeholder="example@email.com" />
                         </Form.Item>
 
-                        <Form.Item name="message" rules={[{ required: true, message: 'Write a message' }]}>
+                        <Form.Item name="message">
                               <Input.TextArea rows={3} placeholder="Write a message" />
                         </Form.Item>
 
