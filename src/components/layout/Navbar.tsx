@@ -8,16 +8,10 @@ import { useState } from 'react';
 
 import NavItems from './NavItems';
 import MobileDrawer from './MobileDrawer';
-import { useAppSelector } from '@/redux/hooks';
-import { selectAccessToken } from '@/redux/features/auth/authSlice';
 import { useGetUserProfileQuery } from '@/redux/features/user/userApi';
-import { Avatar, Button, Dropdown } from 'antd';
-import ProfileDropdown from './ProfileDropdown';
-import { UserIcon } from 'lucide-react';
 
 const Navbar = () => {
       const [showDrawer, setShowDrawer] = useState(false);
-      const token = useAppSelector(selectAccessToken);
       const { data } = useGetUserProfileQuery(undefined);
       const profile = data?.data;
 
@@ -56,7 +50,7 @@ const Navbar = () => {
                               <div className="hidden md:flex bg-[#F6F6F6] rounded-lg p-1.5 items-center gap-8">
                                     <NavItems items={items} />
                               </div>
-                              {token ? (
+                              {/* {token ? (
                                     <Dropdown
                                           placement="bottom"
                                           className="cursor-pointer hidden md:block ml-24"
@@ -86,7 +80,7 @@ const Navbar = () => {
                                                 </Button>
                                           </Link>
                                     </div>
-                              )}
+                              )} */}
 
                               <div className="md:hidden">
                                     <AiOutlineMenu
