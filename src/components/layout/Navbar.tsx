@@ -8,12 +8,11 @@ import { useState } from 'react';
 
 import NavItems from './NavItems';
 import MobileDrawer from './MobileDrawer';
-import { useGetUserProfileQuery } from '@/redux/features/user/userApi';
 
 const Navbar = () => {
       const [showDrawer, setShowDrawer] = useState(false);
-      const { data } = useGetUserProfileQuery(undefined);
-      const profile = data?.data;
+      // const { data } = useGetUserProfileQuery(undefined);
+      // const profile = data?.data;
 
       const items = [
             { label: 'Home', path: '/' },
@@ -93,7 +92,7 @@ const Navbar = () => {
                   </nav>
 
                   {/* Mobile Drawer */}
-                  <MobileDrawer open={showDrawer} setOpen={setShowDrawer} items={items} profile={profile} />
+                  <MobileDrawer open={showDrawer} setOpen={setShowDrawer} items={items} />
             </header>
       );
 };

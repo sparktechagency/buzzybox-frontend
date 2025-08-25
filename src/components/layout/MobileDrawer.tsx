@@ -1,19 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
 import NavItems from './NavItems';
-import { Avatar, Button, Drawer, Dropdown } from 'antd';
-import Link from 'next/link';
-import { UserIcon } from 'lucide-react';
-import ProfileDropdown from './ProfileDropdown';
+import { Drawer } from 'antd';
 const MobileDrawer = ({
       open,
       setOpen,
       items,
-      profile,
 }: {
       open: boolean;
       setOpen: Dispatch<SetStateAction<boolean>>;
       items: any[];
-      profile: any;
 }) => {
       const onClose = () => {
             setOpen(!open);
@@ -23,7 +18,7 @@ const MobileDrawer = ({
             <Drawer placement="left" onClose={onClose} open={open}>
                   <div className="flex flex-col items-center gap-8">
                         <NavItems items={items} onClose={onClose} />
-                        <div className=" items-center flex space-x-6">
+                        {/* <div className=" items-center flex space-x-6">
                               <Link href="/sign-in">
                                     <Button iconPosition="start" icon={<UserIcon />} type="primary">
                                           Sign In
@@ -40,7 +35,7 @@ const MobileDrawer = ({
                                     <Avatar size={45} src={`https://picsum.photos/40`} style={{ border: '2px solid #FFC301' }} />
                                     <h1 className="font-semibold text-lg">Sazzad</h1>
                               </div>
-                        </Dropdown>
+                        </Dropdown> */}
                   </div>
             </Drawer>
       );
