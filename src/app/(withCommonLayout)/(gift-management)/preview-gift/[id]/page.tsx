@@ -121,14 +121,16 @@ const PreviewGiftPage = ({ params }: { params: { id: string } }) => {
                                     <MessageCard key={index} card={item} />
                               ))}
                         </div>
-                        <div className="flex flex-col items-center gap-4 mt-16">
-                              <h1 className="text-2xl font-medium">
-                                    You have <span className="font-semibold">${payment?.totalContribution}</span> gift amount
-                              </h1>
-                              <Button onClick={handleWithdraw} type="primary" disabled={payment?.hasWithdrawn}>
-                                    {payment?.hasWithdrawn ? 'Already Claimed' : 'Withdraw Now'}
-                              </Button>
-                        </div>
+                        {payment?.totalContribution > 0 && (
+                              <div className="flex flex-col items-center gap-4 mt-16">
+                                    <h1 className="text-2xl font-medium">
+                                          You have <span className="font-semibold">${payment?.totalContribution}</span> gift amount
+                                    </h1>
+                                    <Button onClick={handleWithdraw} type="primary" disabled={payment?.hasWithdrawn}>
+                                          {payment?.hasWithdrawn ? 'Already Claimed' : 'Withdraw Now'}
+                                    </Button>
+                              </div>
+                        )}
                   </div>
             </div>
       );
