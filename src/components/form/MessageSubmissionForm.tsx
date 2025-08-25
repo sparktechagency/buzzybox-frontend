@@ -28,6 +28,7 @@ const SubmitMessageForm = ({ setIsModalOpen, id }: { setIsModalOpen: any; id: st
                   if (res.success) {
                         toast.success(res?.message || 'Added successfully', { id: 'addCardToast' });
                         setIsModalOpen(false);
+                        form.resetFields();
                   }
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Failed to add', { id: 'addCardToast' });
@@ -54,12 +55,19 @@ const SubmitMessageForm = ({ setIsModalOpen, id }: { setIsModalOpen: any; id: st
                               <Form.Item
                                     label="Your Name"
                                     name="senderName"
-                                    rules={[{ required: true, message: 'Please enter your name!' }]}
+                                    rules={[
+                                          { required: true, message: 'Please enter your name!' },
+                                          { max: 30, message: 'Name cannot exceed 30 characters.' },
+                                    ]}
                               >
                                     <Input placeholder="Enter your name" />
                               </Form.Item>
 
-                              <Form.Item label="Your Message" name="message">
+                              <Form.Item
+                                    label="Your Message"
+                                    name="message"
+                                    rules={[{ max: 180, message: 'Message cannot exceed 180 characters.' }]}
+                              >
                                     <Input.TextArea
                                           placeholder="Tip: Personalize your message with an image, GIF, or video to make it more memorable."
                                           rows={4}
