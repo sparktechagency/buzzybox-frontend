@@ -32,7 +32,7 @@ const HeroSection = () => {
                               </p>
                               <div className="flex  flex-col md:flex-row justify-start items-center gap-4">
                                     <Button href="/create-gift" type="primary" icon={<GiftIcon size={20} />}>
-                                          Create a Buzzybox
+                                          Create a Thankyoupot
                                     </Button>
                                     <Button
                                           onClick={() => setOpen(true)}

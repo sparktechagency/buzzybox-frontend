@@ -31,7 +31,7 @@ const PreviewPanel = () => {
             {
                   front: {
                         recipientName: recipientName || 'Recipient Name',
-                        title: title || 'Buzzybox Title',
+                        title: title || 'Thankyoupot Title',
                         senderName: senderName || 'Sender Name',
                         bgImage: `${process.env.NEXT_PUBLIC_SERVER_URL}${category?.occasionImage}`,
                   },
@@ -74,7 +74,7 @@ const PreviewPanel = () => {
                         ),
                         content: `
                         Created with
-                        Buzzybox
+                        Thankyoupot
                         `,
                         bg: 'bg-white',
                   },

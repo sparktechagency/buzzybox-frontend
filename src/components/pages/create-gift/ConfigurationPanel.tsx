@@ -79,7 +79,7 @@ const ConfigurationPanel = () => {
                         layout="vertical"
                   >
                         <div className="w-full bg-primary/5 p-1 md:p-6 rounded-xl mx-auto">
-                              <h2 className="text-2xl font-bold text-title">Create Your Buzzybox?</h2>
+                              <h2 className="text-2xl font-bold text-title">Create Your Thankyoupot?</h2>
 
                               <p className="text-gray-700 mt-3 font-medium">Select board format</p>
                               <div className="flex  items-center gap-6">
@@ -113,8 +113,8 @@ const ConfigurationPanel = () => {
                                     />
                               </Form.Item>
 
-                              <p className="text-gray-700 mt-5 font-medium">Buzzybox Title</p>
-                              <Form.Item name="title" rules={[{ required: true, message: 'Please input the Buzzybox title' }]}>
+                              <p className="text-gray-700 mt-5 font-medium">Thankyoupot Title</p>
+                              <Form.Item name="title" rules={[{ required: true, message: 'Please input the Thankyoupot title' }]}>
                                     <Input
                                           placeholder="e.g. Happy Birthday Jenny"
                                           className="mt-2"

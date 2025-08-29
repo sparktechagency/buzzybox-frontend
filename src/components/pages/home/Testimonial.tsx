@@ -21,9 +21,9 @@ const TestimonialSlider = () => {
                               <div className="mb-8">
                                     <h2 className="text-3xl font-bold text-gray-900">What Users Say About Our Service</h2>
                                     <p className="text-paragraph mt-2 text-sm md:text-base md:max-w-xl">
-                                          See why thousands love Buzzybox! Real stories from happy users who made their moments special with
-                                          our digital cards and group gifts. Whether it’s a heartfelt farewell, a joyful birthday, or a team
-                                          celebration, Buzzybox makes every occasion memorable and effortless!
+                                          See why thousands love Thankyoupot! Real stories from happy users who made their moments special
+                                          with our digital cards and group gifts. Whether it’s a heartfelt farewell, a joyful birthday, or a
+                                          team celebration, Thankyoupot makes every occasion memorable and effortless!
                                     </p>
                               </div>
 

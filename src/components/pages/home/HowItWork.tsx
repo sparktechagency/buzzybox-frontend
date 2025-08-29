@@ -31,9 +31,9 @@ const HowItWorks = async () => {
       return (
             <section className=" py-16">
                   <div className="container mx-auto text-center">
-                        <h2 className="text-3xl md:text-4xl font-bold ">How Buzzybox Works</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold ">How Thankyoupot Works</h2>
                         <p className="text-sm md:text-base text-paragraph mt-4">
-                              Buzzybox makes sending greeting cards & gifts effortless!
+                              Thankyoupot makes sending greeting cards & gifts effortless!
                         </p>
 
                         {/* Steps Section */}

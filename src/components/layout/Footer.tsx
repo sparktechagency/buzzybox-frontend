@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { Facebook, Twitter, Instagram, PhoneIcon, MailIcon } from 'lucide-react';
-import Logo from '@/assets/images/footer-logo.svg';
+import Logo from '@/assets/images/footer-logo.png';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -16,8 +16,8 @@ const socialLinks = [
 const quickLinks = [
       { label: 'Home', href: '/' },
       { label: 'About Us', href: '/about-us' },
-      { label: 'How buzzybox work', href: '/how-it-works' },
-      { label: 'Create Buzzybox', href: '/create-buzzybox' },
+      { label: 'How thankyoupot work', href: '/how-it-works' },
+      { label: 'Create Thankyoupot', href: '/create-gift' },
 ];
 
 const quickLinksTwo = [
@@ -49,7 +49,7 @@ const Footer = () => {
                                     </div>
 
                                     <p className="text-gray-300 text-sm md:text-base">
-                                          Personalized digital cards and group gifts made easy—join thousands who love Buzzybox!
+                                          Personalized digital cards and group gifts made easy—join thousands who love Thankyoupot!
                                     </p>
                                     <div className="space-y-4">
                                           <div className="flex items-center gap-2">
@@ -114,7 +114,8 @@ const Footer = () => {
                   </div>
                   <div className=" py-8 border-t-2 border-white/10 text-center">
                         <p className="text-gray-300 text-sm md:text-base">
-                              Copyright &copy;<span className="text-white">Buzzybox {new Date().getFullYear()}</span> . All Right Reserved.
+                              Copyright &copy;<span className="text-white">Thankyoupot {new Date().getFullYear()}</span> . All Right
+                              Reserved.
                         </p>
                   </div>
             </footer>

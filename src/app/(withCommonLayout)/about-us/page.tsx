@@ -13,9 +13,9 @@ const AboutUsPage = async () => {
       //       {
       //             id: 1,
       //             title: 'About Us',
-      //             description: `At BuzzyBox, we believe that every occasion deserves to be special. Whether it’s a birthday, farewell, wedding, or just a simple "thank you," we’re here to help you create unforgettable memories.
+      //             description: `At Thankyoupot, we believe that every occasion deserves to be special. Whether it’s a birthday, farewell, wedding, or just a simple "thank you," we’re here to help you create unforgettable memories.
 
-      //             BuzzyBox is a digital platform designed to make sending personalized greeting cards and group gifts effortless, fun, and meaningful. With our easy-to-use tools, you can create beautiful digital cards, invite friends and family to contribute, and even add a group gift collection—all in one place.`,
+      //             Thankyoupot is a digital platform designed to make sending personalized greeting cards and group gifts effortless, fun, and meaningful. With our easy-to-use tools, you can create beautiful digital cards, invite friends and family to contribute, and even add a group gift collection—all in one place.`,
       //             image: Img1,
       //       },
       //       {

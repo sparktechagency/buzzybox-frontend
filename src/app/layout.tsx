@@ -4,7 +4,7 @@ import Provider from '@/provider/Provider';
 import { DM_Sans, Poppins } from 'next/font/google';
 
 export const metadata: Metadata = {
-      title: 'BuzzyBox',
+      title: 'Thankyoupot',
       description: 'The best gift for your loved ones',
 };
 

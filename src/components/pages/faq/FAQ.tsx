@@ -31,7 +31,7 @@ interface FAQItem {
 //       },
 //       {
 //             question: 'How do I add a background or images?',
-//             answer: 'You can add a background or images by uploading them to your Buzzybox account.',
+//             answer: 'You can add a background or images by uploading them to your Thankyoupot account.',
 //       },
 // ];
 
@@ -45,7 +45,7 @@ const FAQ = () => {
       return (
             <div className="w-full max-w-4xl mx-auto px-4 py-16">
                   <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Frequently Asked Questions</h2>
-                  <p className=" text-sm md:text-base text-center text-paragraph mb-12">Everything you need to know about Buzzybox!</p>
+                  <p className=" text-sm md:text-base text-center text-paragraph mb-12">Everything you need to know about Thankyoupot!</p>
 
                   <div className="space-y-4">
                         {isLoading

@@ -52,7 +52,7 @@ const ProfileSidebar = () => {
             {
                   key: 'gift-history',
                   icon: <GiftIcon size={20} />,
-                  label: 'Buzzybox History',
+                  label: 'Thankyoupot History',
                   href: '/dashboard/gift-history',
             },
             {
