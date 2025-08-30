@@ -8,7 +8,7 @@ const PrivacyPolicyPage = async () => {
             <div className="">
                   <PageHeader title="Privacy Policy" />
                   <div className="container mx-auto py-10 px-4">
-                        <div className="prose max-w-full" dangerouslySetInnerHTML={{ __html: data?.content }} />
+                        <div className="prose max-w-full" dangerouslySetInnerHTML={{ __html: data?.content || '' }} />
                   </div>
             </div>
       );

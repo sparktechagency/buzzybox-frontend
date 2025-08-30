@@ -3,9 +3,5 @@ export const getPrivacyPolicyData = async () => {
             cache: 'no-store',
       });
 
-      if (!res.ok) {
-            throw new Error('Failed to fetch privacy policy data');
-      }
-
       return res.json();
 };
