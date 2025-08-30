@@ -119,7 +119,7 @@ const Sidebar = ({ gift }: { gift: TGift }) => {
                         <div className="space-y-4">
                               <h3 className="text-lg font-medium">Pay $5 and send this gift</h3>
                               <Button onClick={handlePayment} type="primary" className="w-full">
-                                    Pay Now
+                                    Create Thankyoupot
                               </Button>
                         </div>
                   )}
@@ -141,7 +141,7 @@ const Sidebar = ({ gift }: { gift: TGift }) => {
                                     </Form.Item>
                                     <Form.Item>
                                           <Button htmlType="submit" type="primary" className="w-full">
-                                                Pay Now
+                                                Donate Now
                                           </Button>
                                     </Form.Item>
                               </Form>
