@@ -12,6 +12,7 @@ import { useCreateContributionMutation, useCreatePaymentLinkMutation } from '@/r
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { TGift } from '@/types';
+import Link from 'next/link';
 
 dayjs.extend(utc);
 
@@ -121,6 +122,17 @@ const Sidebar = ({ gift }: { gift: TGift }) => {
                               <Button onClick={handlePayment} type="primary" className="w-full">
                                     Create Thankyoupot
                               </Button>
+                              <p className="text-sm text-paragraph">
+                                    By creating this Thankyoupot you agree to our{' '}
+                                    <Link href={'/terms-and-conditions'} className="underline">
+                                          terms & conditions
+                                    </Link>{' '}
+                                    and{' '}
+                                    <Link href={'/privacy-policy'} className="underline">
+                                          privacy policy
+                                    </Link>
+                                    .
+                              </p>
                         </div>
                   )}
 
