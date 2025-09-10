@@ -86,7 +86,7 @@ const Sidebar = ({ gift }: { gift: TGift }) => {
             }
       };
       return (
-            <div className="p-5 space-y-4">
+            <div className="p-5 pt-14 space-y-4">
                   <div
                         onClick={() => setIsInviteModalOpen(true)}
                         className="flex items-center gap-2 border border-primary rounded-lg p-2 cursor-pointer hover:text-primary duration-100"
@@ -118,7 +118,7 @@ const Sidebar = ({ gift }: { gift: TGift }) => {
                   {/* payment */}
                   {!(gift?.paymentStatus === 'paid') && (
                         <div className="space-y-4">
-                              <h3 className="text-lg font-medium">Pay $5 and send this gift</h3>
+                              {/* <h3 className="text-lg font-medium">Pay $5 and send this gift</h3> */}
                               <Button onClick={handlePayment} type="primary" className="w-full">
                                     Create Thankyoupot
                               </Button>
@@ -157,6 +157,17 @@ const Sidebar = ({ gift }: { gift: TGift }) => {
                                           </Button>
                                     </Form.Item>
                               </Form>
+                              <p className="text-sm text-paragraph">
+                                    By donating this Thankyoupot you agree to our{' '}
+                                    <Link href={'/terms-and-conditions'} className="underline">
+                                          terms & conditions
+                                    </Link>{' '}
+                                    and{' '}
+                                    <Link href={'/privacy-policy'} className="underline">
+                                          privacy policy
+                                    </Link>
+                                    .
+                              </p>
                         </div>
                   )}
 

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { MenuOutlined } from '@ant-design/icons';
 import { useParams } from 'next/navigation';
 import { useGetSingleGiftCardQuery } from '@/redux/features/website/gift-card/giftCardApi';
+import { CalendarDays, MessageSquareMore } from 'lucide-react';
 
 const CreateGiftPage = () => {
       const params = useParams();
@@ -25,8 +26,8 @@ const CreateGiftPage = () => {
                               className="flex items-center"
                         ></Button>
                   </div>
-                  <div className="flex h-full justify-center gap-6 py-20">
-                        <div className="w-[35%] hidden md:block ">
+                  <div className="flex h-full justify-center gap-6 pb-20 pt-6">
+                        <div className="w-[35%] hidden md:block">
                               <Sidebar gift={gift} />
                         </div>
                         <Drawer
@@ -39,8 +40,27 @@ const CreateGiftPage = () => {
                         >
                               <Sidebar gift={gift} />
                         </Drawer>
-                        <div className="md:w-[65%] w-full max-w-[792px] min-h-[734px] relative">
-                              <Preview id={id} />
+                        <div className="md:w-[65%] w-full max-w-[792px] flex flex-col">
+                              <div className="flex items-center justify-center gap-8 py-4 text-gray-600">
+                                    <h3 className="flex items-center gap-2">
+                                          <MessageSquareMore size={20} />
+                                          <span className="font-semibold">{gift?.pages?.length}</span>
+                                    </h3>
+                                    <h3 className="flex items-center gap-2">
+                                          <CalendarDays size={20} />
+                                          Scheduled for
+                                          <span className="font-semibold">
+                                                {new Date(gift?.receiverInfo?.emailScheduleDate).toDateString()}
+                                          </span>
+                                          {/* at
+                                          <span className="font-semibold">
+                                                {new Date(gift?.receiverInfo?.emailScheduleDate).toLocaleTimeString()}
+                                          </span> */}
+                                    </h3>
+                              </div>
+                              <div className="min-h-[734px] flex-1">
+                                    <Preview id={id} />
+                              </div>
                         </div>
                   </div>
             </div>
