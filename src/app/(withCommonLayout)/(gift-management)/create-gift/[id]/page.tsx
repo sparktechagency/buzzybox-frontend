@@ -6,7 +6,8 @@ import { useState } from 'react';
 import { MenuOutlined } from '@ant-design/icons';
 import { useParams } from 'next/navigation';
 import { useGetSingleGiftCardQuery } from '@/redux/features/website/gift-card/giftCardApi';
-import { CalendarDays, MessageSquareMore } from 'lucide-react';
+import { CalendarDays, Gift, MessageSquareMore } from 'lucide-react';
+import { useGetSinglePaymentQuery } from '@/redux/features/website/payment/paymentApi';
 
 const CreateGiftPage = () => {
       const params = useParams();
@@ -14,6 +15,8 @@ const CreateGiftPage = () => {
 
       const { data } = useGetSingleGiftCardQuery({ id });
       const gift = data?.data;
+      const { data: paymentData } = useGetSinglePaymentQuery({ id: gift?._id });
+      const payment = paymentData?.data;
 
       const [isDrawerOpen, setIsDrawerOpen] = useState(false);
       return (
@@ -44,20 +47,21 @@ const CreateGiftPage = () => {
                               <div className="flex items-center justify-center gap-8 py-4 text-gray-600">
                                     <h3 className="flex items-center gap-2">
                                           <MessageSquareMore size={20} />
-                                          <span className="font-semibold">{gift?.pages?.length}</span>
+                                          <span className="font-semibold">{gift?.pages?.length || 0}</span>
+                                    </h3>
+                                    <h3 className="flex items-center gap-2">
+                                          <Gift size={20} />
+                                          <span className="font-semibold">£{payment?.totalContribution || 0}</span>
                                     </h3>
                                     <h3 className="flex items-center gap-2">
                                           <CalendarDays size={20} />
                                           Scheduled for
                                           <span className="font-semibold">
-                                                {new Date(gift?.receiverInfo?.emailScheduleDate).toDateString()}
+                                                {new Date(gift?.receiverInfo?.emailScheduleDate || new Date()).toDateString()}
                                           </span>
-                                          {/* at
-                                          <span className="font-semibold">
-                                                {new Date(gift?.receiverInfo?.emailScheduleDate).toLocaleTimeString()}
-                                          </span> */}
                                     </h3>
                               </div>
+                              {/* card preview */}
                               <div className="min-h-[734px] flex-1">
                                     <Preview id={id} />
                               </div>

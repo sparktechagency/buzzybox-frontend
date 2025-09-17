@@ -16,7 +16,7 @@ const HeroSection = () => {
                         backgroundImage: `url(${HeroBg.src})`,
                         backgroundPosition: 'center',
                   }}
-                  className="md:h-[calc(100vh-96px)] bg-no-repeat bg-cover py-10"
+                  className="bg-no-repeat bg-cover py-10"
             >
                   <div className="container h-full  justify-center items-center  grid grid-cols-1 md:grid-cols-2  ">
                         <div className="space-y-8 order-2 md:order-2 text-center md:text-start">
