@@ -51,7 +51,7 @@ const CreateGiftPage = () => {
                                     </h3>
                                     <h3 className="flex items-center gap-2">
                                           <Gift size={20} />
-                                          <span className="font-semibold">£{payment?.totalContribution || 0}</span>
+                                          <span className="font-semibold">x{payment?.contributors?.length || 0}</span>
                                     </h3>
                                     <h3 className="flex items-center gap-2">
                                           <CalendarDays size={20} />
