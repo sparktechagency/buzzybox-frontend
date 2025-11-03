@@ -137,7 +137,7 @@ const Sidebar = ({ gift }: { gift: TGift }) => {
                   )}
 
                   {/* contribution */}
-                  {gift?.paymentStatus === 'paid' && (
+                  {gift?.paymentStatus === 'paid' && gift?.status === 'pending' && (
                         <div className="space-y-4">
                               <h3 className="text-lg font-medium">Contribute in this Gift</h3>
                               <Form onFinish={handleContribution} layout="vertical" requiredMark="optional">
