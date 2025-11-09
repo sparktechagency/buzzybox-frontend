@@ -88,7 +88,7 @@ const PreviewGiftPage = ({ params }: { params: { id: string } }) => {
                   const res = await withdraw({ payload: { giftCardId: gift?._id } }).unwrap();
                   if (res.success) {
                         toast.success('Claimed successfully', { id: 'withdraw' });
-                        window.location.href = res?.data?.connectAccountUrl;
+                        window.location.reload();
                   }
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Failed to withdraw', { id: 'withdraw' });
