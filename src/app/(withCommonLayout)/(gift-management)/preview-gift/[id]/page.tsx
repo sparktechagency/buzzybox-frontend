@@ -87,8 +87,13 @@ const PreviewGiftPage = ({ params }: { params: { id: string } }) => {
                   toast.loading('Pending...', { id: 'withdraw' });
                   const res = await withdraw({ payload: { giftCardId: gift?._id } }).unwrap();
                   if (res.success) {
-                        toast.success('Claimed successfully', { id: 'withdraw' });
-                        window.location.reload();
+                        if (res?.data?.connectAccountUrl) {
+                              toast.success('Connected successfully', { id: 'withdraw' });
+                              window.location.replace(res?.data?.connectAccountUrl);
+                        } else {
+                              toast.success('Claimed successfully', { id: 'withdraw' });
+                              window.location.reload();
+                        }
                   }
             } catch (error: any) {
                   toast.error(error?.data?.message || 'Failed to withdraw', { id: 'withdraw' });
