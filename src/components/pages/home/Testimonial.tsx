@@ -4,11 +4,11 @@ import { Carousel } from 'antd';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { RiDoubleQuotesR } from 'react-icons/ri';
-import { useGetAllReviewsQuery } from '@/redux/features/website/reviews/reviewApi';
+import { reviewsData } from '../../../../public/data/reviews';
 
 const TestimonialSlider = () => {
-      const { data } = useGetAllReviewsQuery(undefined);
-      const reviewsData = data?.data;
+      // const { data } = useGetAllReviewsQuery(undefined);
+      // const reviewsData = data?.data;
 
       const carouselRef = useRef<any>();
       const [activeIndex, setActiveIndex] = useState(0);
@@ -54,7 +54,7 @@ const TestimonialSlider = () => {
                                                                   <div className="flex items-center gap-2 mt-3">
                                                                         <div className="flex-shrink-0">
                                                                               <Image
-                                                                                    src={`${process.env.NEXT_PUBLIC_SERVER_URL}${item?.userImage}`}
+                                                                                    src={item?.image}
                                                                                     width={50}
                                                                                     height={50}
                                                                                     alt={item?.username}
